@@ -1,0 +1,72 @@
+{
+  "name": "DHPaddleLiteSDK",
+  "version": "0.0.3",
+  "summary": "基于PaddleLite实现OCR识别",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "http://192.168.3.182/dbh/DHPaddleLiteSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "dbh": "310701836@qq.com"
+  },
+  "source": {
+    "git": "http://192.168.3.182/dbh/DHPaddleLiteSDK.git",
+    "tag": "0.0.3"
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "default_subspecs": "Core",
+  "static_framework": true,
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": [
+        "DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.{h,m,mm}",
+        "DHPaddleLiteSDK/Classes/Private/*.{h,m,mm}",
+        "DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.{h,m,mm}",
+        "DHPaddleLiteSDK/paddleUtil/*",
+        "DHPaddleLiteSDK/ThirdParty/PaddleLite/include/*.h"
+      ],
+      "public_header_files": [
+        "DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.h",
+        "DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.h"
+      ],
+      "private_header_files": [
+        "DHPaddleLiteSDK/Classes/Private/*.h",
+        "DHPaddleLiteSDK/paddleUtil/*.{hpp,h}"
+      ],
+      "resource_bundles": {
+        "DHPaddleLiteSDK": [
+          "DHPaddleLiteSDK/Classes/**/*.{txt,nb}"
+        ]
+      },
+      "vendored_libraries": "DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a",
+      "vendored_frameworks": "DHPaddleLiteSDK/ThirdParty/opencv2.framework",
+      "libraries": "c++",
+      "frameworks": [
+        "CoreMedia",
+        "AssetsLibrary",
+        "AVFoundation",
+        "opencv2"
+      ],
+      "pod_target_xcconfig": {
+        "DEFINES_MODULE": "YES",
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386",
+        "VALID_ARCHS[sdk=iphonesimulator*]": "",
+        "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup",
+        "FRAMEWORK_SEARCH_PATHS": "$(inherited) \"${PODS_TARGET_SRCROOT}/DHPaddleLiteSDK/ThirdParty\""
+      }
+    },
+    {
+      "name": "PhoneNumberRecognizer",
+      "dependencies": {
+        "DHPaddleLiteSDK/Core": []
+      },
+      "source_files": "DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/*.{h,m,mm}",
+      "public_header_files": "DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/*.h"
+    }
+  ]
+}

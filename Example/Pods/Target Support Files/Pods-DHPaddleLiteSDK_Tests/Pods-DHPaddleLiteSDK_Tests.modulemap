@@ -1,0 +1,6 @@
+framework module Pods_DHPaddleLiteSDK_Tests {
+  umbrella header "Pods-DHPaddleLiteSDK_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

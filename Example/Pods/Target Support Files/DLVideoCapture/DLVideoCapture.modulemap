@@ -1,0 +1,6 @@
+framework module DLVideoCapture {
+  umbrella header "DLVideoCapture-umbrella.h"
+
+  export *
+  module * { export * }
+}

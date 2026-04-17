@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A24553958F575AC61FC2ED8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0A24553958F575AC61FC2ED8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3E9446CA793DEB8ADFAD0E4B /* Pods-DHPaddleLiteSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DHPaddleLiteSDK_Example.release.xcconfig"; path = "Target Support Files/Pods-DHPaddleLiteSDK_Example/Pods-DHPaddleLiteSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* DHPaddleLiteSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DHPaddleLiteSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,13 +58,13 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		63A7B679DD76263C342C266F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		63A7B679DD76263C342C266F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		642517F2A56A7A75D832056C /* Pods-DHPaddleLiteSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DHPaddleLiteSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-DHPaddleLiteSDK_Tests/Pods-DHPaddleLiteSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7785D0D16EE803295BEF820 /* Pods_DHPaddleLiteSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DHPaddleLiteSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1F2A4F5C6F9E3B2294F14C5 /* Pods-DHPaddleLiteSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DHPaddleLiteSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-DHPaddleLiteSDK_Example/Pods-DHPaddleLiteSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D0CC8BD0AA961D18EDF86625 /* DHPaddleLiteSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = DHPaddleLiteSDK.podspec; path = ../DHPaddleLiteSDK.podspec; sourceTree = "<group>"; };
+		D0CC8BD0AA961D18EDF86625 /* DHPaddleLiteSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DHPaddleLiteSDK.podspec; path = ../DHPaddleLiteSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E0F74BB7842EE7BDF44B997B /* Pods-DHPaddleLiteSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DHPaddleLiteSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-DHPaddleLiteSDK_Tests/Pods-DHPaddleLiteSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F3B7D4CC7E56938D0696CE90 /* Pods_DHPaddleLiteSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DHPaddleLiteSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,7 +103,6 @@
 				642517F2A56A7A75D832056C /* Pods-DHPaddleLiteSDK_Tests.debug.xcconfig */,
 				E0F74BB7842EE7BDF44B997B /* Pods-DHPaddleLiteSDK_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,6 +208,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				95DF5D98BD88BE4E2440024C /* [CP] Embed Pods Frameworks */,
+				C06FAA59367F6D1A39A0AD8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +248,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = duanbhu;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = R9J69QFLSC;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -258,6 +261,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -324,11 +328,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DHPaddleLiteSDK_Example/Pods-DHPaddleLiteSDK_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DHPaddleLiteSDK/DHPaddleLiteSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/DLVideoCapture/DLVideoCapture.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DHPaddleLiteSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DLVideoCapture.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -355,6 +359,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C06FAA59367F6D1A39A0AD8A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DHPaddleLiteSDK_Example/Pods-DHPaddleLiteSDK_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/DHPaddleLiteSDK/DHPaddleLiteSDK.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DHPaddleLiteSDK.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DHPaddleLiteSDK_Example/Pods-DHPaddleLiteSDK_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -494,6 +516,7 @@
 			baseConfigurationReference = C1F2A4F5C6F9E3B2294F14C5 /* Pods-DHPaddleLiteSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R9J69QFLSC;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DHPaddleLiteSDK/DHPaddleLiteSDK-Prefix.pch";
 				INFOPLIST_FILE = "DHPaddleLiteSDK/DHPaddleLiteSDK-Info.plist";
@@ -510,6 +533,7 @@
 			baseConfigurationReference = 3E9446CA793DEB8ADFAD0E4B /* Pods-DHPaddleLiteSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R9J69QFLSC;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DHPaddleLiteSDK/DHPaddleLiteSDK-Prefix.pch";
 				INFOPLIST_FILE = "DHPaddleLiteSDK/DHPaddleLiteSDK-Info.plist";

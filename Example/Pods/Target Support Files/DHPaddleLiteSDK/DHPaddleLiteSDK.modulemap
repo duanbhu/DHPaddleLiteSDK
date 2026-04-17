@@ -1,0 +1,6 @@
+framework module DHPaddleLiteSDK {
+  umbrella header "DHPaddleLiteSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
