@@ -24,7 +24,10 @@ DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识�
   s.homepage         = 'https://github.com/duanbhu/DHPaddleLiteSDK'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'dbh' => '310701836@qq.com' }
-  s.source           = { :git => 'https://github.com/duanbhu/DHPaddleLiteSDK.git', :tag => s.version.to_s }
+  s.source           = {
+    :http => "https://github.com/duanbhu/DHPaddleLiteSDK/releases/download/#{s.version}/DHPaddleLiteSDK-#{s.version}.zip",
+    :sha256 => 'adcfc454f8a7c0fbb61977d1083c04e853353ed4616636e7cfef717e1a5cfaf9'
+  }
 
   s.ios.deployment_target = '12.0'
   s.default_subspecs = 'Core'
