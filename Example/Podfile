@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'DHPaddleLiteSDK_Example' do
+  pod 'DHPaddleLiteSDK', :path => '../'
+
+  target 'DHPaddleLiteSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
