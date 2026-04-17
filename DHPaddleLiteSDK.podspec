@@ -18,13 +18,13 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识别与手机号识别组件。
                        DESC
 
-  s.homepage         = 'http://192.168.3.182/dbh/DHPaddleLiteSDK'
+  s.homepage         = 'https://github.com/duanbhu/DHPaddleLiteSDK'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'dbh' => '310701836@qq.com' }
-  s.source           = { :git => 'http://192.168.3.182/dbh/DHPaddleLiteSDK.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/duanbhu/DHPaddleLiteSDK.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'
   s.default_subspecs = 'Core'
@@ -32,14 +32,14 @@ TODO: Add long description of the pod here.
   
   s.subspec 'Core' do |core|
     core.source_files = [
-      'DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.{h,m,mm}',
+      'DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h',
       'DHPaddleLiteSDK/Classes/Private/*.{h,m,mm}',
       'DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.{h,m,mm}',
       'DHPaddleLiteSDK/paddleUtil/*',
       'DHPaddleLiteSDK/ThirdParty/PaddleLite/include/*.h'
     ]
     core.public_header_files = [
-      'DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.h',
+      'DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h',
       'DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.h'
     ]
     core.private_header_files = [

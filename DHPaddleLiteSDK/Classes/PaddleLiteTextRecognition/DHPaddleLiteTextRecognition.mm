@@ -94,7 +94,12 @@ Pipeline *pipeline_;
     NSBundle *resourceBundle = nil;
     NSString *path = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray<NSString *> *candidateBundleNames = @[@"DLPaddleLiteSDK", @"DLPaddleLiteSDK_DLPaddleLiteSDK"];
+    NSArray<NSString *> *candidateBundleNames = @[
+        @"DHPaddleLiteSDK",
+        @"DHPaddleLiteSDK_DHPaddleLiteSDK",
+        @"DLPaddleLiteSDK",
+        @"DLPaddleLiteSDK_DLPaddleLiteSDK"
+    ];
     NSString *requiredFileName = @"cn_PP-OCRv5_mobile_det_opt.nb";
     
     // Approach 1: Try to find known resource bundle names from class bundle and main bundle
