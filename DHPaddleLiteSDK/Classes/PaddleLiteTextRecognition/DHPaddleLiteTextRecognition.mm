@@ -115,12 +115,15 @@ Pipeline *pipeline_;
     NSString *path = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray<NSString *> *candidateBundleNames = @[
+        @"DHPaddleLiteSDKOCRModelV4",
+        @"DHPaddleLiteSDKOCRModelV5",
         @"DHPaddleLiteSDK",
         @"DHPaddleLiteSDK_DHPaddleLiteSDK",
         @"DLPaddleLiteSDK",
         @"DLPaddleLiteSDK_DLPaddleLiteSDK"
     ];
-    NSString *requiredFileName = @"cn_PP-OCRv5_mobile_det_opt.nb";
+    NSString *requiredFileNameV4 = @"cn_PP-OCRv4_mobile_det_opt.nb";
+    NSString *requiredFileNameV5 = @"cn_PP-OCRv5_mobile_det_opt.nb";
     
     // Approach 1: Try to find known resource bundle names from class bundle and main bundle
     NSBundle *currentBundle = [NSBundle bundleForClass:self.class];
@@ -135,8 +138,10 @@ Pipeline *pipeline_;
         if (bundleURL) {
             NSBundle *candidateBundle = [NSBundle bundleWithURL:bundleURL];
             NSString *candidatePath = [candidateBundle bundlePath];
-            NSString *requiredFilePath = [candidatePath stringByAppendingPathComponent:requiredFileName];
-            if ([fileManager fileExistsAtPath:requiredFilePath]) {
+            NSString *requiredFilePathV4 = [candidatePath stringByAppendingPathComponent:requiredFileNameV4];
+            NSString *requiredFilePathV5 = [candidatePath stringByAppendingPathComponent:requiredFileNameV5];
+            if ([fileManager fileExistsAtPath:requiredFilePathV4] ||
+                [fileManager fileExistsAtPath:requiredFilePathV5]) {
                 resourceBundle = candidateBundle;
                 path = candidatePath;
                 NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法1): %@", path);
@@ -155,8 +160,10 @@ Pipeline *pipeline_;
             if (!candidatePath.length) {
                 continue;
             }
-            NSString *requiredFilePath = [candidatePath stringByAppendingPathComponent:requiredFileName];
-            if ([fileManager fileExistsAtPath:requiredFilePath]) {
+            NSString *requiredFilePathV4 = [candidatePath stringByAppendingPathComponent:requiredFileNameV4];
+            NSString *requiredFilePathV5 = [candidatePath stringByAppendingPathComponent:requiredFileNameV5];
+            if ([fileManager fileExistsAtPath:requiredFilePathV4] ||
+                [fileManager fileExistsAtPath:requiredFilePathV5]) {
                 resourceBundle = bundle;
                 path = candidatePath;
                 NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法2): %@", path);
@@ -164,28 +171,90 @@ Pipeline *pipeline_;
             }
         }
     }
+
+    // Approach 3: Scan nested *.bundle under main bundle (resource bundles may not be loaded yet)
+    if (!path) {
+        NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
+        NSArray<NSString *> *contents = [fileManager contentsOfDirectoryAtPath:mainBundlePath error:nil];
+        for (NSString *item in contents) {
+            if (![item.pathExtension.lowercaseString isEqualToString:@"bundle"]) {
+                continue;
+            }
+            NSString *bundlePath = [mainBundlePath stringByAppendingPathComponent:item];
+            NSString *requiredFilePathV4 = [bundlePath stringByAppendingPathComponent:requiredFileNameV4];
+            NSString *requiredFilePathV5 = [bundlePath stringByAppendingPathComponent:requiredFileNameV5];
+            if ([fileManager fileExistsAtPath:requiredFilePathV4] ||
+                [fileManager fileExistsAtPath:requiredFilePathV5]) {
+                resourceBundle = [NSBundle bundleWithPath:bundlePath];
+                path = bundlePath;
+                NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法3): %@", path);
+                break;
+            }
+        }
+    }
     
-    // Approach 3: Fallback to main bundle for diagnostics
+    // Approach 4: Fallback to main bundle for diagnostics
     if (!path) {
         resourceBundle = [NSBundle mainBundle];
         path = [resourceBundle bundlePath];
-        NSLog(@"[DHPaddleLiteTextRecognition] 使用主包兜底 (方法3): %@", path);
+        NSLog(@"[DHPaddleLiteTextRecognition] 使用主包兜底 (方法4): %@", path);
     }
     
     // Setup model paths
     // Note: CocoaPods resource_bundles flattens the directory structure,
     // so files are at the bundle root, not in subdirectories
     std::string paddle_dir = std::string([path UTF8String]);
-    std::string det_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_det_opt.nb";
-    std::string rec_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_rec_opt.nb";
-    std::string cls_model_file = paddle_dir + "/cn_ppocr_mobile_v2.0_cls_opt.nb";
+    std::string det_model_file;
+    std::string rec_model_file;
+    std::string cls_model_file;
+    std::string dict_file;
+    NSString *resolvedOCRVersion = nil;
+
+    NSString *detV4Path = [path stringByAppendingPathComponent:@"cn_PP-OCRv4_mobile_det_opt.nb"];
+    NSString *recV4Path = [path stringByAppendingPathComponent:@"cn_PP-OCRv4_mobile_rec_opt.nb"];
+    NSString *clsV4Path = [path stringByAppendingPathComponent:@"cn_ppocr_mobile_v2.0_cls_opt.nb"];
+    NSString *dictV4Path = [path stringByAppendingPathComponent:@"ppocrv4_dict.txt"];
+
+    NSString *detV5Path = [path stringByAppendingPathComponent:@"cn_PP-OCRv5_mobile_det_opt.nb"];
+    NSString *recV5Path = [path stringByAppendingPathComponent:@"cn_PP-OCRv5_mobile_rec_opt.nb"];
+    NSString *clsV5Path = [path stringByAppendingPathComponent:@"cn_ppocr_mobile_v2.0_cls_opt.nb"];
+    NSString *dictV5Path = [path stringByAppendingPathComponent:@"ppocrv5_dict.txt"];
+
+    BOOL hasV4 = [fileManager fileExistsAtPath:detV4Path] &&
+                 [fileManager fileExistsAtPath:recV4Path] &&
+                 [fileManager fileExistsAtPath:clsV4Path] &&
+                 [fileManager fileExistsAtPath:dictV4Path];
+    BOOL hasV5 = [fileManager fileExistsAtPath:detV5Path] &&
+                 [fileManager fileExistsAtPath:recV5Path] &&
+                 [fileManager fileExistsAtPath:clsV5Path] &&
+                 [fileManager fileExistsAtPath:dictV5Path];
+
+    if (hasV4) {
+        det_model_file = paddle_dir + "/cn_PP-OCRv4_mobile_det_opt.nb";
+        rec_model_file = paddle_dir + "/cn_PP-OCRv4_mobile_rec_opt.nb";
+        cls_model_file = paddle_dir + "/cn_ppocr_mobile_v2.0_cls_opt.nb";
+        dict_file = paddle_dir + "/ppocrv4_dict.txt";
+        resolvedOCRVersion = @"PP-OCRv4";
+    } else if (hasV5) {
+        det_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_det_opt.nb";
+        rec_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_rec_opt.nb";
+        cls_model_file = paddle_dir + "/cn_ppocr_mobile_v2.0_cls_opt.nb";
+        dict_file = paddle_dir + "/ppocrv5_dict.txt";
+        resolvedOCRVersion = @"PP-OCRv5";
+    } else {
+        // Keep v4 as default paths for downstream diagnostics.
+        det_model_file = paddle_dir + "/cn_PP-OCRv4_mobile_det_opt.nb";
+        rec_model_file = paddle_dir + "/cn_PP-OCRv4_mobile_rec_opt.nb";
+        cls_model_file = paddle_dir + "/cn_ppocr_mobile_v2.0_cls_opt.nb";
+        dict_file = paddle_dir + "/ppocrv4_dict.txt";
+    }
 
     self.det_model_path = det_model_file;
     self.rec_model_path = rec_model_file;
     self.cls_model_path = cls_model_file;
     
     // Setup dictionary and config paths
-    self.dict_path = paddle_dir + "/ppocrv5_dict.txt";
+    self.dict_path = dict_file;
     self.config_path = paddle_dir + "/config.txt";
     
     // Check if model files exist
@@ -194,6 +263,12 @@ Pipeline *pipeline_;
     NSString *clsModelPath = [NSString stringWithUTF8String:cls_model_file.c_str()];
     NSString *dictPath = [NSString stringWithUTF8String:self.dict_path.c_str()];
     NSString *configPath = [NSString stringWithUTF8String:self.config_path.c_str()];
+
+    if (resolvedOCRVersion) {
+        NSLog(@"[DHPaddleLiteTextRecognition] 模型版本: %@", resolvedOCRVersion);
+    } else {
+        NSLog(@"[DHPaddleLiteTextRecognition] 警告: 未识别到完整的PP-OCRv4/PP-OCRv5模型文件组合");
+    }
     
     // Validate all required files exist and provide detailed diagnostics
     BOOL allFilesExist = YES;

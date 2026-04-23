@@ -6,7 +6,7 @@
 
 **错误信息:**
 ```
-[PaddleLiteTextRecognition] 错误: 检测模型文件不存在: /path/to/DLPaddleLiteSDK.bundle/models/cn_PP-OCRv5_mobile_det_opt.nb
+[PaddleLiteTextRecognition] 错误: 检测模型文件不存在: /path/to/DLPaddleLiteSDK.bundle/models/cn_PP-OCRv4_mobile_det_opt.nb
 ```
 
 **原因:**
@@ -49,10 +49,10 @@ s.resource_bundles = {
 3. 右键点击 `.app` → Show Package Contents
 4. 检查是否存在 `DLPaddleLiteSDK.bundle`
 5. 检查 bundle 内是否包含:
-   - `models/cn_PP-OCRv5_mobile_det_opt.nb`
-   - `models/cn_PP-OCRv5_mobile_rec_opt.nb`
+   - `models/cn_PP-OCRv4_mobile_det_opt.nb`
+   - `models/cn_PP-OCRv4_mobile_rec_opt.nb`
    - `models/cn_ppocr_mobile_v2.0_cls_opt.nb`
-   - `labels/ppocrv5_dict.txt`
+   - `labels/ppocrv4_dict.txt`
    - `config.txt`
 
 #### 方案 4: 检查文件位置
@@ -64,21 +64,21 @@ s.resource_bundles = {
 DLPaddleLiteSDK/
   Classes/
     models/
-      cn_PP-OCRv5_mobile_det_opt.nb
-      cn_PP-OCRv5_mobile_rec_opt.nb
+      cn_PP-OCRv4_mobile_det_opt.nb
+      cn_PP-OCRv4_mobile_rec_opt.nb
       cn_ppocr_mobile_v2.0_cls_opt.nb
     labels/
-      ppocrv5_dict.txt
+      ppocrv4_dict.txt
     config.txt
 ```
 
 打包后的 bundle 结构（扁平化）:
 ```
 DLPaddleLiteSDK.bundle/
-  cn_PP-OCRv5_mobile_det_opt.nb
-  cn_PP-OCRv5_mobile_rec_opt.nb
+  cn_PP-OCRv4_mobile_det_opt.nb
+  cn_PP-OCRv4_mobile_rec_opt.nb
   cn_ppocr_mobile_v2.0_cls_opt.nb
-  ppocrv5_dict.txt
+  ppocrv4_dict.txt
   config.txt
   Info.plist
 ```

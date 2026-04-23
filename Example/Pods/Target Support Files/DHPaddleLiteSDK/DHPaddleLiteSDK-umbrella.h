@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "DLPaddleLiteSDK.h"
 #import "DHPaddleLiteTextRecognition.h"
 #import "DLTextRecognitionResult.h"
 #import "DHOCRErrorCorrector.h"

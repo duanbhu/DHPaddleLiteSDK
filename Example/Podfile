@@ -8,6 +8,7 @@ target 'DHPaddleLiteSDK_Example' do
   
   pod 'DLVideoCapture'
   pod 'DHPaddleLiteSDK/PhoneNumberRecognizer', :path => '../'
+  pod 'DHPaddleLiteSDK/OCRModelV4', :path => '../'
 
   target 'DHPaddleLiteSDK_Tests' do
     inherit! :search_paths

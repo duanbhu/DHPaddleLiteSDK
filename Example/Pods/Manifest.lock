@@ -1,10 +1,13 @@
 PODS:
-  - DHPaddleLiteSDK/Core (0.0.3)
-  - DHPaddleLiteSDK/PhoneNumberRecognizer (0.0.3):
+  - DHPaddleLiteSDK/Core (0.0.4)
+  - DHPaddleLiteSDK/OCRModelV4 (0.0.4):
+    - DHPaddleLiteSDK/Core
+  - DHPaddleLiteSDK/PhoneNumberRecognizer (0.0.4):
     - DHPaddleLiteSDK/Core
   - DLVideoCapture (0.1.1)
 
 DEPENDENCIES:
+  - DHPaddleLiteSDK/OCRModelV4 (from `../`)
   - DHPaddleLiteSDK/PhoneNumberRecognizer (from `../`)
   - DLVideoCapture
 
@@ -17,9 +20,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DHPaddleLiteSDK: eb9e6a1f0b8c8c4feff822cb67c9d17d438fe438
+  DHPaddleLiteSDK: 882a9c881e244aec077ca6c7e47586ee4edb99f2
   DLVideoCapture: ce5153075f9850b18e980ce65952c70dc09f36df
 
-PODFILE CHECKSUM: 64f4614d7a6caf27faaa30fb7301b579676892ae
+PODFILE CHECKSUM: 0da772acffa4f9efd647df26e708c9682d30beee
 
 COCOAPODS: 1.16.2

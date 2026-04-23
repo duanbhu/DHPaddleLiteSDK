@@ -1,9 +1,9 @@
 {
   "name": "DHPaddleLiteSDK",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "summary": "基于PaddleLite实现OCR识别",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "http://192.168.3.182/dbh/DHPaddleLiteSDK",
+  "description": "DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识别与手机号识别组件。",
+  "homepage": "https://github.com/duanbhu/DHPaddleLiteSDK",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,8 +12,8 @@
     "dbh": "310701836@qq.com"
   },
   "source": {
-    "git": "http://192.168.3.182/dbh/DHPaddleLiteSDK.git",
-    "tag": "0.0.3"
+    "http": "https://github.com/duanbhu/DHPaddleLiteSDK/releases/download/0.0.4/DHPaddleLiteSDK-0.0.4.zip",
+    "sha256": "e086ddf0c761e25de73712ab62454dfb579b1e1b1a04a5280e8fa61bf3e897f4"
   },
   "platforms": {
     "ios": "12.0"
@@ -24,25 +24,20 @@
     {
       "name": "Core",
       "source_files": [
-        "DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.{h,m,mm}",
+        "DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h",
         "DHPaddleLiteSDK/Classes/Private/*.{h,m,mm}",
         "DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.{h,m,mm}",
         "DHPaddleLiteSDK/paddleUtil/*",
         "DHPaddleLiteSDK/ThirdParty/PaddleLite/include/*.h"
       ],
       "public_header_files": [
-        "DHPaddleLiteSDK/Classes/DHPaddleLiteSDK.h",
+        "DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h",
         "DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.h"
       ],
       "private_header_files": [
         "DHPaddleLiteSDK/Classes/Private/*.h",
         "DHPaddleLiteSDK/paddleUtil/*.{hpp,h}"
       ],
-      "resource_bundles": {
-        "DHPaddleLiteSDK": [
-          "DHPaddleLiteSDK/Classes/**/*.{txt,nb}"
-        ]
-      },
       "vendored_libraries": "DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a",
       "vendored_frameworks": "DHPaddleLiteSDK/ThirdParty/opencv2.framework",
       "libraries": "c++",
@@ -58,6 +53,32 @@
         "VALID_ARCHS[sdk=iphonesimulator*]": "",
         "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup",
         "FRAMEWORK_SEARCH_PATHS": "$(inherited) \"${PODS_TARGET_SRCROOT}/DHPaddleLiteSDK/ThirdParty\""
+      }
+    },
+    {
+      "name": "OCRModelV4",
+      "dependencies": {
+        "DHPaddleLiteSDK/Core": []
+      },
+      "resource_bundles": {
+        "DHPaddleLiteSDKOCRModelV4": [
+          "DHPaddleLiteSDK/Classes/config.txt",
+          "DHPaddleLiteSDK/Classes/models/ppocrv4/*.nb",
+          "DHPaddleLiteSDK/Classes/labels/ppocrv4_dict.txt"
+        ]
+      }
+    },
+    {
+      "name": "OCRModelV5",
+      "dependencies": {
+        "DHPaddleLiteSDK/Core": []
+      },
+      "resource_bundles": {
+        "DHPaddleLiteSDKOCRModelV5": [
+          "DHPaddleLiteSDK/Classes/config.txt",
+          "DHPaddleLiteSDK/Classes/models/ppocrv5/*.nb",
+          "DHPaddleLiteSDK/Classes/labels/ppocrv5_dict.txt"
+        ]
       }
     },
     {

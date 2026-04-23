@@ -20,6 +20,31 @@ it, simply add the following line to your Podfile:
 pod 'DHPaddleLiteSDK'
 ```
 
+### 按需选择模型版本（推荐）
+
+默认仅安装 `Core`（不包含任何 OCR 模型资源）。请在 Podfile 中按需选择模型：
+
+```ruby
+# Core + PP-OCRv4
+pod 'DHPaddleLiteSDK/Core'
+pod 'DHPaddleLiteSDK/OCRModelV4'
+
+# 或：Core + PP-OCRv5
+pod 'DHPaddleLiteSDK/Core'
+pod 'DHPaddleLiteSDK/OCRModelV5'
+```
+
+如需手机号识别组件（不自动携带模型）：
+
+```ruby
+# 仅手机号识别逻辑
+pod 'DHPaddleLiteSDK/PhoneNumberRecognizer'
+
+# 必须二选一额外安装模型
+pod 'DHPaddleLiteSDK/OCRModelV4'
+# pod 'DHPaddleLiteSDK/OCRModelV5'
+```
+
 ## Author
 
 duanbhu, 310701836@qq.com

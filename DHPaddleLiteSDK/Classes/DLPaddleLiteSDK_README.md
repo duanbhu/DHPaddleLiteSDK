@@ -25,6 +25,10 @@ PaddleOCR + OpenCV (底层)
 
 ## 快速开始
 
+### 依赖说明
+
+`PhoneNumberRecognizer` 仅包含手机号识别逻辑，不包含 OCR 模型资源。集成时请确保同时安装至少一个模型子模块（`OCRModelV4` 或 `OCRModelV5`），否则运行时无法完成识别。
+
 ### 基本使用
 
 ```objective-c

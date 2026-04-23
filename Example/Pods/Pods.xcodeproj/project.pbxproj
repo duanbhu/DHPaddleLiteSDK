@@ -7,250 +7,260 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0846795A3D74626F74F8B0F3F5A19AF0 /* DHPaddleLiteSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 61BD769DCD1ACF9B4827FC9D51F6C3C3 /* DHPaddleLiteSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07917CC1067C5F30F44F9339017D8D89 /* DLTextRecognitionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1934F3DADC7D4F4D3840707529E263 /* DLTextRecognitionResult.m */; };
+		084069FD2CDE55E4B57760722C35C380 /* cn_ppocr_mobile_v2.0_cls_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = 699F06AE50A188F6654FEE9F92B2F1FE /* cn_ppocr_mobile_v2.0_cls_opt.nb */; };
 		09BF7CF061D4F3CDCBA943F825D65494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		0BFED3FAB4E710AD4353BB4EB662C132 /* paddle_place.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB320BD05E9A67B22AE35D0E240645A /* paddle_place.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0E1BE53CB74218BA4914259DD98179C5 /* DLVideoCapture-DLVideoCapture in Resources */ = {isa = PBXBuildFile; fileRef = 3910F936EB27348A281F82DDC2D0370A /* DLVideoCapture-DLVideoCapture */; };
-		11FCDF327A98E171AEDCEEAFBCB4D917 /* clipper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6DB653ED074D5D02B8963CC4C6111703 /* clipper.mm */; };
-		1506E199ACA90BD98C6AFA484D30A689 /* icon_scan_line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CFEB345BE423407CEFC9D293853579 /* icon_scan_line@3x.png */; };
-		1830BEBCF624328F2FEB301B4042BA06 /* icon_scan_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4E3B419A2A8489DA35B16CF9DA20FF /* icon_scan_line@2x.png */; };
+		12511FC7AD8DC49C405F5976DD7ACBF1 /* DHTrackingNumberFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D25B48EF2BC889BC7E45774B3DBED09A /* DHTrackingNumberFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1609ACB7D30A79A7BF0C0ADB5AFA3CB5 /* DHStreamRecognitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBD97531084F729FD0032667E89028 /* DHStreamRecognitionManager.m */; };
 		1A99DCD0436B93AF3A80923502F0BBDB /* DLVideoCaptureConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D98D9B8247521F4721F9417457F1EC1 /* DLVideoCaptureConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1DB7999A4E721A6201EADB45AE42DA92 /* paddle_image_preprocess.h in Headers */ = {isa = PBXBuildFile; fileRef = EFDC367E1783721D5EB7A44477B77CB3 /* paddle_image_preprocess.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		23373315C0D24F6BF2D0D4F1C175BE60 /* cls_process.h in Headers */ = {isa = PBXBuildFile; fileRef = D3970FC4ACB63B64A62B632447273261 /* cls_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		25DC0A45E0328F0905763DB775E65C4C /* paddle_lite_factory_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6843BED6B9EE0D91CDE3794B47099F5 /* paddle_lite_factory_helper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1F6D619FA0F07770A22436F59DBFBFC0 /* paddle_lite_factory_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D8284ABDFB4CFDE9E706AD3E14806EF /* paddle_lite_factory_helper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		23A3BB772030E0C481337D399C47E702 /* det_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = C3C20E4049322AA2993B14D9F7B80ED2 /* det_process.cc */; };
 		2827020B7A371ABEE1868E89906BFF06 /* Pods-DHPaddleLiteSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 94BE0AE697086344054024EBD610B011 /* Pods-DHPaddleLiteSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2D60EA3B2464EE6D0615A524F47D892A /* DHPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 369A2B662BABB130E576072F248BF86D /* DHPhoneNumberFormatter.m */; };
 		2EFF5551D8A7170B4C754D03CF8A048E /* Pods-DHPaddleLiteSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEC88E3ED4C87206FA2E2A30573A3C2 /* Pods-DHPaddleLiteSDK_Tests-dummy.m */; };
-		2F16866D654F8AFA5EB4603B3F999A45 /* DHPaddleLiteTextRecognition.h in Headers */ = {isa = PBXBuildFile; fileRef = DE2600A56DAB21F9D2A2C7CFEEE39661 /* DHPaddleLiteTextRecognition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2F3A61FA0CC6B0003B3C010CFCA57B91 /* paddle_api.h in Headers */ = {isa = PBXBuildFile; fileRef = 340A767959104B1F3CD0D1827B5F66F1 /* paddle_api.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		301E119A0BC71AC7F1EB753A1A7ECD0E /* DLVideoCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2BC4892ABD50E9672421F3D321C62D /* DLVideoCapture.m */; };
-		34FB157B8306849441B01A910A2F7930 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		3B6948C78B49285C24485BB8C0EA9253 /* DHPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 531B879D1D10A77790FD78A5505CBC02 /* DHPhoneNumberFormatter.m */; };
-		3E3B41E21B999DA2BFFD433B1F68BAF4 /* paddle_use_kernels.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8701902BE6D485F8308656DF419B7 /* paddle_use_kernels.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		49ECF12DB0E2879170AA654173466C55 /* paddle_place.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3F1F8FB2AA00F128DAB1AF2A396820 /* paddle_place.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4D2922F7BC2DE654A250E6E0735AB3FB /* DHPaddleLiteSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 429B296424AFEC1846BB673344FD4EF5 /* DHPaddleLiteSDK-dummy.m */; };
-		589DC5B65E5F4D66D5EB395509FFDCEF /* DHPhoneNumberRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4831B0E6121B3F9C5F8F492601308130 /* DHPhoneNumberRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5A30146D234902A1935C3BAED24AD914 /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5F4E8322FF1A8AE12773ECABB72DEB63 /* utils.cc */; };
-		5C43AAA8033DF638E32E6844831DF24E /* DLPaddleLiteSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16882649446FA5C57847F8A9B3A62C5D /* DLPaddleLiteSDK.mm */; };
-		5E48C2B90517E6E052FCFE1F9EE31CC6 /* DHPaddleLiteTextRecognition.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5AF1FA27AA5BD1997876B0457DFA8 /* DHPaddleLiteTextRecognition.mm */; };
-		625B14ADB222F2A6AD4E6CB00551A164 /* NSString+SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F2F88BFD8B137556209583A270780BD /* NSString+SDK.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		631C06A0519D6F67A4B518AD5ABCB7E5 /* ppocrv5_dict.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0859F4FB6912FAC4D088099A1F13CFC0 /* ppocrv5_dict.txt */; };
-		63933D9CE6FC26BBB3E346AF405559CD /* DHPhoneNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A409D87F353B7B31E6247635D3F332C /* DHPhoneNumberValidator.m */; };
+		3C281DB90466E0EF5C6B164C097DF388 /* det_process.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B941C725A69F06B4088BF7064265973 /* det_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3CA054C93550A3858FBA95EE190D6EF8 /* DHPhoneNumberValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D1CE8BB3AD5B332C14118FAF90541E /* DHPhoneNumberValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D7AFE249D20F6E1105ABE06FC340DD8 /* clipper.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A49EDCB33ADA0D3469C1E57068D735 /* clipper.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		404CC13E2EAC0D4C224423A7E449C7CD /* paddle_use_kernels.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B826410E78BE7C5EF800CEE1286C388 /* paddle_use_kernels.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		421CA9D07B6ADE1AB228E2578A5E23D5 /* paddle_use_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 604D7F7CE4FECEC709D1346B9052BD5C /* paddle_use_ops.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		49605F6A86E2EA84FC318736F6263915 /* DHOCRErrorCorrector.h in Headers */ = {isa = PBXBuildFile; fileRef = 16D7DC37ADF9A4B842ABEEFDF0B988D2 /* DHOCRErrorCorrector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A9A2CD0BDE84CA5C3581B0B7EAC0450 /* DHPhoneNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B4AFB768C9F227406B2DEBC8E36D5DC /* DHPhoneNumberFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E0519230B5D75E36066ACA7779DED92 /* cn_PP-OCRv4_mobile_rec_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = 344122BDBE30E529DCD2F2822572C8D0 /* cn_PP-OCRv4_mobile_rec_opt.nb */; };
+		54BA144F169EC959A00662D72BB9FE38 /* DLPaddleLiteSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 51007D6CFFF230FC7074BC28CBF6B952 /* DLPaddleLiteSDK.mm */; };
+		577A208DD920A7ED3AA814D7AD353C5E /* db_post_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = D041CB8ABBEE0F6F047D246603F0A43D /* db_post_process.cc */; };
+		57C290CBEDB231DBBDE072B588614C88 /* cls_process.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BB3CB2B211547B56E2EE7C43B7E60AC /* cls_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5D09DEB2DCAC7DA7CCEED7A16C109B1A /* paddle_use_passes.h in Headers */ = {isa = PBXBuildFile; fileRef = 21FE7185A9616E2E4E28D6E9BA0208F6 /* paddle_use_passes.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		643542A325354D34E4206029117B9DE5 /* icon_scan_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4E3B419A2A8489DA35B16CF9DA20FF /* icon_scan_line@2x.png */; };
+		68528AC11184004E4499E3376F4ADADB /* paddle_image_preprocess.h in Headers */ = {isa = PBXBuildFile; fileRef = 242288931371CD4B04B19AEF75F2C734 /* paddle_image_preprocess.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6B3AC2A32E965EAEFB87E6F47B69C050 /* DHPaddleLiteSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A22324419D81993C39A2CA235EBAE4CD /* DHPaddleLiteSDK-dummy.m */; };
 		6B85075CCDAD74850C6AB41558001ED9 /* DLVideoCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B63822A71FD119C529898FD2B4B3C6A /* DLVideoCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BE1F94665EDFB3D9B3078D7A556C687 /* db_post_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = A4238ED4881F69E06D94D77D92BC48C0 /* db_post_process.cc */; };
+		6DCB9D940B5931AD639E8A9D344BF638 /* rec_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = 848C7E638128944943B96699331C6239 /* rec_process.cc */; };
+		6FCA2A9AC004C92D1CB76713490E0E47 /* DHPaddleLiteTextRecognition.h in Headers */ = {isa = PBXBuildFile; fileRef = AFF3BDCFBCFF04C1133AF5CFBA6DABB1 /* DHPaddleLiteTextRecognition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FE40694D5C93411533B583283591D16 /* DHPhoneNumberTypeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B94154829A6C17AB63F975F4BADA0A /* DHPhoneNumberTypeFilter.m */; };
 		72399636E1665ED164A33D7131FCC1C4 /* DLVideoCapture-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F0519EA0A8F9C1F04622A0EA5DE305 /* DLVideoCapture-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7646DE0CAB42F1081F834EAF09578697 /* DHPhoneNumberValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = FEFB186E40EE1F7F7005E574596B1165 /* DHPhoneNumberValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		770E43C2AF71E619E3AC9524B0397F70 /* icon_scan_border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930451B1F7E6D4DDB2BA5685109872 /* icon_scan_border@2x.png */; };
-		77A9BDF7098C49D9AF642231691914A5 /* DHPhoneNumberResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3708501E77E529E5269521975DE5C252 /* DHPhoneNumberResult.m */; };
-		78B686219EEEB748D0473E85302FA9AD /* cn_PP-OCRv5_mobile_det_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = D605ECDB80C8A7C881B6C5D30172139B /* cn_PP-OCRv5_mobile_det_opt.nb */; };
-		79D75397A31E7F15C12B514365741F66 /* db_post_process.h in Headers */ = {isa = PBXBuildFile; fileRef = 360DF4C967A428ABBFACD5D86FEEABAB /* db_post_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7B35C1BE08F3EB60DF40ECC458A8C837 /* DHPhoneNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3C75C0B2A28A59934D860B022074DF /* DHPhoneNumberFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79F1990A69D7097D610E3F815C3E107F /* ppocrv4_dict.txt in Resources */ = {isa = PBXBuildFile; fileRef = CCF8D9B206E295FC14A4BADEAE0ED108 /* ppocrv4_dict.txt */; };
+		7CD6779FB7B4290E762C352FF0933BAC /* cn_PP-OCRv4_mobile_det_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = 3C5859BFC2C46C7B6932D066C11AA337 /* cn_PP-OCRv4_mobile_det_opt.nb */; };
 		7D076ADCE0ECB18375ADA08406EC0EF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		7ED9A490494167083D67DF0EB66CA03D /* det_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = 09CE45EA9BBA2DA4F1030B40E5552E11 /* det_process.cc */; };
-		82601EC338039B713E669A87A955E8B4 /* cls_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3CC66CDBD7D89E48244793D60E034EC6 /* cls_process.cc */; };
-		827F6593DADD089AD698411BBA8E3218 /* cn_PP-OCRv5_mobile_rec_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = 585F7FE92AA5BC805E55266D09AD6B6B /* cn_PP-OCRv5_mobile_rec_opt.nb */; };
-		880667644557C2166E2207AACD5CA49E /* DHStreamRecognitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 923198FCBD131583362D0E7B33E53352 /* DHStreamRecognitionManager.m */; };
-		8A271D17941018F58334182DFE049A95 /* DHPhoneNumberRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CCD7A3A69D51C94B7F47BBFB76A3E5 /* DHPhoneNumberRecognizer.m */; };
-		8A57047FD0C3E104864B66B517109017 /* clipper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2D68C1858C97029499057917F321E1C2 /* clipper.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
-		8C1F2EDF0ED14C8D2A1E3DDE2909A5DF /* rec_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = 90DA580643E33105B8DD4B255F76D4C8 /* rec_process.cc */; };
-		8DD329EBE40AE67114AEE57ACCFBCFD8 /* DHPhoneNumberTypeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = FFCD9B6185D57037BF1B9286C81083C0 /* DHPhoneNumberTypeFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		901C23676C51FFE251BF97D159791391 /* DLTextRecognitionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 70832F1B2E4F8450ED82316DBAB185E6 /* DLTextRecognitionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		94DB16D7390F3370F1E1C96D19926135 /* DHOCRErrorCorrector.m in Sources */ = {isa = PBXBuildFile; fileRef = 239B948CABBC6752A8E4E25198CA1008 /* DHOCRErrorCorrector.m */; };
-		952BE79852C684E43BDACA4CC60AA91F /* DHPhoneNumberTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E68BB725B98E12F313DC79BE72E3B985 /* DHPhoneNumberTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81422FD5DF916B7A68FEFDFBB10766C0 /* DHPhoneNumberResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 09A626CE6800D3757B9A162FCB2803ED /* DHPhoneNumberResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81A5EB306276450C14B2A27489170D16 /* DHTrackingNumberFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3099B84A4A585C0AB67F84C5B26469 /* DHTrackingNumberFilter.m */; };
+		83EF9C280E10B2F96CF86C52F9D12541 /* DLTextRecognitionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = E963F4ED03F4573F39FAA28AC9014107 /* DLTextRecognitionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		886797B40077B8F86D56D1BD09D8A8E4 /* rec_process.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD36D1B7B01C6B371F19A03907F0E08 /* rec_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8E651DF05E16E62BAE986D135A41B2CC /* DLScanResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D496F7AAC4D80F0F50E6909D46692DAE /* DLScanResult.m */; };
+		951C21D94BE6BC3E6B6A3D627C7A7679 /* DHPhoneNumberTypeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A54D42CCEF0F7AB942E4B8846D6031 /* DHPhoneNumberTypeFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97B0A6E94E2BC4A809F1CEF8004B1612 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		9932F53559454482BD7B2666726C1E92 /* NSString+SDK.m in Sources */ = {isa = PBXBuildFile; fileRef = DD72BF22B17A949D2914061646A395BA /* NSString+SDK.m */; };
-		9FFE4C0B7DBBCBFFB959D563E1BB7217 /* pipeline.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1E3FF4097637CB5234B923A5E5E9E149 /* pipeline.cc */; };
-		A52D61C5ADAB87585946DD2D4A3059BD /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0884AD7131CD0EFAB034EE114AB26F10 /* config.txt */; };
-		A55621293B03B7BD3FB7028C9ADB9336 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB1B8F4C7E4347364227E7D98F61CE0 /* utils.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A78A40EEAEBB3BAE5A933B4AFAFE35C8 /* DLScanResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FA22959CDF36F75A12FFCDCE02DCA0 /* DLScanResult.m */; };
-		AE4962078219D71DDA2C5C38BFA413F5 /* paddle_api.h in Headers */ = {isa = PBXBuildFile; fileRef = 352CA5FF518BFEC4E25E87EF6D33732D /* paddle_api.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B242F9E7F53DAA7FFA896CCACF7017C6 /* DHPhoneNumberTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 74520198D2A73D4236E61C7B2D3AE9AE /* DHPhoneNumberTypes.m */; };
-		B817B4C17FCF17EA26D9FBEF9ABFC7B1 /* DLScanResult.h in Headers */ = {isa = PBXBuildFile; fileRef = F0B79D3091EE7173DECB4C9E670A9DB7 /* DLScanResult.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B8441699A85DD4EA12617D90FF61CE5D /* clipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F13A587FDA27C634401D1A0AB519E49A /* clipper.cpp */; };
+		9EB0FDA2542B128077704084C33E8B8E /* DHPhoneNumberResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A11F6F51EEADABCFE943002695546F37 /* DHPhoneNumberResult.m */; };
+		9F82AB296BFE27C96F0D44FD61CDE1EF /* utils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 51D5F51E8F71E52B05D7DD3306F533ED /* utils.cc */; };
+		9FF9DB9C337FD5B938B7AFA1FFFCB255 /* pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = EAED9AB08311ECAD7639B8F749A80F3E /* pipeline.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A410880BDC525DEDFCFF18DE389F7E96 /* NSString+SDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F40D9BE757B214CC75945A8726ED783 /* NSString+SDK.m */; };
+		A68140F8E2E0B264938B2100933B517C /* DHPhoneNumberValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74EBAAA2A0A9DCBB32499BD94AE320 /* DHPhoneNumberValidator.m */; };
+		A91C5A4E4783CF447C1580219A7444D8 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6418ED5EB1DC59985B05FEC297A89179 /* timer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A944C5B2541C4ED3545535E6A96BEB97 /* DHPhoneNumberTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = F35E601CAA78A40E7774D77DA372340B /* DHPhoneNumberTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA579659317CB9D6E9D165643F40FCB1 /* icon_scan_line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48CFEB345BE423407CEFC9D293853579 /* icon_scan_line@3x.png */; };
+		AAFDBFB3C598D55F92CABCBD94E79B8D /* icon_scan_border@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0860165277A8D795D11D68F7DC1CA3A9 /* icon_scan_border@3x.png */; };
+		AD15D259C648C115352C0CB59B9300BD /* cls_process.cc in Sources */ = {isa = PBXBuildFile; fileRef = A509B3156872F76CB5D2457032035CA9 /* cls_process.cc */; };
+		B6BD124CFD01EC0BA72A522CBBE06147 /* DHOCRErrorCorrector.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C8730F2B8316A11E79A8B6502F493 /* DHOCRErrorCorrector.m */; };
 		BCC4226ECB1217108222C9226C8C63C7 /* DLVideoCaptureConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8F3D4EE01CA113742FB9182503076D /* DLVideoCaptureConfig.m */; };
-		BE729190555DE55033B55595E82BA821 /* icon_scan_border@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0860165277A8D795D11D68F7DC1CA3A9 /* icon_scan_border@3x.png */; };
-		C3999C57FBB8CDF85E7A488C69B87C22 /* cn_ppocr_mobile_v2.0_cls_opt.nb in Resources */ = {isa = PBXBuildFile; fileRef = 6C7096F36812AA30A8F973086A52105B /* cn_ppocr_mobile_v2.0_cls_opt.nb */; };
-		D16C59D84614FB78B1D6AED7D1FDB182 /* det_process.h in Headers */ = {isa = PBXBuildFile; fileRef = 638D2422342472A1D2B9FD9D4FEE6A20 /* det_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D216FCAAF22FDCF75FBE4BD2C014E9D9 /* clipper.h in Headers */ = {isa = PBXBuildFile; fileRef = C6EB3EDC8316BFFBC38F299A24504195 /* clipper.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D3D38D3DBEB42CFCA75EEA751D16E463 /* paddle_use_passes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E5B9104EECDC6D843BC81483B5E3436 /* paddle_use_passes.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D528E728C41D5782E65D8432E629F6A1 /* DHPhoneNumberTypeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BF3067659C99F6D506121BC4878D2C /* DHPhoneNumberTypeFilter.m */; };
-		D6A9E0DC1641C664AD6E2AD7495A5A5A /* DHStreamRecognitionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE8A6FCB923F2B08C2EDB64559544E1 /* DHStreamRecognitionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD329AD7F47D040EED15A7A992D4560 /* DHPhoneNumberRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A47CAB90A3FFF60F47C6619FA973A /* DHPhoneNumberRecognizer.m */; };
+		BE64101A521BF2B0A39CE8058C4B5EFE /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 908C25F8402677DFD20B0131B90C493E /* utils.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C036789E59A4978095E5A1BAADB481D0 /* db_post_process.h in Headers */ = {isa = PBXBuildFile; fileRef = B14AD9FE95B6CB6D1570EF4606815A80 /* db_post_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C42683F9D02AF06B90C3D5AC31F31417 /* icon_scan_border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930451B1F7E6D4DDB2BA5685109872 /* icon_scan_border@2x.png */; };
+		C8D66365EFCEEA48284B3F8E09E3B973 /* clipper.mm in Sources */ = {isa = PBXBuildFile; fileRef = F933CD1626FDF65312229D64220C6CD3 /* clipper.mm */; };
+		CF6EFE720563BA21965A5422CAAA24DF /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13E2E9BDFA2A2D712407C0B3A7A03286 /* config.txt */; };
+		D65B637E6F0E8120FA5C7FE28398659B /* clipper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9F27ADA2ED6FEE0835AAADE805CFFF07 /* clipper.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		DB543724FD3658FFEF674643718BD344 /* Pods-DHPaddleLiteSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 488A213B7D69EF2C08DECCFDB1A03FD8 /* Pods-DHPaddleLiteSDK_Example-dummy.m */; };
+		DE62DC2FFA6E90AB3C1E179F6A0E159E /* pipeline.cc in Sources */ = {isa = PBXBuildFile; fileRef = 75BEAFC85F4CFAAE78670F725B886002 /* pipeline.cc */; };
+		DF363C02684D48123AA504D9DC76DDBD /* DHStreamRecognitionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8B16B5F5D2A7BDA3BE5DEE7273B556 /* DHStreamRecognitionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E064BBFCB8D0C21677A69263EC33A935 /* DLVideoCapture-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B4864785FE951C591A707FB0F748F9 /* DLVideoCapture-dummy.m */; };
-		E2BB0F41F114069594CD2717C99DB488 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2A3A01A113A5A0FD9CBE9B1BDC8E41 /* timer.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		E3BD5AD7E940376E363ECB2A33926726 /* DHOCRErrorCorrector.h in Headers */ = {isa = PBXBuildFile; fileRef = E18C73042584EE33A858B95C6741E0D3 /* DHOCRErrorCorrector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E7DE78C195670D0A573FABDE743F4FF1 /* DHTrackingNumberFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 92163CDE9F6B8BDAF0AC2934EB892A71 /* DHTrackingNumberFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E940EDF2ECF2FCDF7F043C645B8064CF /* DLTextRecognitionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 594397EC7BB3B08F97F5BC237B66F8F9 /* DLTextRecognitionResult.m */; };
-		F036E811F0E5BA3EC315F6E9A5A5AF56 /* rec_process.h in Headers */ = {isa = PBXBuildFile; fileRef = C8AEB80CD60BA59D4959A7036112DB47 /* rec_process.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E159A8053AD05A6D9C57374969CF22D6 /* DHPaddleLiteTextRecognition.mm in Sources */ = {isa = PBXBuildFile; fileRef = E120C19AD7F1CA51D30DB6D297493868 /* DHPaddleLiteTextRecognition.mm */; };
+		E4A9A47FAA97402035AE7F0C811A88B0 /* clipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE4405A41FF505CC1E40F3B0D841ADA8 /* clipper.cpp */; };
+		EB69783FEE24017EF947C4827A26AAA2 /* DHPaddleLiteSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 75F0591C790E6AC9DAD863565194E574 /* DHPaddleLiteSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB8E1851EEEAB12FD94AA94377270FF6 /* NSString+SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 17F1B39E7F674DFBB21047950120848A /* NSString+SDK.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		ED13ADB3D2C8393D7D12EFB05ED5C5EB /* DHPhoneNumberRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FDE3070DD55FB394D14160829D7DC19 /* DHPhoneNumberRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED5150DAE9DDD9C607ABD84DF11A052C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
 		F1196F7ED42FC41CC6875771A8841062 /* Pods-DHPaddleLiteSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A0A91CC4ED28B358D2964A57901FD591 /* Pods-DHPaddleLiteSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F28C952CC22035480E4F500D710E6CF1 /* pipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = AC1B4644F48730D668FF8F256AF5C610 /* pipeline.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		F3E575BC6365D2E9D4CFDEA1BC217736 /* DHPhoneNumberResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 81B8A612C6999D6E078E128049A70A02 /* DHPhoneNumberResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F590CA2308E9A3F7E82B516510A45D60 /* DHTrackingNumberFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 087568D7490689871EB5CFBD4B5E423C /* DHTrackingNumberFilter.m */; };
-		F88AD3C965D02ED67602BF202B979531 /* paddle_use_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 838BAAC4AE15B72D5C07726A6223C4CF /* paddle_use_ops.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F89E3FD6883D76B1244DB2FD4C441F89 /* DLScanResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 5831E3A8EB397DEE82E4F3187BEAA8D5 /* DLScanResult.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F9D1609E57DB384B936B638847E67364 /* DHPhoneNumberTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = D19F7F433AFAE624EBD0159FD94CE169 /* DHPhoneNumberTypes.m */; };
+		FAF62F328D90F993FC70CFD9C1A1DAFB /* DLPaddleLiteSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BB123DEAB823466E16EB4EBEBB8B56F4 /* DLPaddleLiteSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		743FF691335050A5C6BC6F545C12283C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F52E6C2AD1338CDCAEF9B37DB5B74D80;
-			remoteInfo = "DLVideoCapture-DLVideoCapture";
-		};
-		7DEF3CAE08B54A8B6B4A001D572E7A66 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 45470D60D4A1948A8797A05A8E46C8CE;
-			remoteInfo = "Pods-DHPaddleLiteSDK_Example";
-		};
-		ECC32F29665504D534207FD628413F80 /* PBXContainerItemProxy */ = {
+		3894F780E3667EDE9A0882FB2B235516 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E8C35712F86A8BB0A98B527F6A024A5C;
 			remoteInfo = DLVideoCapture;
 		};
-		F3A976A8A3217884395559E52211EF96 /* PBXContainerItemProxy */ = {
+		3B53A1E6CED7919992525AFD3C1242A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 79206C3D10592A2DF960B0929A430492;
-			remoteInfo = "DHPaddleLiteSDK-DHPaddleLiteSDK";
+			remoteGlobalIDString = F52E6C2AD1338CDCAEF9B37DB5B74D80;
+			remoteInfo = "DLVideoCapture-DLVideoCapture";
 		};
-		F8B2F49226925F7B1C96BEAC63E0EB11 /* PBXContainerItemProxy */ = {
+		46B1ED59DE7F5811CDB4B2EB40BA7634 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45470D60D4A1948A8797A05A8E46C8CE;
+			remoteInfo = "Pods-DHPaddleLiteSDK_Example";
+		};
+		5407B9754787F6CC4F0D30565B0C6363 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7131EA092B6F549AAC9D6481D10A380C;
 			remoteInfo = DHPaddleLiteSDK;
 		};
+		AC1270CCBEF7F0197909E87E70F45157 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96933A3899155F217F5BF992F6DEB3F8;
+			remoteInfo = "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0859F4FB6912FAC4D088099A1F13CFC0 /* ppocrv5_dict.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = ppocrv5_dict.txt; sourceTree = "<group>"; };
+		00523FC1DD21974E82FEC305C25AD0CF /* libpaddle_api_light_bundled.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libpaddle_api_light_bundled.a; path = DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a; sourceTree = "<group>"; };
 		0860165277A8D795D11D68F7DC1CA3A9 /* icon_scan_border@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "icon_scan_border@3x.png"; path = "DLVideoCapture/Assets/icon_scan_border@3x.png"; sourceTree = "<group>"; };
-		087568D7490689871EB5CFBD4B5E423C /* DHTrackingNumberFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHTrackingNumberFilter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHTrackingNumberFilter.m; sourceTree = "<group>"; };
-		0884AD7131CD0EFAB034EE114AB26F10 /* config.txt */ = {isa = PBXFileReference; includeInIndex = 1; name = config.txt; path = DHPaddleLiteSDK/Classes/config.txt; sourceTree = "<group>"; };
-		09CE45EA9BBA2DA4F1030B40E5552E11 /* det_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = det_process.cc; sourceTree = "<group>"; };
-		16882649446FA5C57847F8A9B3A62C5D /* DLPaddleLiteSDK.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = DLPaddleLiteSDK.mm; sourceTree = "<group>"; };
-		1BD8701902BE6D485F8308656DF419B7 /* paddle_use_kernels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_kernels.h; sourceTree = "<group>"; };
-		1BE8A6FCB923F2B08C2EDB64559544E1 /* DHStreamRecognitionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHStreamRecognitionManager.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHStreamRecognitionManager.h; sourceTree = "<group>"; };
-		1D8558E2C67FB96314B8358E562EEADB /* DHPaddleLiteSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DHPaddleLiteSDK-Info.plist"; sourceTree = "<group>"; };
+		08EED4DE36E74578CDB0C26A1CE14BB3 /* DHPaddleLiteSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DHPaddleLiteSDK-prefix.pch"; sourceTree = "<group>"; };
+		09A626CE6800D3757B9A162FCB2803ED /* DHPhoneNumberResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberResult.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberResult.h; sourceTree = "<group>"; };
+		0A1934F3DADC7D4F4D3840707529E263 /* DLTextRecognitionResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DLTextRecognitionResult.m; sourceTree = "<group>"; };
+		0B826410E78BE7C5EF800CEE1286C388 /* paddle_use_kernels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_kernels.h; sourceTree = "<group>"; };
+		0FDE3070DD55FB394D14160829D7DC19 /* DHPhoneNumberRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberRecognizer.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberRecognizer.h; sourceTree = "<group>"; };
+		13E2E9BDFA2A2D712407C0B3A7A03286 /* config.txt */ = {isa = PBXFileReference; includeInIndex = 1; name = config.txt; path = DHPaddleLiteSDK/Classes/config.txt; sourceTree = "<group>"; };
+		16D7DC37ADF9A4B842ABEEFDF0B988D2 /* DHOCRErrorCorrector.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHOCRErrorCorrector.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHOCRErrorCorrector.h; sourceTree = "<group>"; };
+		17F1B39E7F674DFBB21047950120848A /* NSString+SDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+SDK.h"; sourceTree = "<group>"; };
+		1D8284ABDFB4CFDE9E706AD3E14806EF /* paddle_lite_factory_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_lite_factory_helper.h; sourceTree = "<group>"; };
 		1D98D9B8247521F4721F9417457F1EC1 /* DLVideoCaptureConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DLVideoCaptureConfig.h; path = DLVideoCapture/Classes/DLVideoCaptureConfig.h; sourceTree = "<group>"; };
-		1E3FF4097637CB5234B923A5E5E9E149 /* pipeline.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = pipeline.cc; sourceTree = "<group>"; };
-		1EB1B8F4C7E4347364227E7D98F61CE0 /* utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		1FC5AF1FA27AA5BD1997876B0457DFA8 /* DHPaddleLiteTextRecognition.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = DHPaddleLiteTextRecognition.mm; sourceTree = "<group>"; };
 		20930451B1F7E6D4DDB2BA5685109872 /* icon_scan_border@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "icon_scan_border@2x.png"; path = "DLVideoCapture/Assets/icon_scan_border@2x.png"; sourceTree = "<group>"; };
+		209C8730F2B8316A11E79A8B6502F493 /* DHOCRErrorCorrector.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHOCRErrorCorrector.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHOCRErrorCorrector.m; sourceTree = "<group>"; };
+		21FE7185A9616E2E4E28D6E9BA0208F6 /* paddle_use_passes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_passes.h; sourceTree = "<group>"; };
 		22F0519EA0A8F9C1F04622A0EA5DE305 /* DLVideoCapture-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DLVideoCapture-umbrella.h"; sourceTree = "<group>"; };
-		239B948CABBC6752A8E4E25198CA1008 /* DHOCRErrorCorrector.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHOCRErrorCorrector.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHOCRErrorCorrector.m; sourceTree = "<group>"; };
+		242288931371CD4B04B19AEF75F2C734 /* paddle_image_preprocess.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_image_preprocess.h; sourceTree = "<group>"; };
 		29C7761852C246FBC8092E2D34C31BF7 /* Pods-DHPaddleLiteSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DHPaddleLiteSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		2BB3CB2B211547B56E2EE7C43B7E60AC /* cls_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = cls_process.h; sourceTree = "<group>"; };
 		2BD2B43FC957360FC10BFBD621836309 /* Pods-DHPaddleLiteSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DHPaddleLiteSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
-		2D68C1858C97029499057917F321E1C2 /* clipper.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; path = clipper.hpp; sourceTree = "<group>"; };
+		2C74EBAAA2A0A9DCBB32499BD94AE320 /* DHPhoneNumberValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberValidator.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberValidator.m; sourceTree = "<group>"; };
 		3200565DBC521E808A96B5C1AE7C9172 /* DLVideoCapture */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DLVideoCapture; path = DLVideoCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		352CA5FF518BFEC4E25E87EF6D33732D /* paddle_api.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_api.h; sourceTree = "<group>"; };
-		360DF4C967A428ABBFACD5D86FEEABAB /* db_post_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = db_post_process.h; sourceTree = "<group>"; };
+		340A767959104B1F3CD0D1827B5F66F1 /* paddle_api.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_api.h; sourceTree = "<group>"; };
+		344122BDBE30E529DCD2F2822572C8D0 /* cn_PP-OCRv4_mobile_rec_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = "cn_PP-OCRv4_mobile_rec_opt.nb"; sourceTree = "<group>"; };
 		362250A67936ACCE6949A95A98DAA88D /* Pods-DHPaddleLiteSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DHPaddleLiteSDK_Example.modulemap"; sourceTree = "<group>"; };
-		3708501E77E529E5269521975DE5C252 /* DHPhoneNumberResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberResult.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberResult.m; sourceTree = "<group>"; };
+		369A2B662BABB130E576072F248BF86D /* DHPhoneNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberFormatter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberFormatter.m; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3910F936EB27348A281F82DDC2D0370A /* DLVideoCapture-DLVideoCapture */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "DLVideoCapture-DLVideoCapture"; path = DLVideoCapture.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CC66CDBD7D89E48244793D60E034EC6 /* cls_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = cls_process.cc; sourceTree = "<group>"; };
-		429B296424AFEC1846BB673344FD4EF5 /* DHPaddleLiteSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DHPaddleLiteSDK-dummy.m"; sourceTree = "<group>"; };
+		3B4AFB768C9F227406B2DEBC8E36D5DC /* DHPhoneNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberFormatter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberFormatter.h; sourceTree = "<group>"; };
+		3C5859BFC2C46C7B6932D066C11AA337 /* cn_PP-OCRv4_mobile_det_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = "cn_PP-OCRv4_mobile_det_opt.nb"; sourceTree = "<group>"; };
+		3D8B16B5F5D2A7BDA3BE5DEE7273B556 /* DHStreamRecognitionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHStreamRecognitionManager.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHStreamRecognitionManager.h; sourceTree = "<group>"; };
 		44B06456746A4EBE846F76EB6509EFC0 /* ResourceBundle-DLVideoCapture-DLVideoCapture-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-DLVideoCapture-DLVideoCapture-Info.plist"; sourceTree = "<group>"; };
-		4831B0E6121B3F9C5F8F492601308130 /* DHPhoneNumberRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberRecognizer.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberRecognizer.h; sourceTree = "<group>"; };
+		47D367085CE4AF85672248E2A838A346 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = DHPaddleLiteSDK/ThirdParty/opencv2.framework; sourceTree = "<group>"; };
+		47F38B07067F2099D89C8705EDCDE66B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		488A213B7D69EF2C08DECCFDB1A03FD8 /* Pods-DHPaddleLiteSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DHPaddleLiteSDK_Example-dummy.m"; sourceTree = "<group>"; };
 		48CFEB345BE423407CEFC9D293853579 /* icon_scan_line@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "icon_scan_line@3x.png"; path = "DLVideoCapture/Assets/icon_scan_line@3x.png"; sourceTree = "<group>"; };
 		4B63822A71FD119C529898FD2B4B3C6A /* DLVideoCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DLVideoCapture.h; path = DLVideoCapture/Classes/DLVideoCapture.h; sourceTree = "<group>"; };
-		4B7F466257430D4C186BE37CA7359B45 /* DHPaddleLiteSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DHPaddleLiteSDK-prefix.pch"; sourceTree = "<group>"; };
 		4EEC88E3ED4C87206FA2E2A30573A3C2 /* Pods-DHPaddleLiteSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DHPaddleLiteSDK_Tests-dummy.m"; sourceTree = "<group>"; };
-		531B879D1D10A77790FD78A5505CBC02 /* DHPhoneNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberFormatter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberFormatter.m; sourceTree = "<group>"; };
-		5565EDACBE74E652FD048372D45AD328 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		585F7FE92AA5BC805E55266D09AD6B6B /* cn_PP-OCRv5_mobile_rec_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = "cn_PP-OCRv5_mobile_rec_opt.nb"; sourceTree = "<group>"; };
-		594397EC7BB3B08F97F5BC237B66F8F9 /* DLTextRecognitionResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DLTextRecognitionResult.m; sourceTree = "<group>"; };
-		599BA15D288653521E9B33D02485147A /* DHPaddleLiteSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DHPaddleLiteSDK.debug.xcconfig; sourceTree = "<group>"; };
-		5F3C75C0B2A28A59934D860B022074DF /* DHPhoneNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberFormatter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberFormatter.h; sourceTree = "<group>"; };
-		5F4E8322FF1A8AE12773ECABB72DEB63 /* utils.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = utils.cc; sourceTree = "<group>"; };
-		61BD769DCD1ACF9B4827FC9D51F6C3C3 /* DHPaddleLiteSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DHPaddleLiteSDK-umbrella.h"; sourceTree = "<group>"; };
-		638D2422342472A1D2B9FD9D4FEE6A20 /* det_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = det_process.h; sourceTree = "<group>"; };
+		51007D6CFFF230FC7074BC28CBF6B952 /* DLPaddleLiteSDK.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = DLPaddleLiteSDK.mm; sourceTree = "<group>"; };
+		51D5F51E8F71E52B05D7DD3306F533ED /* utils.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = utils.cc; sourceTree = "<group>"; };
+		5831E3A8EB397DEE82E4F3187BEAA8D5 /* DLScanResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DLScanResult.h; sourceTree = "<group>"; };
+		5B3AAF97922B1EBAA32E4ADA1BA3998B /* ResourceBundle-DHPaddleLiteSDKOCRModelV4-DHPaddleLiteSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-DHPaddleLiteSDKOCRModelV4-DHPaddleLiteSDK-Info.plist"; sourceTree = "<group>"; };
+		5E3A4F2074AE5854709C76676EBCDD54 /* DHPaddleLiteSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DHPaddleLiteSDK.debug.xcconfig; sourceTree = "<group>"; };
+		604D7F7CE4FECEC709D1346B9052BD5C /* paddle_use_ops.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_ops.h; sourceTree = "<group>"; };
+		6418ED5EB1DC59985B05FEC297A89179 /* timer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		699F06AE50A188F6654FEE9F92B2F1FE /* cn_ppocr_mobile_v2.0_cls_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = cn_ppocr_mobile_v2.0_cls_opt.nb; sourceTree = "<group>"; };
+		6A0D0C6A7375A950736AA30003C7C35F /* DHPaddleLiteSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DHPaddleLiteSDK.release.xcconfig; sourceTree = "<group>"; };
 		6B4E3B419A2A8489DA35B16CF9DA20FF /* icon_scan_line@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "icon_scan_line@2x.png"; path = "DLVideoCapture/Assets/icon_scan_line@2x.png"; sourceTree = "<group>"; };
-		6C7096F36812AA30A8F973086A52105B /* cn_ppocr_mobile_v2.0_cls_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = cn_ppocr_mobile_v2.0_cls_opt.nb; sourceTree = "<group>"; };
-		6DB653ED074D5D02B8963CC4C6111703 /* clipper.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = clipper.mm; sourceTree = "<group>"; };
+		6B941C725A69F06B4088BF7064265973 /* det_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = det_process.h; sourceTree = "<group>"; };
 		6E47D84469097BAC43AE545460E6F4C5 /* DHPaddleLiteSDK */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DHPaddleLiteSDK; path = DHPaddleLiteSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E5B9104EECDC6D843BC81483B5E3436 /* paddle_use_passes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_passes.h; sourceTree = "<group>"; };
-		70832F1B2E4F8450ED82316DBAB185E6 /* DLTextRecognitionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DLTextRecognitionResult.h; sourceTree = "<group>"; };
 		721FEBD11538246A5F6F90751EF8E1F0 /* Pods-DHPaddleLiteSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DHPaddleLiteSDK_Example-resources.sh"; sourceTree = "<group>"; };
-		74520198D2A73D4236E61C7B2D3AE9AE /* DHPhoneNumberTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberTypes.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypes.m; sourceTree = "<group>"; };
-		75FA22959CDF36F75A12FFCDCE02DCA0 /* DLScanResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DLScanResult.m; sourceTree = "<group>"; };
+		735F611F88BF07CC5496EEA889DC5804 /* DHPaddleLiteSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DHPaddleLiteSDK.modulemap; sourceTree = "<group>"; };
+		746A47CAB90A3FFF60F47C6619FA973A /* DHPhoneNumberRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberRecognizer.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberRecognizer.m; sourceTree = "<group>"; };
+		75BEAFC85F4CFAAE78670F725B886002 /* pipeline.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = pipeline.cc; sourceTree = "<group>"; };
+		75F0591C790E6AC9DAD863565194E574 /* DHPaddleLiteSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DHPaddleLiteSDK-umbrella.h"; sourceTree = "<group>"; };
 		7AAA8A25ED129837521E3658C298992D /* Pods-DHPaddleLiteSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DHPaddleLiteSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		7BAA551F098AB04EC8B7CAFBCE5068A0 /* DLVideoCapture.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DLVideoCapture.modulemap; sourceTree = "<group>"; };
-		81B8A612C6999D6E078E128049A70A02 /* DHPhoneNumberResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberResult.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberResult.h; sourceTree = "<group>"; };
+		82C1A87EDF29715063587FB2637926A3 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4"; path = DHPaddleLiteSDKOCRModelV4.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8373ECB37CEE5BB9F2CB4619580C2F57 /* Pods-DHPaddleLiteSDK_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-DHPaddleLiteSDK_Tests"; path = Pods_DHPaddleLiteSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83791A8A4100A11FFD4864E0B66704FC /* Pods-DHPaddleLiteSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DHPaddleLiteSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
-		838BAAC4AE15B72D5C07726A6223C4CF /* paddle_use_ops.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_use_ops.h; sourceTree = "<group>"; };
+		848C7E638128944943B96699331C6239 /* rec_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = rec_process.cc; sourceTree = "<group>"; };
 		8A57723F912618072BD773E225605C64 /* Pods-DHPaddleLiteSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DHPaddleLiteSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		8B8F3D4EE01CA113742FB9182503076D /* DLVideoCaptureConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DLVideoCaptureConfig.m; path = DLVideoCapture/Classes/DLVideoCaptureConfig.m; sourceTree = "<group>"; };
-		90DA580643E33105B8DD4B255F76D4C8 /* rec_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = rec_process.cc; sourceTree = "<group>"; };
-		92163CDE9F6B8BDAF0AC2934EB892A71 /* DHTrackingNumberFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHTrackingNumberFilter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHTrackingNumberFilter.h; sourceTree = "<group>"; };
-		923198FCBD131583362D0E7B33E53352 /* DHStreamRecognitionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHStreamRecognitionManager.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHStreamRecognitionManager.m; sourceTree = "<group>"; };
+		908C25F8402677DFD20B0131B90C493E /* utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		94BE0AE697086344054024EBD610B011 /* Pods-DHPaddleLiteSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DHPaddleLiteSDK_Example-umbrella.h"; sourceTree = "<group>"; };
-		982E0AA5AABE9A34FD6A461E6C1628EA /* DHPaddleLiteSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DHPaddleLiteSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9A409D87F353B7B31E6247635D3F332C /* DHPhoneNumberValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberValidator.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberValidator.m; sourceTree = "<group>"; };
+		97CBD97531084F729FD0032667E89028 /* DHStreamRecognitionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHStreamRecognitionManager.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHStreamRecognitionManager.m; sourceTree = "<group>"; };
 		9A57E6CC7608346F0257A521B3565BEF /* DLVideoCapture-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DLVideoCapture-Info.plist"; sourceTree = "<group>"; };
-		9B559759654FE7F1C2A3E7AD61101D99 /* libpaddle_api_light_bundled.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libpaddle_api_light_bundled.a; path = DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a; sourceTree = "<group>"; };
-		9C2A3A01A113A5A0FD9CBE9B1BDC8E41 /* timer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		9D0EE1D57FA447B9EBD40CB43476A100 /* DHPaddleLiteSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DHPaddleLiteSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DF2A6D59178F7B369362E4A414D98F6 /* Pods-DHPaddleLiteSDK_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DHPaddleLiteSDK_Example-Info.plist"; sourceTree = "<group>"; };
-		9F2F88BFD8B137556209583A270780BD /* NSString+SDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+SDK.h"; sourceTree = "<group>"; };
+		9F27ADA2ED6FEE0835AAADE805CFFF07 /* clipper.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; path = clipper.hpp; sourceTree = "<group>"; };
+		9F40D9BE757B214CC75945A8726ED783 /* NSString+SDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+SDK.m"; sourceTree = "<group>"; };
 		A0A91CC4ED28B358D2964A57901FD591 /* Pods-DHPaddleLiteSDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DHPaddleLiteSDK_Tests-umbrella.h"; sourceTree = "<group>"; };
-		A4238ED4881F69E06D94D77D92BC48C0 /* db_post_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = db_post_process.cc; sourceTree = "<group>"; };
-		A6843BED6B9EE0D91CDE3794B47099F5 /* paddle_lite_factory_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_lite_factory_helper.h; sourceTree = "<group>"; };
-		ABD4998E2E0BDC21C88F202E7EA2C38F /* ResourceBundle-DHPaddleLiteSDK-DHPaddleLiteSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-DHPaddleLiteSDK-DHPaddleLiteSDK-Info.plist"; sourceTree = "<group>"; };
-		AC1B4644F48730D668FF8F256AF5C610 /* pipeline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pipeline.h; sourceTree = "<group>"; };
-		B24A57DAD0F2269A0AA94C727DE7FCD3 /* DHPaddleLiteSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DHPaddleLiteSDK.release.xcconfig; sourceTree = "<group>"; };
-		B3C049FC5D3C222C02934DC4E007763B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		A11F6F51EEADABCFE943002695546F37 /* DHPhoneNumberResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberResult.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberResult.m; sourceTree = "<group>"; };
+		A22324419D81993C39A2CA235EBAE4CD /* DHPaddleLiteSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DHPaddleLiteSDK-dummy.m"; sourceTree = "<group>"; };
+		A2AD786DD7622957B0C25EB9E463E085 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		A509B3156872F76CB5D2457032035CA9 /* cls_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = cls_process.cc; sourceTree = "<group>"; };
+		A52123BBEC1E4F5E5F2A3D2864A8A4AA /* DHPaddleLiteSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DHPaddleLiteSDK-Info.plist"; sourceTree = "<group>"; };
+		ABD36D1B7B01C6B371F19A03907F0E08 /* rec_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = rec_process.h; sourceTree = "<group>"; };
+		AC3099B84A4A585C0AB67F84C5B26469 /* DHTrackingNumberFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHTrackingNumberFilter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHTrackingNumberFilter.m; sourceTree = "<group>"; };
+		AFF3BDCFBCFF04C1133AF5CFBA6DABB1 /* DHPaddleLiteTextRecognition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DHPaddleLiteTextRecognition.h; sourceTree = "<group>"; };
+		B14AD9FE95B6CB6D1570EF4606815A80 /* db_post_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = db_post_process.h; sourceTree = "<group>"; };
+		B4A54D42CCEF0F7AB942E4B8846D6031 /* DHPhoneNumberTypeFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberTypeFilter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypeFilter.h; sourceTree = "<group>"; };
 		B86CC0B11A4E4E22D6020C4CC8714A89 /* Pods-DHPaddleLiteSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DHPaddleLiteSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		C6EB3EDC8316BFFBC38F299A24504195 /* clipper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = clipper.h; sourceTree = "<group>"; };
+		BB123DEAB823466E16EB4EBEBB8B56F4 /* DLPaddleLiteSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DLPaddleLiteSDK.h; sourceTree = "<group>"; };
+		C3C20E4049322AA2993B14D9F7B80ED2 /* det_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = det_process.cc; sourceTree = "<group>"; };
 		C7BEA1A270985F6F904BD89D471F23B5 /* DLVideoCapture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DLVideoCapture.release.xcconfig; sourceTree = "<group>"; };
-		C8AEB80CD60BA59D4959A7036112DB47 /* rec_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = rec_process.h; sourceTree = "<group>"; };
 		C9A15055740023CD9D2D7D2C91A772E0 /* Pods-DHPaddleLiteSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DHPaddleLiteSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C9B94154829A6C17AB63F975F4BADA0A /* DHPhoneNumberTypeFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberTypeFilter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypeFilter.m; sourceTree = "<group>"; };
 		CACA3B5ABF19416F5810C5D19E0C8A78 /* DLVideoCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DLVideoCapture.debug.xcconfig; sourceTree = "<group>"; };
+		CCF8D9B206E295FC14A4BADEAE0ED108 /* ppocrv4_dict.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = ppocrv4_dict.txt; sourceTree = "<group>"; };
 		CD2BC4892ABD50E9672421F3D321C62D /* DLVideoCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DLVideoCapture.m; path = DLVideoCapture/Classes/DLVideoCapture.m; sourceTree = "<group>"; };
 		CED97433B3B8E1F42EA6D4853C7EBACB /* DLVideoCapture-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DLVideoCapture-prefix.pch"; sourceTree = "<group>"; };
-		D3970FC4ACB63B64A62B632447273261 /* cls_process.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = cls_process.h; sourceTree = "<group>"; };
-		D4D59143DFC9872D1497EBB9F97D87D9 /* DHPaddleLiteSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DHPaddleLiteSDK.modulemap; sourceTree = "<group>"; };
-		D605ECDB80C8A7C881B6C5D30172139B /* cn_PP-OCRv5_mobile_det_opt.nb */ = {isa = PBXFileReference; includeInIndex = 1; path = "cn_PP-OCRv5_mobile_det_opt.nb"; sourceTree = "<group>"; };
+		D041CB8ABBEE0F6F047D246603F0A43D /* db_post_process.cc */ = {isa = PBXFileReference; includeInIndex = 1; path = db_post_process.cc; sourceTree = "<group>"; };
+		D19F7F433AFAE624EBD0159FD94CE169 /* DHPhoneNumberTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberTypes.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypes.m; sourceTree = "<group>"; };
+		D25B48EF2BC889BC7E45774B3DBED09A /* DHTrackingNumberFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHTrackingNumberFilter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHTrackingNumberFilter.h; sourceTree = "<group>"; };
+		D496F7AAC4D80F0F50E6909D46692DAE /* DLScanResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DLScanResult.m; sourceTree = "<group>"; };
 		D7C65EFF4BECCE1554462D054ABED039 /* Pods-DHPaddleLiteSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DHPaddleLiteSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D928203BEF84AD8240EB3856A6B3684E /* DHPaddleLiteSDK-DHPaddleLiteSDK */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "DHPaddleLiteSDK-DHPaddleLiteSDK"; path = DHPaddleLiteSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD72BF22B17A949D2914061646A395BA /* NSString+SDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+SDK.m"; sourceTree = "<group>"; };
-		DE2600A56DAB21F9D2A2C7CFEEE39661 /* DHPaddleLiteTextRecognition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DHPaddleLiteTextRecognition.h; sourceTree = "<group>"; };
-		E18C73042584EE33A858B95C6741E0D3 /* DHOCRErrorCorrector.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHOCRErrorCorrector.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHOCRErrorCorrector.h; sourceTree = "<group>"; };
+		D9D1CE8BB3AD5B332C14118FAF90541E /* DHPhoneNumberValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberValidator.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberValidator.h; sourceTree = "<group>"; };
+		E120C19AD7F1CA51D30DB6D297493868 /* DHPaddleLiteTextRecognition.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = DHPaddleLiteTextRecognition.mm; sourceTree = "<group>"; };
 		E4B4864785FE951C591A707FB0F748F9 /* DLVideoCapture-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DLVideoCapture-dummy.m"; sourceTree = "<group>"; };
 		E4BC8FE1DB403F7C483D9362594C21BF /* Pods-DHPaddleLiteSDK_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-DHPaddleLiteSDK_Example"; path = Pods_DHPaddleLiteSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58721D0D1C176FFEA86208BAE9C8C4F /* Pods-DHPaddleLiteSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DHPaddleLiteSDK_Tests.modulemap"; sourceTree = "<group>"; };
-		E68BB725B98E12F313DC79BE72E3B985 /* DHPhoneNumberTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberTypes.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypes.h; sourceTree = "<group>"; };
+		E6A49EDCB33ADA0D3469C1E57068D735 /* clipper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = clipper.h; sourceTree = "<group>"; };
+		E963F4ED03F4573F39FAA28AC9014107 /* DLTextRecognitionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DLTextRecognitionResult.h; sourceTree = "<group>"; };
 		E98C6ED886AF82749CDAC161105CA981 /* Pods-DHPaddleLiteSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DHPaddleLiteSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		EFDC367E1783721D5EB7A44477B77CB3 /* paddle_image_preprocess.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_image_preprocess.h; sourceTree = "<group>"; };
-		F0B79D3091EE7173DECB4C9E670A9DB7 /* DLScanResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DLScanResult.h; sourceTree = "<group>"; };
-		F13A587FDA27C634401D1A0AB519E49A /* clipper.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; path = clipper.cpp; sourceTree = "<group>"; };
-		F1CCD7A3A69D51C94B7F47BBFB76A3E5 /* DHPhoneNumberRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberRecognizer.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberRecognizer.m; sourceTree = "<group>"; };
-		F4BF3067659C99F6D506121BC4878D2C /* DHPhoneNumberTypeFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DHPhoneNumberTypeFilter.m; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypeFilter.m; sourceTree = "<group>"; };
-		FC79392E6F23E17F9DC7103E7BF33973 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = DHPaddleLiteSDK/ThirdParty/opencv2.framework; sourceTree = "<group>"; };
-		FEFB186E40EE1F7F7005E574596B1165 /* DHPhoneNumberValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberValidator.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberValidator.h; sourceTree = "<group>"; };
+		EAED9AB08311ECAD7639B8F749A80F3E /* pipeline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pipeline.h; sourceTree = "<group>"; };
+		EE4405A41FF505CC1E40F3B0D841ADA8 /* clipper.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; path = clipper.cpp; sourceTree = "<group>"; };
+		F35E601CAA78A40E7774D77DA372340B /* DHPhoneNumberTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberTypes.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypes.h; sourceTree = "<group>"; };
+		F933CD1626FDF65312229D64220C6CD3 /* clipper.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = clipper.mm; sourceTree = "<group>"; };
+		FAB320BD05E9A67B22AE35D0E240645A /* paddle_place.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_place.h; sourceTree = "<group>"; };
 		FF1B43147DCAE934371BFCF1246E06F8 /* Pods-DHPaddleLiteSDK_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DHPaddleLiteSDK_Tests-Info.plist"; sourceTree = "<group>"; };
-		FF3F1F8FB2AA00F128DAB1AF2A396820 /* paddle_place.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = paddle_place.h; sourceTree = "<group>"; };
-		FFCD9B6185D57037BF1B9286C81083C0 /* DHPhoneNumberTypeFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DHPhoneNumberTypeFilter.h; path = DHPaddleLiteSDK/Classes/PhoneNumberRecognizer/DHPhoneNumberTypeFilter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3D899055D6397D93695F0F1818AE6953 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		639F6D3F897D4F5270DD581ACE83FC59 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7D076ADCE0ECB18375ADA08406EC0EF7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74E0359CAD1B1E9EA64790D61EAC70FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5150DAE9DDD9C607ABD84DF11A052C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FA8666CFD3CFEE3AC0910F4252678F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +272,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5B91986DFD7E5F51190000E650B5F0D /* Frameworks */ = {
+		AE47C82AD7AA2AD3DF8E37A8540AC43D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,92 +287,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA49F3B90DF53AB4167BA8B0779406CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				34FB157B8306849441B01A910A2F7930 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F8DE38BFCFADBECA5D81B2A93A90CE7 /* ThirdParty */ = {
+		03501B8BD23F4860FD1E792C9752A322 /* labels */ = {
 			isa = PBXGroup;
 			children = (
-				3A283953102CB5558C603B1A775823D7 /* PaddleLite */,
+				CCF8D9B206E295FC14A4BADEAE0ED108 /* ppocrv4_dict.txt */,
 			);
-			name = ThirdParty;
-			path = DHPaddleLiteSDK/ThirdParty;
+			name = labels;
+			path = DHPaddleLiteSDK/Classes/labels;
 			sourceTree = "<group>";
 		};
-		0FEA797279FBB870DA572B533DB54624 /* Core */ = {
+		06AD792B8D66D47AA2F56955DC28FA2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0884AD7131CD0EFAB034EE114AB26F10 /* config.txt */,
-				8929C87FC79FFBC6A9E9B443C157AA42 /* Classes */,
-				6794B790774151F16FBEF289AE97F9D8 /* Frameworks */,
-				675F823B92A0950B791030983D71BC60 /* labels */,
-				1CE9AD28AE20309D509E7C4FA7CDC3DD /* models */,
-				F4B6A4A9EE4AD2E4F484225571370EBE /* paddleUtil */,
-				0F8DE38BFCFADBECA5D81B2A93A90CE7 /* ThirdParty */,
+				00523FC1DD21974E82FEC305C25AD0CF /* libpaddle_api_light_bundled.a */,
+				47D367085CE4AF85672248E2A838A346 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2466B3EA9D5433EEBFEAFD4D78C18357 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				9D0EE1D57FA447B9EBD40CB43476A100 /* DHPaddleLiteSDK.podspec */,
+				47F38B07067F2099D89C8705EDCDE66B /* LICENSE */,
+				A2AD786DD7622957B0C25EB9E463E085 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		25FB781FF2F0025447CDD7744B0F8CCC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FB0B8296A4FAD0F86F82736EA7564B96 /* Classes */,
+				06AD792B8D66D47AA2F56955DC28FA2E /* Frameworks */,
+				78B387F84594FC4D2330D374A79D03A5 /* paddleUtil */,
+				626F7207C5B75F417D9D24E042B5DA0E /* ThirdParty */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		13B5A3F0D9ACE325A110397C43FA6068 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				D4D59143DFC9872D1497EBB9F97D87D9 /* DHPaddleLiteSDK.modulemap */,
-				429B296424AFEC1846BB673344FD4EF5 /* DHPaddleLiteSDK-dummy.m */,
-				1D8558E2C67FB96314B8358E562EEADB /* DHPaddleLiteSDK-Info.plist */,
-				4B7F466257430D4C186BE37CA7359B45 /* DHPaddleLiteSDK-prefix.pch */,
-				61BD769DCD1ACF9B4827FC9D51F6C3C3 /* DHPaddleLiteSDK-umbrella.h */,
-				599BA15D288653521E9B33D02485147A /* DHPaddleLiteSDK.debug.xcconfig */,
-				B24A57DAD0F2269A0AA94C727DE7FCD3 /* DHPaddleLiteSDK.release.xcconfig */,
-				ABD4998E2E0BDC21C88F202E7EA2C38F /* ResourceBundle-DHPaddleLiteSDK-DHPaddleLiteSDK-Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/DHPaddleLiteSDK";
-			sourceTree = "<group>";
-		};
-		15068D9D1AEA9390D19BA44D1D749E9F /* include */ = {
-			isa = PBXGroup;
-			children = (
-				352CA5FF518BFEC4E25E87EF6D33732D /* paddle_api.h */,
-				EFDC367E1783721D5EB7A44477B77CB3 /* paddle_image_preprocess.h */,
-				A6843BED6B9EE0D91CDE3794B47099F5 /* paddle_lite_factory_helper.h */,
-				FF3F1F8FB2AA00F128DAB1AF2A396820 /* paddle_place.h */,
-				1BD8701902BE6D485F8308656DF419B7 /* paddle_use_kernels.h */,
-				838BAAC4AE15B72D5C07726A6223C4CF /* paddle_use_ops.h */,
-				6E5B9104EECDC6D843BC81483B5E3436 /* paddle_use_passes.h */,
-			);
-			name = include;
-			path = include;
-			sourceTree = "<group>";
-		};
-		1B34282BD21A9E87DFCC8A2F194B6CB1 /* PaddleLiteTextRecognition */ = {
-			isa = PBXGroup;
-			children = (
-				DE2600A56DAB21F9D2A2C7CFEEE39661 /* DHPaddleLiteTextRecognition.h */,
-				1FC5AF1FA27AA5BD1997876B0457DFA8 /* DHPaddleLiteTextRecognition.mm */,
-				70832F1B2E4F8450ED82316DBAB185E6 /* DLTextRecognitionResult.h */,
-				594397EC7BB3B08F97F5BC237B66F8F9 /* DLTextRecognitionResult.m */,
-			);
-			name = PaddleLiteTextRecognition;
-			path = PaddleLiteTextRecognition;
-			sourceTree = "<group>";
-		};
-		1CE9AD28AE20309D509E7C4FA7CDC3DD /* models */ = {
-			isa = PBXGroup;
-			children = (
-				D605ECDB80C8A7C881B6C5D30172139B /* cn_PP-OCRv5_mobile_det_opt.nb */,
-				585F7FE92AA5BC805E55266D09AD6B6B /* cn_PP-OCRv5_mobile_rec_opt.nb */,
-				6C7096F36812AA30A8F973086A52105B /* cn_ppocr_mobile_v2.0_cls_opt.nb */,
-			);
-			name = models;
-			path = DHPaddleLiteSDK/Classes/models;
 			sourceTree = "<group>";
 		};
 		2BF28CF7C0EDD5768435D874FAFB1819 /* Pods-DHPaddleLiteSDK_Example */ = {
@@ -383,17 +347,19 @@
 			path = "Target Support Files/Pods-DHPaddleLiteSDK_Example";
 			sourceTree = "<group>";
 		};
-		2D2DF480A6434961AD267006759E84FB /* Private */ = {
+		2E0282A817214CA33278BCEED5DF5490 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				16882649446FA5C57847F8A9B3A62C5D /* DLPaddleLiteSDK.mm */,
-				F0B79D3091EE7173DECB4C9E670A9DB7 /* DLScanResult.h */,
-				75FA22959CDF36F75A12FFCDCE02DCA0 /* DLScanResult.m */,
-				9F2F88BFD8B137556209583A270780BD /* NSString+SDK.h */,
-				DD72BF22B17A949D2914061646A395BA /* NSString+SDK.m */,
+				340A767959104B1F3CD0D1827B5F66F1 /* paddle_api.h */,
+				242288931371CD4B04B19AEF75F2C734 /* paddle_image_preprocess.h */,
+				1D8284ABDFB4CFDE9E706AD3E14806EF /* paddle_lite_factory_helper.h */,
+				FAB320BD05E9A67B22AE35D0E240645A /* paddle_place.h */,
+				0B826410E78BE7C5EF800CEE1286C388 /* paddle_use_kernels.h */,
+				604D7F7CE4FECEC709D1346B9052BD5C /* paddle_use_ops.h */,
+				21FE7185A9616E2E4E28D6E9BA0208F6 /* paddle_use_passes.h */,
 			);
-			name = Private;
-			path = Private;
+			name = include;
+			path = include;
 			sourceTree = "<group>";
 		};
 		380D2794F5400D18B38F6E32F67D14B9 /* Resources */ = {
@@ -405,15 +371,6 @@
 				48CFEB345BE423407CEFC9D293853579 /* icon_scan_line@3x.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		3A283953102CB5558C603B1A775823D7 /* PaddleLite */ = {
-			isa = PBXGroup;
-			children = (
-				15068D9D1AEA9390D19BA44D1D749E9F /* include */,
-			);
-			name = PaddleLite;
-			path = PaddleLite;
 			sourceTree = "<group>";
 		};
 		5618A36F3CD1709F270BE8FDF8E66D61 /* Pods-DHPaddleLiteSDK_Tests */ = {
@@ -432,87 +389,85 @@
 			path = "Target Support Files/Pods-DHPaddleLiteSDK_Tests";
 			sourceTree = "<group>";
 		};
-		675F823B92A0950B791030983D71BC60 /* labels */ = {
+		59ACD365C2EB5B730BCFE5211319646B /* PaddleLite */ = {
 			isa = PBXGroup;
 			children = (
-				0859F4FB6912FAC4D088099A1F13CFC0 /* ppocrv5_dict.txt */,
+				2E0282A817214CA33278BCEED5DF5490 /* include */,
 			);
-			name = labels;
-			path = DHPaddleLiteSDK/Classes/labels;
+			name = PaddleLite;
+			path = PaddleLite;
 			sourceTree = "<group>";
 		};
-		6794B790774151F16FBEF289AE97F9D8 /* Frameworks */ = {
+		626F7207C5B75F417D9D24E042B5DA0E /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				9B559759654FE7F1C2A3E7AD61101D99 /* libpaddle_api_light_bundled.a */,
-				FC79392E6F23E17F9DC7103E7BF33973 /* opencv2.framework */,
+				59ACD365C2EB5B730BCFE5211319646B /* PaddleLite */,
 			);
-			name = Frameworks;
+			name = ThirdParty;
+			path = DHPaddleLiteSDK/ThirdParty;
 			sourceTree = "<group>";
 		};
-		6A45CEBAAE5A097F46BA5C10ED1D97A3 /* Pod */ = {
+		69686519835A06A07C338B973F947A59 /* PaddleLiteTextRecognition */ = {
 			isa = PBXGroup;
 			children = (
-				982E0AA5AABE9A34FD6A461E6C1628EA /* DHPaddleLiteSDK.podspec */,
-				B3C049FC5D3C222C02934DC4E007763B /* LICENSE */,
-				5565EDACBE74E652FD048372D45AD328 /* README.md */,
+				AFF3BDCFBCFF04C1133AF5CFBA6DABB1 /* DHPaddleLiteTextRecognition.h */,
+				E120C19AD7F1CA51D30DB6D297493868 /* DHPaddleLiteTextRecognition.mm */,
+				E963F4ED03F4573F39FAA28AC9014107 /* DLTextRecognitionResult.h */,
+				0A1934F3DADC7D4F4D3840707529E263 /* DLTextRecognitionResult.m */,
 			);
-			name = Pod;
+			name = PaddleLiteTextRecognition;
+			path = PaddleLiteTextRecognition;
 			sourceTree = "<group>";
 		};
-		6AECE6A8CD19B2582716AD9842F2D7A3 /* DHPaddleLiteSDK */ = {
+		749C14369DA42E825A13348127E5FD11 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0FEA797279FBB870DA572B533DB54624 /* Core */,
-				75DCD0B0781ACF29EFCDC09270271A55 /* PhoneNumberRecognizer */,
-				6A45CEBAAE5A097F46BA5C10ED1D97A3 /* Pod */,
-				13B5A3F0D9ACE325A110397C43FA6068 /* Support Files */,
+				6E47D84469097BAC43AE545460E6F4C5 /* DHPaddleLiteSDK */,
+				82C1A87EDF29715063587FB2637926A3 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */,
+				3200565DBC521E808A96B5C1AE7C9172 /* DLVideoCapture */,
+				3910F936EB27348A281F82DDC2D0370A /* DLVideoCapture-DLVideoCapture */,
+				E4BC8FE1DB403F7C483D9362594C21BF /* Pods-DHPaddleLiteSDK_Example */,
+				8373ECB37CEE5BB9F2CB4619580C2F57 /* Pods-DHPaddleLiteSDK_Tests */,
 			);
-			name = DHPaddleLiteSDK;
-			path = ../..;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		735DE79DF5A469B4ABBBACACC9B94BB9 /* Development Pods */ = {
+		78B387F84594FC4D2330D374A79D03A5 /* paddleUtil */ = {
 			isa = PBXGroup;
 			children = (
-				6AECE6A8CD19B2582716AD9842F2D7A3 /* DHPaddleLiteSDK */,
+				EE4405A41FF505CC1E40F3B0D841ADA8 /* clipper.cpp */,
+				E6A49EDCB33ADA0D3469C1E57068D735 /* clipper.h */,
+				9F27ADA2ED6FEE0835AAADE805CFFF07 /* clipper.hpp */,
+				F933CD1626FDF65312229D64220C6CD3 /* clipper.mm */,
+				A509B3156872F76CB5D2457032035CA9 /* cls_process.cc */,
+				2BB3CB2B211547B56E2EE7C43B7E60AC /* cls_process.h */,
+				D041CB8ABBEE0F6F047D246603F0A43D /* db_post_process.cc */,
+				B14AD9FE95B6CB6D1570EF4606815A80 /* db_post_process.h */,
+				C3C20E4049322AA2993B14D9F7B80ED2 /* det_process.cc */,
+				6B941C725A69F06B4088BF7064265973 /* det_process.h */,
+				75BEAFC85F4CFAAE78670F725B886002 /* pipeline.cc */,
+				EAED9AB08311ECAD7639B8F749A80F3E /* pipeline.h */,
+				848C7E638128944943B96699331C6239 /* rec_process.cc */,
+				ABD36D1B7B01C6B371F19A03907F0E08 /* rec_process.h */,
+				6418ED5EB1DC59985B05FEC297A89179 /* timer.h */,
+				51D5F51E8F71E52B05D7DD3306F533ED /* utils.cc */,
+				908C25F8402677DFD20B0131B90C493E /* utils.h */,
 			);
-			name = "Development Pods";
+			name = paddleUtil;
+			path = DHPaddleLiteSDK/paddleUtil;
 			sourceTree = "<group>";
 		};
-		75DCD0B0781ACF29EFCDC09270271A55 /* PhoneNumberRecognizer */ = {
+		887022F7D28283F1F98E4688EB1FCD0C /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				E18C73042584EE33A858B95C6741E0D3 /* DHOCRErrorCorrector.h */,
-				239B948CABBC6752A8E4E25198CA1008 /* DHOCRErrorCorrector.m */,
-				5F3C75C0B2A28A59934D860B022074DF /* DHPhoneNumberFormatter.h */,
-				531B879D1D10A77790FD78A5505CBC02 /* DHPhoneNumberFormatter.m */,
-				4831B0E6121B3F9C5F8F492601308130 /* DHPhoneNumberRecognizer.h */,
-				F1CCD7A3A69D51C94B7F47BBFB76A3E5 /* DHPhoneNumberRecognizer.m */,
-				81B8A612C6999D6E078E128049A70A02 /* DHPhoneNumberResult.h */,
-				3708501E77E529E5269521975DE5C252 /* DHPhoneNumberResult.m */,
-				FFCD9B6185D57037BF1B9286C81083C0 /* DHPhoneNumberTypeFilter.h */,
-				F4BF3067659C99F6D506121BC4878D2C /* DHPhoneNumberTypeFilter.m */,
-				E68BB725B98E12F313DC79BE72E3B985 /* DHPhoneNumberTypes.h */,
-				74520198D2A73D4236E61C7B2D3AE9AE /* DHPhoneNumberTypes.m */,
-				FEFB186E40EE1F7F7005E574596B1165 /* DHPhoneNumberValidator.h */,
-				9A409D87F353B7B31E6247635D3F332C /* DHPhoneNumberValidator.m */,
-				1BE8A6FCB923F2B08C2EDB64559544E1 /* DHStreamRecognitionManager.h */,
-				923198FCBD131583362D0E7B33E53352 /* DHStreamRecognitionManager.m */,
-				92163CDE9F6B8BDAF0AC2934EB892A71 /* DHTrackingNumberFilter.h */,
-				087568D7490689871EB5CFBD4B5E423C /* DHTrackingNumberFilter.m */,
+				51007D6CFFF230FC7074BC28CBF6B952 /* DLPaddleLiteSDK.mm */,
+				5831E3A8EB397DEE82E4F3187BEAA8D5 /* DLScanResult.h */,
+				D496F7AAC4D80F0F50E6909D46692DAE /* DLScanResult.m */,
+				17F1B39E7F674DFBB21047950120848A /* NSString+SDK.h */,
+				9F40D9BE757B214CC75945A8726ED783 /* NSString+SDK.m */,
 			);
-			name = PhoneNumberRecognizer;
-			sourceTree = "<group>";
-		};
-		8929C87FC79FFBC6A9E9B443C157AA42 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				1B34282BD21A9E87DFCC8A2F194B6CB1 /* PaddleLiteTextRecognition */,
-				2D2DF480A6434961AD267006759E84FB /* Private */,
-			);
-			name = Classes;
-			path = DHPaddleLiteSDK/Classes;
+			name = Private;
+			path = Private;
 			sourceTree = "<group>";
 		};
 		8D3B8CF5821A7B76448048CF230A78A9 /* Support Files */ = {
@@ -529,6 +484,24 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/DLVideoCapture";
+			sourceTree = "<group>";
+		};
+		978097EA499165B849C6E7B065E89893 /* OCRModelV4 */ = {
+			isa = PBXGroup;
+			children = (
+				13E2E9BDFA2A2D712407C0B3A7A03286 /* config.txt */,
+				03501B8BD23F4860FD1E792C9752A322 /* labels */,
+				B3FF73F4E3F61188505C2A4A81290A76 /* models */,
+			);
+			name = OCRModelV4;
+			sourceTree = "<group>";
+		};
+		9A371D5FF7A8908D091B46F8BF894EAA /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5F9F9345409305DB716A4B9975709C9 /* DHPaddleLiteSDK */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		A72C5D6CE4193B1A3D573AC8119B3F9E /* Pods */ = {
@@ -548,29 +521,36 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		B3FF73F4E3F61188505C2A4A81290A76 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BE54A1B11F852BD140A182EB076D3C05 /* ppocrv4 */,
+			);
+			name = models;
+			path = DHPaddleLiteSDK/Classes/models;
+			sourceTree = "<group>";
+		};
+		BE54A1B11F852BD140A182EB076D3C05 /* ppocrv4 */ = {
+			isa = PBXGroup;
+			children = (
+				3C5859BFC2C46C7B6932D066C11AA337 /* cn_PP-OCRv4_mobile_det_opt.nb */,
+				344122BDBE30E529DCD2F2822572C8D0 /* cn_PP-OCRv4_mobile_rec_opt.nb */,
+				699F06AE50A188F6654FEE9F92B2F1FE /* cn_ppocr_mobile_v2.0_cls_opt.nb */,
+			);
+			name = ppocrv4;
+			path = ppocrv4;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				735DE79DF5A469B4ABBBACACC9B94BB9 /* Development Pods */,
+				9A371D5FF7A8908D091B46F8BF894EAA /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				A72C5D6CE4193B1A3D573AC8119B3F9E /* Pods */,
-				CF9293BAE697AD5DABDD14198C7DEF0B /* Products */,
+				749C14369DA42E825A13348127E5FD11 /* Products */,
 				AC3B9C51AA8EE4D5B54F2A7F0A05940A /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		CF9293BAE697AD5DABDD14198C7DEF0B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6E47D84469097BAC43AE545460E6F4C5 /* DHPaddleLiteSDK */,
-				D928203BEF84AD8240EB3856A6B3684E /* DHPaddleLiteSDK-DHPaddleLiteSDK */,
-				3200565DBC521E808A96B5C1AE7C9172 /* DLVideoCapture */,
-				3910F936EB27348A281F82DDC2D0370A /* DLVideoCapture-DLVideoCapture */,
-				E4BC8FE1DB403F7C483D9362594C21BF /* Pods-DHPaddleLiteSDK_Example */,
-				8373ECB37CEE5BB9F2CB4619580C2F57 /* Pods-DHPaddleLiteSDK_Tests */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
@@ -603,29 +583,69 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		F4B6A4A9EE4AD2E4F484225571370EBE /* paddleUtil */ = {
+		F33FA3C68E7C96756D98C13C84B6BB1A /* PhoneNumberRecognizer */ = {
 			isa = PBXGroup;
 			children = (
-				F13A587FDA27C634401D1A0AB519E49A /* clipper.cpp */,
-				C6EB3EDC8316BFFBC38F299A24504195 /* clipper.h */,
-				2D68C1858C97029499057917F321E1C2 /* clipper.hpp */,
-				6DB653ED074D5D02B8963CC4C6111703 /* clipper.mm */,
-				3CC66CDBD7D89E48244793D60E034EC6 /* cls_process.cc */,
-				D3970FC4ACB63B64A62B632447273261 /* cls_process.h */,
-				A4238ED4881F69E06D94D77D92BC48C0 /* db_post_process.cc */,
-				360DF4C967A428ABBFACD5D86FEEABAB /* db_post_process.h */,
-				09CE45EA9BBA2DA4F1030B40E5552E11 /* det_process.cc */,
-				638D2422342472A1D2B9FD9D4FEE6A20 /* det_process.h */,
-				1E3FF4097637CB5234B923A5E5E9E149 /* pipeline.cc */,
-				AC1B4644F48730D668FF8F256AF5C610 /* pipeline.h */,
-				90DA580643E33105B8DD4B255F76D4C8 /* rec_process.cc */,
-				C8AEB80CD60BA59D4959A7036112DB47 /* rec_process.h */,
-				9C2A3A01A113A5A0FD9CBE9B1BDC8E41 /* timer.h */,
-				5F4E8322FF1A8AE12773ECABB72DEB63 /* utils.cc */,
-				1EB1B8F4C7E4347364227E7D98F61CE0 /* utils.h */,
+				16D7DC37ADF9A4B842ABEEFDF0B988D2 /* DHOCRErrorCorrector.h */,
+				209C8730F2B8316A11E79A8B6502F493 /* DHOCRErrorCorrector.m */,
+				3B4AFB768C9F227406B2DEBC8E36D5DC /* DHPhoneNumberFormatter.h */,
+				369A2B662BABB130E576072F248BF86D /* DHPhoneNumberFormatter.m */,
+				0FDE3070DD55FB394D14160829D7DC19 /* DHPhoneNumberRecognizer.h */,
+				746A47CAB90A3FFF60F47C6619FA973A /* DHPhoneNumberRecognizer.m */,
+				09A626CE6800D3757B9A162FCB2803ED /* DHPhoneNumberResult.h */,
+				A11F6F51EEADABCFE943002695546F37 /* DHPhoneNumberResult.m */,
+				B4A54D42CCEF0F7AB942E4B8846D6031 /* DHPhoneNumberTypeFilter.h */,
+				C9B94154829A6C17AB63F975F4BADA0A /* DHPhoneNumberTypeFilter.m */,
+				F35E601CAA78A40E7774D77DA372340B /* DHPhoneNumberTypes.h */,
+				D19F7F433AFAE624EBD0159FD94CE169 /* DHPhoneNumberTypes.m */,
+				D9D1CE8BB3AD5B332C14118FAF90541E /* DHPhoneNumberValidator.h */,
+				2C74EBAAA2A0A9DCBB32499BD94AE320 /* DHPhoneNumberValidator.m */,
+				3D8B16B5F5D2A7BDA3BE5DEE7273B556 /* DHStreamRecognitionManager.h */,
+				97CBD97531084F729FD0032667E89028 /* DHStreamRecognitionManager.m */,
+				D25B48EF2BC889BC7E45774B3DBED09A /* DHTrackingNumberFilter.h */,
+				AC3099B84A4A585C0AB67F84C5B26469 /* DHTrackingNumberFilter.m */,
 			);
-			name = paddleUtil;
-			path = DHPaddleLiteSDK/paddleUtil;
+			name = PhoneNumberRecognizer;
+			sourceTree = "<group>";
+		};
+		F5F9F9345409305DB716A4B9975709C9 /* DHPaddleLiteSDK */ = {
+			isa = PBXGroup;
+			children = (
+				25FB781FF2F0025447CDD7744B0F8CCC /* Core */,
+				978097EA499165B849C6E7B065E89893 /* OCRModelV4 */,
+				F33FA3C68E7C96756D98C13C84B6BB1A /* PhoneNumberRecognizer */,
+				2466B3EA9D5433EEBFEAFD4D78C18357 /* Pod */,
+				FACDCEB6C74F900E6F0CB017F486CC9B /* Support Files */,
+			);
+			name = DHPaddleLiteSDK;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		FACDCEB6C74F900E6F0CB017F486CC9B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				735F611F88BF07CC5496EEA889DC5804 /* DHPaddleLiteSDK.modulemap */,
+				A22324419D81993C39A2CA235EBAE4CD /* DHPaddleLiteSDK-dummy.m */,
+				A52123BBEC1E4F5E5F2A3D2864A8A4AA /* DHPaddleLiteSDK-Info.plist */,
+				08EED4DE36E74578CDB0C26A1CE14BB3 /* DHPaddleLiteSDK-prefix.pch */,
+				75F0591C790E6AC9DAD863565194E574 /* DHPaddleLiteSDK-umbrella.h */,
+				5E3A4F2074AE5854709C76676EBCDD54 /* DHPaddleLiteSDK.debug.xcconfig */,
+				6A0D0C6A7375A950736AA30003C7C35F /* DHPaddleLiteSDK.release.xcconfig */,
+				5B3AAF97922B1EBAA32E4ADA1BA3998B /* ResourceBundle-DHPaddleLiteSDKOCRModelV4-DHPaddleLiteSDK-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/DHPaddleLiteSDK";
+			sourceTree = "<group>";
+		};
+		FB0B8296A4FAD0F86F82736EA7564B96 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BB123DEAB823466E16EB4EBEBB8B56F4 /* DLPaddleLiteSDK.h */,
+				69686519835A06A07C338B973F947A59 /* PaddleLiteTextRecognition */,
+				887022F7D28283F1F98E4688EB1FCD0C /* Private */,
+			);
+			name = Classes;
+			path = DHPaddleLiteSDK/Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -649,40 +669,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0172D4AFA8E56CCC04EE9DED48AF145 /* Headers */ = {
+		F6E7B5C7C8F8A4F23EDAF2E8210C49AC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D216FCAAF22FDCF75FBE4BD2C014E9D9 /* clipper.h in Headers */,
-				8A57047FD0C3E104864B66B517109017 /* clipper.hpp in Headers */,
-				23373315C0D24F6BF2D0D4F1C175BE60 /* cls_process.h in Headers */,
-				79D75397A31E7F15C12B514365741F66 /* db_post_process.h in Headers */,
-				D16C59D84614FB78B1D6AED7D1FDB182 /* det_process.h in Headers */,
-				E3BD5AD7E940376E363ECB2A33926726 /* DHOCRErrorCorrector.h in Headers */,
-				0846795A3D74626F74F8B0F3F5A19AF0 /* DHPaddleLiteSDK-umbrella.h in Headers */,
-				2F16866D654F8AFA5EB4603B3F999A45 /* DHPaddleLiteTextRecognition.h in Headers */,
-				7B35C1BE08F3EB60DF40ECC458A8C837 /* DHPhoneNumberFormatter.h in Headers */,
-				589DC5B65E5F4D66D5EB395509FFDCEF /* DHPhoneNumberRecognizer.h in Headers */,
-				F3E575BC6365D2E9D4CFDEA1BC217736 /* DHPhoneNumberResult.h in Headers */,
-				8DD329EBE40AE67114AEE57ACCFBCFD8 /* DHPhoneNumberTypeFilter.h in Headers */,
-				952BE79852C684E43BDACA4CC60AA91F /* DHPhoneNumberTypes.h in Headers */,
-				7646DE0CAB42F1081F834EAF09578697 /* DHPhoneNumberValidator.h in Headers */,
-				D6A9E0DC1641C664AD6E2AD7495A5A5A /* DHStreamRecognitionManager.h in Headers */,
-				E7DE78C195670D0A573FABDE743F4FF1 /* DHTrackingNumberFilter.h in Headers */,
-				B817B4C17FCF17EA26D9FBEF9ABFC7B1 /* DLScanResult.h in Headers */,
-				901C23676C51FFE251BF97D159791391 /* DLTextRecognitionResult.h in Headers */,
-				625B14ADB222F2A6AD4E6CB00551A164 /* NSString+SDK.h in Headers */,
-				AE4962078219D71DDA2C5C38BFA413F5 /* paddle_api.h in Headers */,
-				1DB7999A4E721A6201EADB45AE42DA92 /* paddle_image_preprocess.h in Headers */,
-				25DC0A45E0328F0905763DB775E65C4C /* paddle_lite_factory_helper.h in Headers */,
-				49ECF12DB0E2879170AA654173466C55 /* paddle_place.h in Headers */,
-				3E3B41E21B999DA2BFFD433B1F68BAF4 /* paddle_use_kernels.h in Headers */,
-				F88AD3C965D02ED67602BF202B979531 /* paddle_use_ops.h in Headers */,
-				D3D38D3DBEB42CFCA75EEA751D16E463 /* paddle_use_passes.h in Headers */,
-				F28C952CC22035480E4F500D710E6CF1 /* pipeline.h in Headers */,
-				F036E811F0E5BA3EC315F6E9A5A5AF56 /* rec_process.h in Headers */,
-				E2BB0F41F114069594CD2717C99DB488 /* timer.h in Headers */,
-				A55621293B03B7BD3FB7028C9ADB9336 /* utils.h in Headers */,
+				3D7AFE249D20F6E1105ABE06FC340DD8 /* clipper.h in Headers */,
+				D65B637E6F0E8120FA5C7FE28398659B /* clipper.hpp in Headers */,
+				57C290CBEDB231DBBDE072B588614C88 /* cls_process.h in Headers */,
+				C036789E59A4978095E5A1BAADB481D0 /* db_post_process.h in Headers */,
+				3C281DB90466E0EF5C6B164C097DF388 /* det_process.h in Headers */,
+				49605F6A86E2EA84FC318736F6263915 /* DHOCRErrorCorrector.h in Headers */,
+				EB69783FEE24017EF947C4827A26AAA2 /* DHPaddleLiteSDK-umbrella.h in Headers */,
+				6FCA2A9AC004C92D1CB76713490E0E47 /* DHPaddleLiteTextRecognition.h in Headers */,
+				4A9A2CD0BDE84CA5C3581B0B7EAC0450 /* DHPhoneNumberFormatter.h in Headers */,
+				ED13ADB3D2C8393D7D12EFB05ED5C5EB /* DHPhoneNumberRecognizer.h in Headers */,
+				81422FD5DF916B7A68FEFDFBB10766C0 /* DHPhoneNumberResult.h in Headers */,
+				951C21D94BE6BC3E6B6A3D627C7A7679 /* DHPhoneNumberTypeFilter.h in Headers */,
+				A944C5B2541C4ED3545535E6A96BEB97 /* DHPhoneNumberTypes.h in Headers */,
+				3CA054C93550A3858FBA95EE190D6EF8 /* DHPhoneNumberValidator.h in Headers */,
+				DF363C02684D48123AA504D9DC76DDBD /* DHStreamRecognitionManager.h in Headers */,
+				12511FC7AD8DC49C405F5976DD7ACBF1 /* DHTrackingNumberFilter.h in Headers */,
+				FAF62F328D90F993FC70CFD9C1A1DAFB /* DLPaddleLiteSDK.h in Headers */,
+				F89E3FD6883D76B1244DB2FD4C441F89 /* DLScanResult.h in Headers */,
+				83EF9C280E10B2F96CF86C52F9D12541 /* DLTextRecognitionResult.h in Headers */,
+				EB8E1851EEEAB12FD94AA94377270FF6 /* NSString+SDK.h in Headers */,
+				2F3A61FA0CC6B0003B3C010CFCA57B91 /* paddle_api.h in Headers */,
+				68528AC11184004E4499E3376F4ADADB /* paddle_image_preprocess.h in Headers */,
+				1F6D619FA0F07770A22436F59DBFBFC0 /* paddle_lite_factory_helper.h in Headers */,
+				0BFED3FAB4E710AD4353BB4EB662C132 /* paddle_place.h in Headers */,
+				404CC13E2EAC0D4C224423A7E449C7CD /* paddle_use_kernels.h in Headers */,
+				421CA9D07B6ADE1AB228E2578A5E23D5 /* paddle_use_ops.h in Headers */,
+				5D09DEB2DCAC7DA7CCEED7A16C109B1A /* paddle_use_passes.h in Headers */,
+				9FF9DB9C337FD5B938B7AFA1FFFCB255 /* pipeline.h in Headers */,
+				886797B40077B8F86D56D1BD09D8A8E4 /* rec_process.h in Headers */,
+				A91C5A4E4783CF447C1580219A7444D8 /* timer.h in Headers */,
+				BE64101A521BF2B0A39CE8058C4B5EFE /* utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,8 +730,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				D3AE4966AF2AA31E11E2CE439D2F5785 /* PBXTargetDependency */,
-				F9C5842D4614FC29A8916C735D1B51BE /* PBXTargetDependency */,
+				DC4BE99786CF03BEB9469E4004052349 /* PBXTargetDependency */,
+				243402537F0E48983D28F9614542423F /* PBXTargetDependency */,
 			);
 			name = "Pods-DHPaddleLiteSDK_Example";
 			productName = Pods_DHPaddleLiteSDK_Example;
@@ -719,38 +740,38 @@
 		};
 		7131EA092B6F549AAC9D6481D10A380C /* DHPaddleLiteSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 108FDD4D26631B4640CCEA45FE79AB2F /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK" */;
+			buildConfigurationList = 88A942D1AF1799AA6CC98E52F742A071 /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK" */;
 			buildPhases = (
-				A0172D4AFA8E56CCC04EE9DED48AF145 /* Headers */,
-				7FB5DA74745E2BAF6067F06B37B5ADF3 /* Sources */,
-				FA49F3B90DF53AB4167BA8B0779406CD /* Frameworks */,
-				8BEDE5C5F9E548486851FCFBD13D833B /* Resources */,
+				F6E7B5C7C8F8A4F23EDAF2E8210C49AC /* Headers */,
+				C7D7F40943F5C7A2EFD9C87D380FCE3B /* Sources */,
+				74E0359CAD1B1E9EA64790D61EAC70FA /* Frameworks */,
+				3014493C7E5B78E056F775C8E2BBFE36 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9FDB5422CF9CEF496BB280BD7ED8D6EB /* PBXTargetDependency */,
+				E2C81088122957F1E22652C061D7A293 /* PBXTargetDependency */,
 			);
 			name = DHPaddleLiteSDK;
 			productName = DHPaddleLiteSDK;
 			productReference = 6E47D84469097BAC43AE545460E6F4C5 /* DHPaddleLiteSDK */;
 			productType = "com.apple.product-type.framework";
 		};
-		79206C3D10592A2DF960B0929A430492 /* DHPaddleLiteSDK-DHPaddleLiteSDK */ = {
+		96933A3899155F217F5BF992F6DEB3F8 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 906FBC08870C2382245DECF7D216CD0F /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK-DHPaddleLiteSDK" */;
+			buildConfigurationList = 811EBF07D214994CD6E1CECA89F901F5 /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4" */;
 			buildPhases = (
-				AD6DE536FA02367226637B60BA7BBDB0 /* Sources */,
-				3D899055D6397D93695F0F1818AE6953 /* Frameworks */,
-				45E112616B57D63C69E403E4D8173E6B /* Resources */,
+				BBFD3BD8F96C13D0532117D7B1C26306 /* Sources */,
+				AE47C82AD7AA2AD3DF8E37A8540AC43D /* Frameworks */,
+				0815303D8233AFB28A3076848F5055F3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "DHPaddleLiteSDK-DHPaddleLiteSDK";
-			productName = DHPaddleLiteSDK;
-			productReference = D928203BEF84AD8240EB3856A6B3684E /* DHPaddleLiteSDK-DHPaddleLiteSDK */;
+			name = "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4";
+			productName = DHPaddleLiteSDKOCRModelV4;
+			productReference = 82C1A87EDF29715063587FB2637926A3 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */;
 			productType = "com.apple.product-type.bundle";
 		};
 		9DD121F8FB06026C94D3BEC7B5B419F2 /* Pods-DHPaddleLiteSDK_Tests */ = {
@@ -765,7 +786,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				ED627A00BFBABE5A47115055407D7915 /* PBXTargetDependency */,
+				BFC917EA93234DFFBAF2EA20E88F9377 /* PBXTargetDependency */,
 			);
 			name = "Pods-DHPaddleLiteSDK_Tests";
 			productName = Pods_DHPaddleLiteSDK_Tests;
@@ -784,7 +805,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				654E6E7DC69D66E23CEF9DC50CDFA73C /* PBXTargetDependency */,
+				1F509486782C38E97D49798198D66633 /* PBXTargetDependency */,
 			);
 			name = DLVideoCapture;
 			productName = DLVideoCapture;
@@ -793,11 +814,11 @@
 		};
 		F52E6C2AD1338CDCAEF9B37DB5B74D80 /* DLVideoCapture-DLVideoCapture */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F84FD8BB3BBADA4EE23EDAE8E1D52FE1 /* Build configuration list for PBXNativeTarget "DLVideoCapture-DLVideoCapture" */;
+			buildConfigurationList = 0A2FBF8925E2D10444D186448606FD4D /* Build configuration list for PBXNativeTarget "DLVideoCapture-DLVideoCapture" */;
 			buildPhases = (
-				DD570D536C1E56889211308BDFE06F1A /* Sources */,
-				D5B91986DFD7E5F51190000E650B5F0D /* Frameworks */,
-				8D30E4BAD24DF00D51EC693C87E3F653 /* Resources */,
+				45B534A5EB5514DFCA8136846F72CE2F /* Sources */,
+				8FA8666CFD3CFEE3AC0910F4252678F4 /* Frameworks */,
+				21E8B7FB8B8388BB172B2B93E4C9CF1B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -828,12 +849,12 @@
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			minimizedProjectReferenceProxies = 0;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = CF9293BAE697AD5DABDD14198C7DEF0B /* Products */;
+			productRefGroup = 749C14369DA42E825A13348127E5FD11 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				7131EA092B6F549AAC9D6481D10A380C /* DHPaddleLiteSDK */,
-				79206C3D10592A2DF960B0929A430492 /* DHPaddleLiteSDK-DHPaddleLiteSDK */,
+				96933A3899155F217F5BF992F6DEB3F8 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */,
 				E8C35712F86A8BB0A98B527F6A024A5C /* DLVideoCapture */,
 				F52E6C2AD1338CDCAEF9B37DB5B74D80 /* DLVideoCapture-DLVideoCapture */,
 				45470D60D4A1948A8797A05A8E46C8CE /* Pods-DHPaddleLiteSDK_Example */,
@@ -843,40 +864,40 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0815303D8233AFB28A3076848F5055F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CD6779FB7B4290E762C352FF0933BAC /* cn_PP-OCRv4_mobile_det_opt.nb in Resources */,
+				4E0519230B5D75E36066ACA7779DED92 /* cn_PP-OCRv4_mobile_rec_opt.nb in Resources */,
+				084069FD2CDE55E4B57760722C35C380 /* cn_ppocr_mobile_v2.0_cls_opt.nb in Resources */,
+				CF6EFE720563BA21965A5422CAAA24DF /* config.txt in Resources */,
+				79F1990A69D7097D610E3F815C3E107F /* ppocrv4_dict.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21E8B7FB8B8388BB172B2B93E4C9CF1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C42683F9D02AF06B90C3D5AC31F31417 /* icon_scan_border@2x.png in Resources */,
+				AAFDBFB3C598D55F92CABCBD94E79B8D /* icon_scan_border@3x.png in Resources */,
+				643542A325354D34E4206029117B9DE5 /* icon_scan_line@2x.png in Resources */,
+				AA579659317CB9D6E9D165643F40FCB1 /* icon_scan_line@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3014493C7E5B78E056F775C8E2BBFE36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		36534521D2A6AE38476FA960FCF2984B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45E112616B57D63C69E403E4D8173E6B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				78B686219EEEB748D0473E85302FA9AD /* cn_PP-OCRv5_mobile_det_opt.nb in Resources */,
-				827F6593DADD089AD698411BBA8E3218 /* cn_PP-OCRv5_mobile_rec_opt.nb in Resources */,
-				C3999C57FBB8CDF85E7A488C69B87C22 /* cn_ppocr_mobile_v2.0_cls_opt.nb in Resources */,
-				A52D61C5ADAB87585946DD2D4A3059BD /* config.txt in Resources */,
-				631C06A0519D6F67A4B518AD5ABCB7E5 /* ppocrv5_dict.txt in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8BEDE5C5F9E548486851FCFBD13D833B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8D30E4BAD24DF00D51EC693C87E3F653 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				770E43C2AF71E619E3AC9524B0397F70 /* icon_scan_border@2x.png in Resources */,
-				BE729190555DE55033B55595E82BA821 /* icon_scan_border@3x.png in Resources */,
-				1830BEBCF624328F2FEB301B4042BA06 /* icon_scan_line@2x.png in Resources */,
-				1506E199ACA90BD98C6AFA484D30A689 /* icon_scan_line@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,40 +937,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7FB5DA74745E2BAF6067F06B37B5ADF3 /* Sources */ = {
+		45B534A5EB5514DFCA8136846F72CE2F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8441699A85DD4EA12617D90FF61CE5D /* clipper.cpp in Sources */,
-				11FCDF327A98E171AEDCEEAFBCB4D917 /* clipper.mm in Sources */,
-				82601EC338039B713E669A87A955E8B4 /* cls_process.cc in Sources */,
-				6BE1F94665EDFB3D9B3078D7A556C687 /* db_post_process.cc in Sources */,
-				7ED9A490494167083D67DF0EB66CA03D /* det_process.cc in Sources */,
-				94DB16D7390F3370F1E1C96D19926135 /* DHOCRErrorCorrector.m in Sources */,
-				4D2922F7BC2DE654A250E6E0735AB3FB /* DHPaddleLiteSDK-dummy.m in Sources */,
-				5E48C2B90517E6E052FCFE1F9EE31CC6 /* DHPaddleLiteTextRecognition.mm in Sources */,
-				3B6948C78B49285C24485BB8C0EA9253 /* DHPhoneNumberFormatter.m in Sources */,
-				8A271D17941018F58334182DFE049A95 /* DHPhoneNumberRecognizer.m in Sources */,
-				77A9BDF7098C49D9AF642231691914A5 /* DHPhoneNumberResult.m in Sources */,
-				D528E728C41D5782E65D8432E629F6A1 /* DHPhoneNumberTypeFilter.m in Sources */,
-				B242F9E7F53DAA7FFA896CCACF7017C6 /* DHPhoneNumberTypes.m in Sources */,
-				63933D9CE6FC26BBB3E346AF405559CD /* DHPhoneNumberValidator.m in Sources */,
-				880667644557C2166E2207AACD5CA49E /* DHStreamRecognitionManager.m in Sources */,
-				F590CA2308E9A3F7E82B516510A45D60 /* DHTrackingNumberFilter.m in Sources */,
-				5C43AAA8033DF638E32E6844831DF24E /* DLPaddleLiteSDK.mm in Sources */,
-				A78A40EEAEBB3BAE5A933B4AFAFE35C8 /* DLScanResult.m in Sources */,
-				E940EDF2ECF2FCDF7F043C645B8064CF /* DLTextRecognitionResult.m in Sources */,
-				9932F53559454482BD7B2666726C1E92 /* NSString+SDK.m in Sources */,
-				9FFE4C0B7DBBCBFFB959D563E1BB7217 /* pipeline.cc in Sources */,
-				8C1F2EDF0ED14C8D2A1E3DDE2909A5DF /* rec_process.cc in Sources */,
-				5A30146D234902A1935C3BAED24AD914 /* utils.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD6DE536FA02367226637B60BA7BBDB0 /* Sources */ = {
+		BBFD3BD8F96C13D0532117D7B1C26306 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7D7F40943F5C7A2EFD9C87D380FCE3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4A9A47FAA97402035AE7F0C811A88B0 /* clipper.cpp in Sources */,
+				C8D66365EFCEEA48284B3F8E09E3B973 /* clipper.mm in Sources */,
+				AD15D259C648C115352C0CB59B9300BD /* cls_process.cc in Sources */,
+				577A208DD920A7ED3AA814D7AD353C5E /* db_post_process.cc in Sources */,
+				23A3BB772030E0C481337D399C47E702 /* det_process.cc in Sources */,
+				B6BD124CFD01EC0BA72A522CBBE06147 /* DHOCRErrorCorrector.m in Sources */,
+				6B3AC2A32E965EAEFB87E6F47B69C050 /* DHPaddleLiteSDK-dummy.m in Sources */,
+				E159A8053AD05A6D9C57374969CF22D6 /* DHPaddleLiteTextRecognition.mm in Sources */,
+				2D60EA3B2464EE6D0615A524F47D892A /* DHPhoneNumberFormatter.m in Sources */,
+				BDD329AD7F47D040EED15A7A992D4560 /* DHPhoneNumberRecognizer.m in Sources */,
+				9EB0FDA2542B128077704084C33E8B8E /* DHPhoneNumberResult.m in Sources */,
+				6FE40694D5C93411533B583283591D16 /* DHPhoneNumberTypeFilter.m in Sources */,
+				F9D1609E57DB384B936B638847E67364 /* DHPhoneNumberTypes.m in Sources */,
+				A68140F8E2E0B264938B2100933B517C /* DHPhoneNumberValidator.m in Sources */,
+				1609ACB7D30A79A7BF0C0ADB5AFA3CB5 /* DHStreamRecognitionManager.m in Sources */,
+				81A5EB306276450C14B2A27489170D16 /* DHTrackingNumberFilter.m in Sources */,
+				54BA144F169EC959A00662D72BB9FE38 /* DLPaddleLiteSDK.mm in Sources */,
+				8E651DF05E16E62BAE986D135A41B2CC /* DLScanResult.m in Sources */,
+				07917CC1067C5F30F44F9339017D8D89 /* DLTextRecognitionResult.m in Sources */,
+				A410880BDC525DEDFCFF18DE389F7E96 /* NSString+SDK.m in Sources */,
+				DE62DC2FFA6E90AB3C1E179F6A0E159E /* pipeline.cc in Sources */,
+				6DCB9D940B5931AD639E8A9D344BF638 /* rec_process.cc in Sources */,
+				9F82AB296BFE27C96F0D44FD61CDE1EF /* utils.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,49 +989,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD570D536C1E56889211308BDFE06F1A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		654E6E7DC69D66E23CEF9DC50CDFA73C /* PBXTargetDependency */ = {
+		1F509486782C38E97D49798198D66633 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "DLVideoCapture-DLVideoCapture";
 			target = F52E6C2AD1338CDCAEF9B37DB5B74D80 /* DLVideoCapture-DLVideoCapture */;
-			targetProxy = 743FF691335050A5C6BC6F545C12283C /* PBXContainerItemProxy */;
+			targetProxy = 3B53A1E6CED7919992525AFD3C1242A0 /* PBXContainerItemProxy */;
 		};
-		9FDB5422CF9CEF496BB280BD7ED8D6EB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DHPaddleLiteSDK-DHPaddleLiteSDK";
-			target = 79206C3D10592A2DF960B0929A430492 /* DHPaddleLiteSDK-DHPaddleLiteSDK */;
-			targetProxy = F3A976A8A3217884395559E52211EF96 /* PBXContainerItemProxy */;
-		};
-		D3AE4966AF2AA31E11E2CE439D2F5785 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DHPaddleLiteSDK;
-			target = 7131EA092B6F549AAC9D6481D10A380C /* DHPaddleLiteSDK */;
-			targetProxy = F8B2F49226925F7B1C96BEAC63E0EB11 /* PBXContainerItemProxy */;
-		};
-		ED627A00BFBABE5A47115055407D7915 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-DHPaddleLiteSDK_Example";
-			target = 45470D60D4A1948A8797A05A8E46C8CE /* Pods-DHPaddleLiteSDK_Example */;
-			targetProxy = 7DEF3CAE08B54A8B6B4A001D572E7A66 /* PBXContainerItemProxy */;
-		};
-		F9C5842D4614FC29A8916C735D1B51BE /* PBXTargetDependency */ = {
+		243402537F0E48983D28F9614542423F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DLVideoCapture;
 			target = E8C35712F86A8BB0A98B527F6A024A5C /* DLVideoCapture */;
-			targetProxy = ECC32F29665504D534207FD628413F80 /* PBXContainerItemProxy */;
+			targetProxy = 3894F780E3667EDE9A0882FB2B235516 /* PBXContainerItemProxy */;
+		};
+		BFC917EA93234DFFBAF2EA20E88F9377 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-DHPaddleLiteSDK_Example";
+			target = 45470D60D4A1948A8797A05A8E46C8CE /* Pods-DHPaddleLiteSDK_Example */;
+			targetProxy = 46B1ED59DE7F5811CDB4B2EB40BA7634 /* PBXContainerItemProxy */;
+		};
+		DC4BE99786CF03BEB9469E4004052349 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DHPaddleLiteSDK;
+			target = 7131EA092B6F549AAC9D6481D10A380C /* DHPaddleLiteSDK */;
+			targetProxy = 5407B9754787F6CC4F0D30565B0C6363 /* PBXContainerItemProxy */;
+		};
+		E2C81088122957F1E22652C061D7A293 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4";
+			target = 96933A3899155F217F5BF992F6DEB3F8 /* DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4 */;
+			targetProxy = AC1270CCBEF7F0197909E87E70F45157 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0FFF0C445A5B81117FBB433C6479E0B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CACA3B5ABF19416F5810C5D19E0C8A78 /* DLVideoCapture.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/DLVideoCapture";
+				ENABLE_BITCODE = NO;
+				IBSC_MODULE = DLVideoCapture;
+				INFOPLIST_FILE = "Target Support Files/DLVideoCapture/ResourceBundle-DLVideoCapture-DLVideoCapture-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = DLVideoCapture;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1108,21 +1147,42 @@
 			};
 			name = Debug;
 		};
-		508CF41FE055421242B8E4BA4453C94F /* Release */ = {
+		5354DB08F34BCA5B16BE93C05179B425 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B24A57DAD0F2269A0AA94C727DE7FCD3 /* DHPaddleLiteSDK.release.xcconfig */;
+			baseConfigurationReference = 6A0D0C6A7375A950736AA30003C7C35F /* DHPaddleLiteSDK.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/DHPaddleLiteSDK";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				IBSC_MODULE = DHPaddleLiteSDK;
-				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/ResourceBundle-DHPaddleLiteSDK-DHPaddleLiteSDK-Info.plist";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK.modulemap";
+				PRODUCT_MODULE_NAME = DHPaddleLiteSDK;
 				PRODUCT_NAME = DHPaddleLiteSDK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1188,41 +1248,23 @@
 			};
 			name = Release;
 		};
-		868CF7B4EFBF50BB4A8E39BE104CB587 /* Debug */ = {
+		AC5FADD1261A5D79A9D7B18789C0580E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 599BA15D288653521E9B33D02485147A /* DHPaddleLiteSDK.debug.xcconfig */;
+			baseConfigurationReference = 6A0D0C6A7375A950736AA30003C7C35F /* DHPaddleLiteSDK.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/DHPaddleLiteSDK";
 				ENABLE_BITCODE = NO;
 				IBSC_MODULE = DHPaddleLiteSDK;
-				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/ResourceBundle-DHPaddleLiteSDK-DHPaddleLiteSDK-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/ResourceBundle-DHPaddleLiteSDKOCRModelV4-DHPaddleLiteSDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				PRODUCT_NAME = DHPaddleLiteSDK;
+				PRODUCT_NAME = DHPaddleLiteSDKOCRModelV4;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
-		};
-		A0B875AD5103F4820F6FB635D596EB50 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CACA3B5ABF19416F5810C5D19E0C8A78 /* DLVideoCapture.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/DLVideoCapture";
-				ENABLE_BITCODE = NO;
-				IBSC_MODULE = DLVideoCapture;
-				INFOPLIST_FILE = "Target Support Files/DLVideoCapture/ResourceBundle-DLVideoCapture-DLVideoCapture-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				PRODUCT_NAME = DLVideoCapture;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
+			name = Release;
 		};
 		AEB251CBFCFD33F4F07AB3152D2FA787 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1300,9 +1342,27 @@
 			};
 			name = Debug;
 		};
-		CB714876EE5445F07DA0ECA78FE4FD10 /* Debug */ = {
+		BB1EB0D9ECED5E74F375B952ABF99398 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 599BA15D288653521E9B33D02485147A /* DHPaddleLiteSDK.debug.xcconfig */;
+			baseConfigurationReference = 5E3A4F2074AE5854709C76676EBCDD54 /* DHPaddleLiteSDK.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/DHPaddleLiteSDK";
+				ENABLE_BITCODE = NO;
+				IBSC_MODULE = DHPaddleLiteSDK;
+				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/ResourceBundle-DHPaddleLiteSDKOCRModelV4-DHPaddleLiteSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = DHPaddleLiteSDKOCRModelV4;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		C930CBDD97FF05C4D77DD79D1EDF6EBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E3A4F2074AE5854709C76676EBCDD54 /* DHPaddleLiteSDK.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1338,46 +1398,7 @@
 			};
 			name = Debug;
 		};
-		CEFA19C6901BA7AB4D432823A27395D0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B24A57DAD0F2269A0AA94C727DE7FCD3 /* DHPaddleLiteSDK.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGNING_ALLOWED = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = NO;
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/DHPaddleLiteSDK/DHPaddleLiteSDK.modulemap";
-				PRODUCT_MODULE_NAME = DHPaddleLiteSDK;
-				PRODUCT_NAME = DHPaddleLiteSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D52DA6C02ECCBDB8E40AD8426D399E1E /* Release */ = {
+		CAF8DD082F23D9D1EA2F45016EF6F257 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7BEA1A270985F6F904BD89D471F23B5 /* DLVideoCapture.release.xcconfig */;
 			buildSettings = {
@@ -1515,11 +1536,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		108FDD4D26631B4640CCEA45FE79AB2F /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK" */ = {
+		0A2FBF8925E2D10444D186448606FD4D /* Build configuration list for PBXNativeTarget "DLVideoCapture-DLVideoCapture" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CB714876EE5445F07DA0ECA78FE4FD10 /* Debug */,
-				CEFA19C6901BA7AB4D432823A27395D0 /* Release */,
+				0FFF0C445A5B81117FBB433C6479E0B7 /* Debug */,
+				CAF8DD082F23D9D1EA2F45016EF6F257 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1533,20 +1554,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		811EBF07D214994CD6E1CECA89F901F5 /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK-DHPaddleLiteSDKOCRModelV4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB1EB0D9ECED5E74F375B952ABF99398 /* Debug */,
+				AC5FADD1261A5D79A9D7B18789C0580E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88A942D1AF1799AA6CC98E52F742A071 /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C930CBDD97FF05C4D77DD79D1EDF6EBF /* Debug */,
+				5354DB08F34BCA5B16BE93C05179B425 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8F4077DC0236FD05DF807348BA0B1809 /* Build configuration list for PBXNativeTarget "Pods-DHPaddleLiteSDK_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7A1543E8639849D32FD57047496C080 /* Debug */,
 				DF75CC14B6CB768E4E616364769C7239 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		906FBC08870C2382245DECF7D216CD0F /* Build configuration list for PBXNativeTarget "DHPaddleLiteSDK-DHPaddleLiteSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				868CF7B4EFBF50BB4A8E39BE104CB587 /* Debug */,
-				508CF41FE055421242B8E4BA4453C94F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1565,15 +1595,6 @@
 			buildConfigurations = (
 				447CA7444CC0B9701F3588B702CDA387 /* Debug */,
 				F0AA3DF71398B0A4CDC6682699DA4F1A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F84FD8BB3BBADA4EE23EDAE8E1D52FE1 /* Build configuration list for PBXNativeTarget "DLVideoCapture-DLVideoCapture" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0B875AD5103F4820F6FB635D596EB50 /* Debug */,
-				D52DA6C02ECCBDB8E40AD8426D399E1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

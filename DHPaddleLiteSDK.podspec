@@ -49,9 +49,6 @@ DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识�
       'DHPaddleLiteSDK/Classes/Private/*.h',
       'DHPaddleLiteSDK/paddleUtil/*.{hpp,h}'
     ]
-    core.resource_bundles = {
-      'DHPaddleLiteSDK' => ['DHPaddleLiteSDK/Classes/**/*.{txt,nb}']
-    }
     core.vendored_libraries = 'DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a'
     core.vendored_frameworks = 'DHPaddleLiteSDK/ThirdParty/opencv2.framework'
     core.libraries = 'c++'
@@ -62,6 +59,28 @@ DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识�
       'VALID_ARCHS[sdk=iphonesimulator*]' => '',
       'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup',
       'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/DHPaddleLiteSDK/ThirdParty"'
+    }
+  end
+
+  s.subspec 'OCRModelV4' do |model_v4|
+    model_v4.dependency 'DHPaddleLiteSDK/Core'
+    model_v4.resource_bundles = {
+      'DHPaddleLiteSDKOCRModelV4' => [
+        'DHPaddleLiteSDK/Classes/config.txt',
+        'DHPaddleLiteSDK/Classes/models/ppocrv4/*.nb',
+        'DHPaddleLiteSDK/Classes/labels/ppocrv4_dict.txt'
+      ]
+    }
+  end
+
+  s.subspec 'OCRModelV5' do |model_v5|
+    model_v5.dependency 'DHPaddleLiteSDK/Core'
+    model_v5.resource_bundles = {
+      'DHPaddleLiteSDKOCRModelV5' => [
+        'DHPaddleLiteSDK/Classes/config.txt',
+        'DHPaddleLiteSDK/Classes/models/ppocrv5/*.nb',
+        'DHPaddleLiteSDK/Classes/labels/ppocrv5_dict.txt'
+      ]
     }
   end
 
