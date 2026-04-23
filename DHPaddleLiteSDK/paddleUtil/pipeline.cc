@@ -148,6 +148,11 @@ cv::Mat Visualization(cv::Mat srcimg,
     return img_vis;
 }
 
+void Pipeline::SetUseDirectionClassify(bool enabled) {
+    use_direction_classify_override_ = enabled ? 1 : 0;
+}
+
+
 Pipeline::Pipeline(const std::string &detModelDir,
                    const std::string &clsModelDir,
                    const std::string &recModelDir,
@@ -164,13 +169,16 @@ Pipeline::Pipeline(const std::string &detModelDir,
     charactor_dict_ = ReadDict(dict_path);
     charactor_dict_.insert(charactor_dict_.begin(), "#"); // NOLINT
     charactor_dict_.push_back(" ");
+    use_direction_classify_override_ = -1;
 }
 
 cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
-                          std::vector<std::string> &res_txt) {
+                          std::vector<std::string> &res_txt,
+                          std::vector<std::vector<std::vector<int>>> *res_boxes,
+                          bool enable_visualization) {
     //  Timer tic;
     //  tic.start();
-    int use_direction_classify = int(Config_["use_direction_classify"]); // NOLINT
+    int use_direction_classify = use_direction_classify_override_ >= 0 ? use_direction_classify_override_ : int(Config_["use_direction_classify"]); // NOLINT
     cv::Mat srcimg;
     img.copyTo(srcimg);
     // det predict
@@ -186,6 +194,11 @@ cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
     
     std::vector<std::string> rec_text;
     std::vector<float> rec_text_score;
+    if (res_boxes != nullptr) {
+        res_boxes->clear();
+        res_boxes->reserve(boxes.size());
+    }
+    
     for (int i = boxes.size() - 1; i >= 0; i--) {
         crop_img = GetRotateCropImage(img_copy, boxes[i]);
         if (use_direction_classify >= 1) {
@@ -196,13 +209,17 @@ cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
                                           charactor_dict_);
         rec_text.push_back(res.first);
         rec_text_score.push_back(res.second);
+        if (res_boxes != nullptr) {
+            res_boxes->push_back(boxes[i]);
+        }
     }
     // tic.end();
     // *processTime = tic.get_average_ms();
     // std::cout << "pipeline predict costs" <<  *processTime;
-    
-    //// visualization
-    auto img_vis = Visualization(img, boxes, output_img_path);
+    cv::Mat img_vis;
+    if (enable_visualization) {
+        img_vis = Visualization(img, boxes, output_img_path);
+    }
     // print recognized text
     res_txt.resize(rec_text.size() * 2);
     for (int i = 0; i < rec_text.size(); i++) {

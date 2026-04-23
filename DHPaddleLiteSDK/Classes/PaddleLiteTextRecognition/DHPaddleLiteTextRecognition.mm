@@ -47,9 +47,21 @@ Pipeline *pipeline_;
 @property (nonatomic, assign) BOOL isProcessing;
 @property (nonatomic, assign) NSTimeInterval lastProcessTime;
 
+// Runtime OCR options
+@property (nonatomic, assign) NSInteger configuredOCRThreads;
+@property (nonatomic, assign) BOOL configuredDirectionClassifyEnabled;
+@property (nonatomic) std::string det_model_path;
+@property (nonatomic) std::string rec_model_path;
+@property (nonatomic) std::string cls_model_path;
+
 // Private helper methods
 - (cv::Mat)convertUIImageToMat:(UIImage *)image error:(NSError **)error;
 - (cv::Mat)cropMat:(cv::Mat)srcMat withRect:(CGRect)rect error:(NSError **)error;
+- (CGRect)boundingBoxFromPoints:(const std::vector<std::vector<int>> &)points
+                          offset:(CGPoint)offset;
+- (NSArray<NSValue *> *)cornersFromPoints:(const std::vector<std::vector<int>> &)points
+                                   offset:(CGPoint)offset;
+- (void)rebuildPipeline;
 
 @end
 
@@ -71,7 +83,7 @@ Pipeline *pipeline_;
 - (instancetype)init {
     if (self = [super init]) {
         // Set default confidence threshold
-        _confidenceThreshold = 0.7;
+        _confidenceThreshold = 0.5;
         
         // Initialize failure flag
         _initializationFailed = NO;
@@ -79,6 +91,14 @@ Pipeline *pipeline_;
         // Initialize throttle control
         _isProcessing = NO;
         _lastProcessTime = 0;
+
+        // Runtime OCR options
+        NSInteger configuredThreads = [[NSUserDefaults standardUserDefaults] integerForKey:@"DHPaddleLiteOCRThreads"];
+        if (configuredThreads <= 0) {
+            configuredThreads = 4;
+        }
+        _configuredOCRThreads = MAX(1, MIN(8, configuredThreads));
+        _configuredDirectionClassifyEnabled = [[NSUserDefaults standardUserDefaults] objectForKey:@"DHPaddleLiteOCRDirectionClassifyEnabled"] ? [[NSUserDefaults standardUserDefaults] boolForKey:@"DHPaddleLiteOCRDirectionClassifyEnabled"] : NO;
         
         // Create serial queue for thread-safe resource access
         _processingQueue = dispatch_queue_create("com.paddlelite.textrecognition.processing", DISPATCH_QUEUE_SERIAL);
@@ -159,6 +179,10 @@ Pipeline *pipeline_;
     std::string det_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_det_opt.nb";
     std::string rec_model_file = paddle_dir + "/cn_PP-OCRv5_mobile_rec_opt.nb";
     std::string cls_model_file = paddle_dir + "/cn_ppocr_mobile_v2.0_cls_opt.nb";
+
+    self.det_model_path = det_model_file;
+    self.rec_model_path = rec_model_file;
+    self.cls_model_path = cls_model_file;
     
     // Setup dictionary and config paths
     self.dict_path = paddle_dir + "/ppocrv5_dict.txt";
@@ -225,13 +249,30 @@ Pipeline *pipeline_;
         self.initializationFailed = YES;
         return;
     }
-    
-    // Initialize Pipeline with LITE_POWER_HIGH mode and 2 threads
-    // Default confidence threshold is set to 0.7 in init method
+    [self rebuildPipeline];
+}
+
+- (void)rebuildPipeline {
+    if (self.det_model_path.empty() || self.rec_model_path.empty() || self.cls_model_path.empty()) {
+        return;
+    }
+
+    NSInteger threads = MAX(1, MIN(8, self.configuredOCRThreads));
+
     @try {
-        pipeline_ = new Pipeline(det_model_file, cls_model_file, rec_model_file,
-                                "LITE_POWER_HIGH", 2, self.config_path, self.dict_path);
+        if (pipeline_ != nullptr) {
+            delete pipeline_;
+            pipeline_ = nullptr;
+        }
+
+        pipeline_ = new Pipeline(self.det_model_path, self.cls_model_path, self.rec_model_path,
+                                "LITE_POWER_HIGH", (int)threads, self.config_path, self.dict_path);
+        pipeline_->SetUseDirectionClassify(self.configuredDirectionClassifyEnabled);
+
+        NSLog(@"[DHPaddleLiteTextRecognition] OCR线程数: %ld", (long)threads);
+        NSLog(@"[DHPaddleLiteTextRecognition] 方向分类: %@", self.configuredDirectionClassifyEnabled ? @"开启" : @"关闭");
         NSLog(@"[DHPaddleLiteTextRecognition] SDK初始化成功");
+        self.initializationFailed = NO;
     } @catch (NSException *exception) {
         NSLog(@"[DHPaddleLiteTextRecognition] 错误: Pipeline初始化失败: %@", exception.reason);
         self.initializationFailed = YES;
@@ -307,6 +348,10 @@ Pipeline *pipeline_;
     // 3. Call crop helper method with effectiveArea
     NSError *cropError = nil;
     cv::Mat processedMat = [self cropMat:convertedMat withRect:rect error:&cropError];
+    CGPoint cropOffset = CGPointZero;
+    if (!CGRectIsEmpty(rect) && !CGRectEqualToRect(rect, CGRectZero)) {
+        cropOffset = rect.origin;
+    }
     
     // Release convertedMat after cropping (it's no longer needed)
     // Note: cv::Mat uses reference counting, setting to empty Mat releases memory
@@ -334,24 +379,17 @@ Pipeline *pipeline_;
         
         @try {
             // Use processedMatCopy for processing
-            
-            // Pipeline's Process method requires an output image path for visualization
-            // Use /dev/null to avoid writing large files (memory optimization)
-            // Note: We still need a valid extension for imwrite to work
-            std::string output_path = "/tmp/ocr_vis_temp.jpg";
-            
-            // Call Pipeline Process method
-            std::vector<std::string> res_txt;
-            __block cv::Mat img_vis = pipeline_->Process(processedMatCopy, output_path, res_txt);
-            
-            // Release img_vis immediately after use (Requirement 7.2)
-            img_vis = cv::Mat();
-            
-            // Release processedMatCopy after processing
-            processedMatCopy = cv::Mat();
-            
-            // Delete temporary file immediately to free disk space
-            [[NSFileManager defaultManager] removeItemAtPath:@"/tmp/ocr_vis_temp.jpg" error:nil];
+// Call Pipeline Process method (visualization disabled to avoid disk I/O)
+std::vector<std::string> res_txt;
+std::vector<std::vector<std::vector<int>>> res_boxes;
+__block cv::Mat img_vis = pipeline_->Process(processedMatCopy, "", res_txt, &res_boxes, false);
+
+// Release img_vis immediately after use
+img_vis = cv::Mat();
+
+// Release processedMatCopy after processing
+processedMatCopy = cv::Mat();
+
             
             // Parse res_txt vector (text and confidence alternate)
             // Format: [text_0, confidence_0, text_1, confidence_1, ...]
@@ -369,10 +407,20 @@ Pipeline *pipeline_;
                     
                     // Apply confidence threshold filter
                     if (confidence >= self.confidenceThreshold) {
+                        size_t boxIndex = i / 2;
+                        CGRect boundingBox = CGRectZero;
+                        NSArray<NSValue *> *corners = @[];
+                        if (boxIndex < res_boxes.size()) {
+                            boundingBox = [self boundingBoxFromPoints:res_boxes[boxIndex] offset:cropOffset];
+                            corners = [self cornersFromPoints:res_boxes[boxIndex] offset:cropOffset];
+                        }
+                        
                         // Create DLTextRecognitionResult object
                         DLTextRecognitionResult *result = [[DLTextRecognitionResult alloc] initWithText:text
                                                                                              confidence:confidence
-                                                                                                  index:index];
+                                                                                                  index:index
+                                                                                            boundingBox:boundingBox
+                                                                                                corners:corners];
                         [results addObject:result];
                         index++;
                     }
@@ -416,6 +464,37 @@ Pipeline *pipeline_;
     _confidenceThreshold = clampedThreshold;
     
     NSLog(@"[DHPaddleLiteTextRecognition] 置信度阈值已设置为: %.2f", _confidenceThreshold);
+}
+
+- (void)setDirectionClassifyEnabled:(BOOL)enabled {
+    _configuredDirectionClassifyEnabled = enabled;
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:@"DHPaddleLiteOCRDirectionClassifyEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    if (pipeline_ != nullptr) {
+        pipeline_->SetUseDirectionClassify(enabled);
+    }
+}
+
+- (BOOL)isDirectionClassifyEnabled {
+    return _configuredDirectionClassifyEnabled;
+}
+
+- (void)setOCRThreads:(NSInteger)threads {
+    NSInteger clamped = MAX(1, MIN(8, threads));
+    if (_configuredOCRThreads == clamped) {
+        return;
+    }
+
+    _configuredOCRThreads = clamped;
+    [[NSUserDefaults standardUserDefaults] setInteger:clamped forKey:@"DHPaddleLiteOCRThreads"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [self rebuildPipeline];
+}
+
+- (NSInteger)ocrThreads {
+    return _configuredOCRThreads;
 }
 
 #pragma mark - Private Helper Methods
@@ -553,6 +632,49 @@ Pipeline *pipeline_;
         }
         return cv::Mat();
     }
+}
+
+- (CGRect)boundingBoxFromPoints:(const std::vector<std::vector<int>> &)points
+                          offset:(CGPoint)offset {
+    if (points.empty()) {
+        return CGRectZero;
+    }
+    
+    CGFloat minX = CGFLOAT_MAX;
+    CGFloat minY = CGFLOAT_MAX;
+    CGFloat maxX = -CGFLOAT_MAX;
+    CGFloat maxY = -CGFLOAT_MAX;
+    
+    for (const auto &point : points) {
+        if (point.size() < 2) {
+            continue;
+        }
+        CGFloat x = (CGFloat)point[0] + offset.x;
+        CGFloat y = (CGFloat)point[1] + offset.y;
+        minX = MIN(minX, x);
+        minY = MIN(minY, y);
+        maxX = MAX(maxX, x);
+        maxY = MAX(maxY, y);
+    }
+    
+    if (minX == CGFLOAT_MAX || minY == CGFLOAT_MAX) {
+        return CGRectZero;
+    }
+    
+    return CGRectMake(minX, minY, maxX - minX, maxY - minY);
+}
+
+- (NSArray<NSValue *> *)cornersFromPoints:(const std::vector<std::vector<int>> &)points
+                                   offset:(CGPoint)offset {
+    NSMutableArray<NSValue *> *corners = [NSMutableArray arrayWithCapacity:points.size()];
+    for (const auto &point : points) {
+        if (point.size() < 2) {
+            continue;
+        }
+        CGPoint corner = CGPointMake((CGFloat)point[0] + offset.x, (CGFloat)point[1] + offset.y);
+        [corners addObject:[NSValue valueWithCGPoint:corner]];
+    }
+    return [corners copy];
 }
 
 @end

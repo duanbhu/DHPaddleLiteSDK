@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,6 +65,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSInteger index;
 
 /**
+ * @brief 文本行的外接矩形
+ *
+ * 坐标系统与输入图像一致：原点在左上角，单位为像素。
+ *
+ * @note 当底层未返回定位信息时，该值为CGRectZero
+ */
+@property (nonatomic, assign, readonly) CGRect boundingBox;
+
+/**
+ * @brief 文本行四边形顶点（按顺时针）
+ *
+ * 使用 NSValue(CGPoint) 封装四个顶点，数量通常为4。
+ * 坐标系统与输入图像一致：原点在左上角，单位为像素。
+ *
+ * @note 当底层未返回定位信息时，该数组为空
+ */
+@property (nonatomic, copy, readonly) NSArray<NSValue *> *corners;
+
+/**
  * @brief 初始化识别结果对象
  *
  * 创建一个新的识别结果对象，包含文本内容、置信度和位置索引。
@@ -81,6 +101,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithText:(NSString *)text
                   confidence:(CGFloat)confidence
                        index:(NSInteger)index;
+
+/**
+ * @brief 初始化识别结果对象（含行级位置信息）
+ *
+ * @param text 识别出的文本内容，不能为nil
+ * @param confidence 置信度分数，范围[0.0, 1.0]
+ * @param index 位置索引，从0开始
+ * @param boundingBox 文本行外接矩形（像素坐标）
+ * @param corners 文本行四边形顶点（NSValue(CGPoint)）
+ *
+ * @return 初始化的DLTextRecognitionResult实例
+ */
+- (instancetype)initWithText:(NSString *)text
+                  confidence:(CGFloat)confidence
+                       index:(NSInteger)index
+                 boundingBox:(CGRect)boundingBox
+                     corners:(NSArray<NSValue *> *)corners;
 
 @end
 

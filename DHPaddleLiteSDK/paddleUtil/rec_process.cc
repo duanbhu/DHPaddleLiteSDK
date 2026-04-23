@@ -16,7 +16,7 @@
 #include "timer.h"
 #include "utils.h"
 
-const std::vector<int> rec_image_shape{3, 32, 320};
+const std::vector<int> rec_image_shape{3, 48, 320};
 
 cv::Mat CrnnResizeImg(cv::Mat img, float wh_ratio) {
   int imgC, imgH, imgW;
@@ -24,7 +24,7 @@ cv::Mat CrnnResizeImg(cv::Mat img, float wh_ratio) {
   imgW = rec_image_shape[2];
   imgH = rec_image_shape[1];
 
-  imgW = int(32 * wh_ratio);
+  imgW = int(imgH * wh_ratio);
 
   float ratio = static_cast<float>(img.cols) / static_cast<float>(img.rows);
   int resize_w, resize_h;

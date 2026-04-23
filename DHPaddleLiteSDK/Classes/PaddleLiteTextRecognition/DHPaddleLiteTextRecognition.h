@@ -147,6 +147,38 @@ typedef NS_ENUM(NSInteger, DHPaddleLiteTextRecognitionErrorCode) {
  */
 - (CGFloat)confidenceThreshold;
 
+/**
+ * @brief 设置是否开启方向分类（文本角度分类）
+ *
+ * @param enabled YES 开启，NO 关闭
+ *
+ * @discussion
+ * - 开启可提升旋转文本场景下的准确率，但会增加耗时。
+ * - 设置后立即生效。
+ */
+- (void)setDirectionClassifyEnabled:(BOOL)enabled;
+
+/**
+ * @brief 获取当前方向分类开关状态
+ */
+- (BOOL)isDirectionClassifyEnabled;
+
+/**
+ * @brief 设置OCR线程数
+ *
+ * @param threads 线程数，范围 1~8
+ *
+ * @discussion
+ * - 默认值为4。
+ * - 线程数调整会触发Pipeline重建，并在后续识别中生效。
+ */
+- (void)setOCRThreads:(NSInteger)threads;
+
+/**
+ * @brief 获取当前OCR线程数
+ */
+- (NSInteger)ocrThreads;
+
 @end
 
 NS_ASSUME_NONNULL_END

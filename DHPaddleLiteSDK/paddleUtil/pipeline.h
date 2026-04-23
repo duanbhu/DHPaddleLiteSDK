@@ -34,7 +34,12 @@ public:
            const std::string &dict_path);
 
   cv::Mat Process(cv::Mat srcimg, std::string output_img_path,
-                  std::vector<std::string> &res_txt);
+                  std::vector<std::string> &res_txt,
+                  std::vector<std::vector<std::vector<int>>> *res_boxes =
+                      nullptr,
+                  bool enable_visualization = false);
+
+  void SetUseDirectionClassify(bool enabled);
 
 private:
   std::map<std::string, double> Config_;
@@ -42,4 +47,5 @@ private:
   std::shared_ptr<ClsPredictor> clsPredictor_;
   std::shared_ptr<DetPredictor> detPredictor_;
   std::shared_ptr<RecPredictor> recPredictor_;
+  int use_direction_classify_override_ = -1;// -1 means use config.txt
 };
