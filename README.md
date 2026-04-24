@@ -20,6 +20,9 @@ it, simply add the following line to your Podfile:
 pod 'DHPaddleLiteSDK'
 ```
 
+`DHPaddleLiteSDK` 会自动依赖 `PaddleLiteiOS`（独立的 ThirdParty 二进制包），
+无需手动额外添加。
+
 ### 按需选择模型版本（推荐）
 
 默认仅安装 `Core`（不包含任何 OCR 模型资源）。请在 Podfile 中按需选择模型：

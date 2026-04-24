@@ -7,6 +7,7 @@ platform :ios, '12.0'
 target 'DHPaddleLiteSDK_Example' do
   
   pod 'DLVideoCapture'
+  pod 'PaddleLiteiOS', :path => '../../PaddleLiteiOS'
   pod 'DHPaddleLiteSDK/PhoneNumberRecognizer', :path => '../'
   pod 'DHPaddleLiteSDK/OCRModelV4', :path => '../'
 

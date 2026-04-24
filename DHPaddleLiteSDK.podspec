@@ -33,12 +33,12 @@ DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识�
   s.static_framework = true
   
   s.subspec 'Core' do |core|
+    core.dependency 'PaddleLiteiOS', s.version.to_s
     core.source_files = [
       'DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h',
       'DHPaddleLiteSDK/Classes/Private/*.{h,m,mm}',
       'DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.{h,m,mm}',
-      'DHPaddleLiteSDK/paddleUtil/*',
-      'DHPaddleLiteSDK/ThirdParty/PaddleLite/include/*.h'
+      'DHPaddleLiteSDK/paddleUtil/*'
     ]
     core.public_header_files = [
       'DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h',
@@ -48,16 +48,12 @@ DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识�
       'DHPaddleLiteSDK/Classes/Private/*.h',
       'DHPaddleLiteSDK/paddleUtil/*.{hpp,h}'
     ]
-    core.vendored_libraries = 'DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a'
-    core.vendored_frameworks = 'DHPaddleLiteSDK/ThirdParty/opencv2.framework'
-    core.libraries = 'c++'
-    core.frameworks = 'CoreMedia', 'AssetsLibrary', 'AVFoundation', 'opencv2'
+    core.frameworks = 'CoreMedia', 'AssetsLibrary', 'AVFoundation'
     core.pod_target_xcconfig = {
       'DEFINES_MODULE' => 'YES',
       'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386',
       'VALID_ARCHS[sdk=iphonesimulator*]' => '',
-      'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup',
-      'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}/DHPaddleLiteSDK/ThirdParty"'
+      'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup'
     }
   end
 
