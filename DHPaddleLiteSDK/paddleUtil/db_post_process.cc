@@ -354,7 +354,8 @@ FilterTagDetRes(std::vector<std::vector<std::vector<int>>> boxes, float ratio_h,
     rect_height =
         static_cast<int>(sqrt(pow(boxes[n][0][0] - boxes[n][3][0], 2) +
                               pow(boxes[n][0][1] - boxes[n][3][1], 2)));
-    if (rect_width <= 4 || rect_height <= 4)
+    // Relax small-box filtering so single-character lines (e.g. "7") can survive.
+    if (rect_width <= 3 || rect_height <= 3)
       continue;
     root_points.push_back(boxes[n]);
   }

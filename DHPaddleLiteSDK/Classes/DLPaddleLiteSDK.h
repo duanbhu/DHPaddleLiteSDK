@@ -59,6 +59,7 @@ UIKIT_EXTERN NSString *const kKeyVirtualPhone;
  *
  * @see DHPaddleLiteTextRecognition
  */
+__attribute__((deprecated("DLPaddleLiteSDK is deprecated. Use DHPaddleLiteTextRecognition instead.")))
 @interface DLPaddleLiteSDK : NSObject
 
 /**
@@ -77,7 +78,7 @@ UIKIT_EXTERN NSString *const kKeyVirtualPhone;
  *
  * @discussion 该方法返回全局唯一的 SDK 实例
  */
-+ (DLPaddleLiteSDK *)sharedManager;
++ (DLPaddleLiteSDK *)sharedManager __attribute__((deprecated("Use DHPaddleLiteTextRecognition sharedInstance instead.")));
 
 /**
  * @brief 识别图像中的手机号
@@ -108,7 +109,9 @@ UIKIT_EXTERN NSString *const kKeyVirtualPhone;
  * @note 只返回出现频率 >= 3 次的手机号
  * @note 回调不保证在主线程执行
  */
-- (void)recognitionImage:(UIImage *)image effectiveArea:(CGRect)rect result:(void(^)(NSDictionary *info))result;
+- (void)recognitionImage:(UIImage *)image
+           effectiveArea:(CGRect)rect
+                  result:(void(^)(NSDictionary *info))result __attribute__((deprecated("Use DHPaddleLiteTextRecognition -recognizeImage:effectiveArea:completion: instead.")));
 
 @end
 

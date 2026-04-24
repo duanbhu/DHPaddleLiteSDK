@@ -83,7 +83,7 @@ Pipeline *pipeline_;
 - (instancetype)init {
     if (self = [super init]) {
         // Set default confidence threshold
-        _confidenceThreshold = 0.5;
+        _confidenceThreshold = 0.35;
         
         // Initialize failure flag
         _initializationFailed = NO;
