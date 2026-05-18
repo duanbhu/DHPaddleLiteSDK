@@ -1,15 +1,18 @@
 PODS:
-  - DHPaddleLiteSDK/Core (0.0.4)
-  - DHPaddleLiteSDK/OCRModelV4 (0.0.4):
+  - DHPaddleLiteSDK/Core (0.0.5):
+    - PaddleLiteiOS (= 0.0.5)
+  - DHPaddleLiteSDK/OCRModelV4 (0.0.5):
     - DHPaddleLiteSDK/Core
-  - DHPaddleLiteSDK/PhoneNumberRecognizer (0.0.4):
+  - DHPaddleLiteSDK/PhoneNumberRecognizer (0.0.5):
     - DHPaddleLiteSDK/Core
   - DLVideoCapture (0.1.1)
+  - PaddleLiteiOS (0.0.5)
 
 DEPENDENCIES:
   - DHPaddleLiteSDK/OCRModelV4 (from `../`)
   - DHPaddleLiteSDK/PhoneNumberRecognizer (from `../`)
   - DLVideoCapture
+  - PaddleLiteiOS (from `../../PaddleLiteiOS`)
 
 SPEC REPOS:
   https://gitee.com/duanLss/moduleSpecs.git:
@@ -18,11 +21,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   DHPaddleLiteSDK:
     :path: "../"
+  PaddleLiteiOS:
+    :path: "../../PaddleLiteiOS"
 
 SPEC CHECKSUMS:
-  DHPaddleLiteSDK: 882a9c881e244aec077ca6c7e47586ee4edb99f2
+  DHPaddleLiteSDK: 53204d467b39f78e0038d63047ac56ef075d89e5
   DLVideoCapture: ce5153075f9850b18e980ce65952c70dc09f36df
+  PaddleLiteiOS: bdeba119718c64d7d3cbc3c3ff2c54393a404784
 
-PODFILE CHECKSUM: 0da772acffa4f9efd647df26e708c9682d30beee
+PODFILE CHECKSUM: ad847c52609cbde60627edd6b69774854135ba24
 
 COCOAPODS: 1.16.2

@@ -1,6 +1,6 @@
 {
   "name": "DHPaddleLiteSDK",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "summary": "基于PaddleLite实现OCR识别",
   "description": "DHPaddleLiteSDK 提供基于 PaddleLite 的端侧 OCR 能力，包含文本识别与手机号识别组件。",
   "homepage": "https://github.com/duanbhu/DHPaddleLiteSDK",
@@ -12,8 +12,7 @@
     "dbh": "310701836@qq.com"
   },
   "source": {
-    "http": "https://github.com/duanbhu/DHPaddleLiteSDK/releases/download/0.0.4/DHPaddleLiteSDK-0.0.4.zip",
-    "sha256": "e086ddf0c761e25de73712ab62454dfb579b1e1b1a04a5280e8fa61bf3e897f4"
+    "http": "https://github.com/duanbhu/DHPaddleLiteSDK/releases/download/0.0.5/DHPaddleLiteSDK-0.0.5.zip"
   },
   "platforms": {
     "ios": "12.0"
@@ -23,12 +22,16 @@
   "subspecs": [
     {
       "name": "Core",
+      "dependencies": {
+        "PaddleLiteiOS": [
+          "0.0.5"
+        ]
+      },
       "source_files": [
         "DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h",
         "DHPaddleLiteSDK/Classes/Private/*.{h,m,mm}",
         "DHPaddleLiteSDK/Classes/PaddleLiteTextRecognition/*.{h,m,mm}",
-        "DHPaddleLiteSDK/paddleUtil/*",
-        "DHPaddleLiteSDK/ThirdParty/PaddleLite/include/*.h"
+        "DHPaddleLiteSDK/paddleUtil/*"
       ],
       "public_header_files": [
         "DHPaddleLiteSDK/Classes/DLPaddleLiteSDK.h",
@@ -38,21 +41,16 @@
         "DHPaddleLiteSDK/Classes/Private/*.h",
         "DHPaddleLiteSDK/paddleUtil/*.{hpp,h}"
       ],
-      "vendored_libraries": "DHPaddleLiteSDK/ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a",
-      "vendored_frameworks": "DHPaddleLiteSDK/ThirdParty/opencv2.framework",
-      "libraries": "c++",
       "frameworks": [
         "CoreMedia",
         "AssetsLibrary",
-        "AVFoundation",
-        "opencv2"
+        "AVFoundation"
       ],
       "pod_target_xcconfig": {
         "DEFINES_MODULE": "YES",
         "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386",
         "VALID_ARCHS[sdk=iphonesimulator*]": "",
-        "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup",
-        "FRAMEWORK_SEARCH_PATHS": "$(inherited) \"${PODS_TARGET_SRCROOT}/DHPaddleLiteSDK/ThirdParty\""
+        "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup"
       }
     },
     {

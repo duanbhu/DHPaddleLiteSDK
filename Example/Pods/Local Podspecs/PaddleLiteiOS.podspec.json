@@ -1,0 +1,34 @@
+{
+  "name": "PaddleLiteiOS",
+  "version": "0.0.5",
+  "summary": "PaddleLite OCR 所需第三方二进制依赖集合",
+  "description": "PaddleLiteiOS 将 DHPaddleLiteSDK 的 ThirdParty 部分独立出来，\n包含 PaddleLite 静态库与 OpenCV framework，供上层 SDK 复用。",
+  "homepage": "https://github.com/duanbhu/DHPaddleLiteSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "dbh": "310701836@qq.com"
+  },
+  "source": {
+    "http": "https://github.com/duanbhu/DHPaddleLiteSDK/releases/download/0.0.5/DHPaddleLiteSDK-0.0.5.zip"
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "static_framework": true,
+  "source_files": "ThirdParty/PaddleLite/include/*.h",
+  "public_header_files": "ThirdParty/PaddleLite/include/*.h",
+  "vendored_libraries": "ThirdParty/PaddleLite/lib/libpaddle_api_light_bundled.a",
+  "vendored_frameworks": "ThirdParty/opencv2.framework",
+  "libraries": "c++",
+  "frameworks": "opencv2",
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "i386",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "",
+    "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup",
+    "FRAMEWORK_SEARCH_PATHS": "$(inherited) \"${PODS_TARGET_SRCROOT}/ThirdParty\""
+  }
+}
