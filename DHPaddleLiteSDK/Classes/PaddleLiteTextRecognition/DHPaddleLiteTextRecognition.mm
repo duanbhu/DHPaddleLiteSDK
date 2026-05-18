@@ -61,6 +61,13 @@ Pipeline *pipeline_;
                           offset:(CGPoint)offset;
 - (NSArray<NSValue *> *)cornersFromPoints:(const std::vector<std::vector<int>> &)points
                                    offset:(CGPoint)offset;
+- (cv::Mat)buildEnhancedMatForOCR:(const cv::Mat &)srcMat;
+// 解析 pipeline 输出协议：[text0, score0, text1, score1, ...]。
+- (NSArray<DLTextRecognitionResult *> *)resultsFromResTxt:(const std::vector<std::string> &)resTxt
+                                                  resBoxes:(const std::vector<std::vector<std::vector<int>>> &)resBoxes
+                                                    offset:(CGPoint)cropOffset;
+// 用于在主识别与增强识别之间择优的启发式质量分。
+- (CGFloat)qualityScoreForResults:(NSArray<DLTextRecognitionResult *> *)results;
 - (void)rebuildPipeline;
 
 @end
@@ -446,61 +453,54 @@ Pipeline *pipeline_;
     // Release original processedMat
     processedMat = cv::Mat();
     
-    // 4. Execute OCR on background thread using serial queue for thread-safe resource access
+    // 4. 执行 OCR 主流程（线程安全串行队列）：
+    //    1) 先对原图进行主识别，得到 primaryResults。
+    //    2) 当主识别为空或质量分偏低时，触发增强图二次识别。
+    //    3) 分别计算两次结果质量分（置信度加权 + 条数小幅加分）。
+    //    4) 按规则择优，输出最终 finalResults 给上层回调。
     __weak typeof(self) weakSelf = self;
     dispatch_async(self.processingQueue, ^{
         NSMutableArray<DLTextRecognitionResult *> *results = [NSMutableArray array];
         NSError *processingError = nil;
         
         @try {
-            // Use processedMatCopy for processing
-// Call Pipeline Process method (visualization disabled to avoid disk I/O)
-std::vector<std::string> res_txt;
-std::vector<std::vector<std::vector<int>>> res_boxes;
-__block cv::Mat img_vis = pipeline_->Process(processedMatCopy, "", res_txt, &res_boxes, false);
+            // Primary OCR pass.
+            std::vector<std::string> primaryResTxt;
+            std::vector<std::vector<std::vector<int>>> primaryResBoxes;
+            __block cv::Mat img_vis = pipeline_->Process(processedMatCopy, "", primaryResTxt, &primaryResBoxes, false);
+            img_vis = cv::Mat();
+            NSArray<DLTextRecognitionResult *> *primaryResults = [self resultsFromResTxt:primaryResTxt
+                                                                                 resBoxes:primaryResBoxes
+                                                                                   offset:cropOffset];
 
-// Release img_vis immediately after use
-img_vis = cv::Mat();
+            // 低质量场景下的二次识别：使用增强图再次 OCR。
+            // 仅在主识别为空或整体置信度偏弱时触发。
+            NSArray<DLTextRecognitionResult *> *finalResults = primaryResults;
+            CGFloat primaryScore = [self qualityScoreForResults:primaryResults];
+            BOOL shouldRetryWithEnhancement = (primaryResults.count == 0 || primaryScore < 0.58);
+            if (shouldRetryWithEnhancement) {
+                cv::Mat enhancedMat = [self buildEnhancedMatForOCR:processedMatCopy];
+                if (!enhancedMat.empty()) {
+                    std::vector<std::string> enhancedResTxt;
+                    std::vector<std::vector<std::vector<int>>> enhancedResBoxes;
+                    __block cv::Mat enhancedVis = pipeline_->Process(enhancedMat, "", enhancedResTxt, &enhancedResBoxes, false);
+                    enhancedVis = cv::Mat();
 
-// Release processedMatCopy after processing
-processedMatCopy = cv::Mat();
+                    NSArray<DLTextRecognitionResult *> *enhancedResults = [self resultsFromResTxt:enhancedResTxt
+                                                                                         resBoxes:enhancedResBoxes
+                                                                                           offset:cropOffset];
+                    CGFloat enhancedScore = [self qualityScoreForResults:enhancedResults];
 
-            
-            // Parse res_txt vector (text and confidence alternate)
-            // Format: [text_0, confidence_0, text_1, confidence_1, ...]
-            if (res_txt.size() > 0 && res_txt.size() % 2 == 0) {
-                NSInteger index = 0;
-                
-                for (size_t i = 0; i < res_txt.size(); i += 2) {
-                    // Even indices contain text
-                    std::string textStr = res_txt[i];
-                    NSString *text = [NSString stringWithUTF8String:textStr.c_str()];
-                    
-                    // Odd indices contain confidence as string
-                    std::string confidenceStr = res_txt[i + 1];
-                    CGFloat confidence = [[NSString stringWithUTF8String:confidenceStr.c_str()] floatValue];
-                    
-                    // Apply confidence threshold filter
-                    if (confidence >= self.confidenceThreshold) {
-                        size_t boxIndex = i / 2;
-                        CGRect boundingBox = CGRectZero;
-                        NSArray<NSValue *> *corners = @[];
-                        if (boxIndex < res_boxes.size()) {
-                            boundingBox = [self boundingBoxFromPoints:res_boxes[boxIndex] offset:cropOffset];
-                            corners = [self cornersFromPoints:res_boxes[boxIndex] offset:cropOffset];
-                        }
-                        
-                        // Create DLTextRecognitionResult object
-                        DLTextRecognitionResult *result = [[DLTextRecognitionResult alloc] initWithText:text
-                                                                                             confidence:confidence
-                                                                                                  index:index
-                                                                                            boundingBox:boundingBox
-                                                                                                corners:corners];
-                        [results addObject:result];
-                        index++;
+                    // 增强结果明显更好，或接近但行数更多时，优先采用增强结果。
+                    if (enhancedScore > primaryScore + 0.02 ||
+                        (enhancedScore >= primaryScore - 0.01 && enhancedResults.count > primaryResults.count)) {
+                        finalResults = enhancedResults;
                     }
                 }
             }
+
+            [results addObjectsFromArray:finalResults];
+            processedMatCopy = cv::Mat();
             
         } @catch (NSException *exception) {
             // Handle Pipeline processing exceptions
@@ -750,6 +750,93 @@ processedMatCopy = cv::Mat();
         [corners addObject:[NSValue valueWithCGPoint:corner]];
     }
     return [corners copy];
+}
+
+- (cv::Mat)buildEnhancedMatForOCR:(const cv::Mat &)srcMat {
+    if (srcMat.empty()) {
+        return cv::Mat();
+    }
+
+    cv::Mat enhanced;
+    srcMat.copyTo(enhanced);
+
+    // Improve local contrast in low-light or low-contrast images.
+    cv::Mat lab;
+    cvtColor(enhanced, lab, COLOR_RGB2Lab);
+    std::vector<cv::Mat> channels;
+    split(lab, channels);
+    if (channels.size() == 3) {
+        cv::Ptr<cv::CLAHE> clahe = cv::createCLAHE(2.0, cv::Size(8, 8));
+        clahe->apply(channels[0], channels[0]);
+        merge(channels, lab);
+        cvtColor(lab, enhanced, COLOR_Lab2RGB);
+    }
+
+    // 轻度去噪 + 轻锐化：尽量保留文字边缘，避免过增强带来的伪影。
+    cv::Mat denoised;
+    bilateralFilter(enhanced, denoised, 5, 35, 35);
+    cv::Mat sharpened;
+    addWeighted(denoised, 1.25, enhanced, -0.25, 0, sharpened);
+    return sharpened;
+}
+
+- (NSArray<DLTextRecognitionResult *> *)resultsFromResTxt:(const std::vector<std::string> &)resTxt
+                                                  resBoxes:(const std::vector<std::vector<std::vector<int>>> &)resBoxes
+                                                    offset:(CGPoint)cropOffset {
+    NSMutableArray<DLTextRecognitionResult *> *parsedResults = [NSMutableArray array];
+    if (resTxt.empty() || resTxt.size() % 2 != 0) {
+        return [parsedResults copy];
+    }
+
+    NSInteger index = 0;
+    for (size_t i = 0; i < resTxt.size(); i += 2) {
+        NSString *text = [NSString stringWithUTF8String:resTxt[i].c_str()];
+        if (text.length == 0) {
+            continue;
+        }
+
+        CGFloat confidence = [[NSString stringWithUTF8String:resTxt[i + 1].c_str()] floatValue];
+        // 保持与现有对外 API 一致的阈值过滤行为。
+        if (confidence < self.confidenceThreshold) {
+            continue;
+        }
+
+        size_t boxIndex = i / 2;
+        CGRect boundingBox = CGRectZero;
+        NSArray<NSValue *> *corners = @[];
+        if (boxIndex < resBoxes.size()) {
+            boundingBox = [self boundingBoxFromPoints:resBoxes[boxIndex] offset:cropOffset];
+            corners = [self cornersFromPoints:resBoxes[boxIndex] offset:cropOffset];
+        }
+
+        DLTextRecognitionResult *result = [[DLTextRecognitionResult alloc] initWithText:text
+                                                                             confidence:confidence
+                                                                                  index:index
+                                                                            boundingBox:boundingBox
+                                                                                corners:corners];
+        [parsedResults addObject:result];
+        index++;
+    }
+
+    return [parsedResults copy];
+}
+
+- (CGFloat)qualityScoreForResults:(NSArray<DLTextRecognitionResult *> *)results {
+    if (results.count == 0) {
+        return 0;
+    }
+
+    CGFloat weightedSum = 0;
+    CGFloat weight = 0;
+    for (DLTextRecognitionResult *result in results) {
+        CGFloat tokenWeight = MAX(1, result.text.length);
+        weightedSum += result.confidence * tokenWeight;
+        weight += tokenWeight;
+    }
+    CGFloat avgConfidence = weight > 0 ? (weightedSum / weight) : 0;
+    // 结果条数给予小幅加分，但设置上限，避免条数对评分产生过强偏置。
+    CGFloat countBonus = MIN((CGFloat)results.count, 6.0) * 0.02;
+    return avgConfidence + countBonus;
 }
 
 @end
