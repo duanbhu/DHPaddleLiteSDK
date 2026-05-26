@@ -521,6 +521,12 @@ typedef void(^PaddleLiteTextRecognitionCompletion)(NSArray<DLTextRecognitionResu
 
 ## 版本历史
 
+### v2.0.0
+
+- 新增视频帧 OCR 识别接口 `recognizeSampleBuffer:effectiveArea:completion:`
+- 新增 `releaseResources` 资源释放接口
+- 重构识别链路与 C++ pipeline，优化实时识别场景下的内存与结果合并策略
+
 ### v1.0.0
 - 初始版本
 - 支持中英文文本识别
