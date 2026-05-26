@@ -147,8 +147,9 @@ std::vector<std::vector<float>> GetMiniBoxes(cv::RotatedRect box,
   return array;
 }
 
-float BoxScoreFast(std::vector<std::vector<float>> box_array, cv::Mat pred) {
-  auto array = box_array;
+float BoxScoreFast(const std::vector<std::vector<float>> &box_array,
+                   const cv::Mat &pred) {
+  const auto &array = box_array;
   int width = pred.cols;
   int height = pred.rows;
 
@@ -184,15 +185,14 @@ float BoxScoreFast(std::vector<std::vector<float>> box_array, cv::Mat pred) {
   int npt[] = {4};
   cv::fillPoly(mask, ppt, npt, 1, cv::Scalar(1));
 
-  cv::Mat croppedImg;
-  pred(cv::Rect(xmin, ymin, xmax - xmin + 1, ymax - ymin + 1))
-      .copyTo(croppedImg);
-
+  cv::Mat croppedImg = pred(cv::Rect(xmin, ymin, xmax - xmin + 1,
+                                     ymax - ymin + 1));
   auto score = cv::mean(croppedImg, mask)[0];
   return score;
 }
 
-float PolygonScoreAcc(std::vector<cv::Point> contour, cv::Mat pred) {
+float PolygonScoreAcc(const std::vector<cv::Point> &contour,
+                      const cv::Mat &pred) {
   int width = pred.cols;
   int height = pred.rows;
   std::vector<float> box_x;
@@ -222,35 +222,33 @@ float PolygonScoreAcc(std::vector<cv::Point> contour, cv::Mat pred) {
   cv::Mat mask;
   mask = cv::Mat::zeros(ymax - ymin + 1, xmax - xmin + 1, CV_8UC1);
 
-  cv::Point *rook_point = new cv::Point[contour.size()];
+  std::vector<cv::Point> rook_point(contour.size());
 
   for (int i = 0; i < contour.size(); ++i) {
     rook_point[i] =
         cv::Point(int(box_x[i]) - xmin, int(box_y[i]) - ymin); // NOLINT
   }
-  const cv::Point *ppt[1] = {rook_point};
+  const cv::Point *ppt[1] = {rook_point.data()};
   int npt[] = {int(contour.size())}; // NOLINT
 
   cv::fillPoly(mask, ppt, npt, 1, cv::Scalar(1));
 
-  cv::Mat croppedImg;
-  pred(cv::Rect(xmin, ymin, xmax - xmin + 1, ymax - ymin + 1))
-      .copyTo(croppedImg);
+  cv::Mat croppedImg = pred(cv::Rect(xmin, ymin, xmax - xmin + 1,
+                                     ymax - ymin + 1));
   float score = cv::mean(croppedImg, mask)[0];
 
-  delete[] rook_point;
   return score;
 }
 
 std::vector<std::vector<std::vector<int>>>
-BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
-                std::map<std::string, double> Config) {
+BoxesFromBitmap(const cv::Mat &pred, const cv::Mat &bitmap,
+                const std::map<std::string, double> &Config) {
   const int min_size = 3;
   const int max_candidates = 1000;
-  const float box_thresh = static_cast<float>(Config["det_db_box_thresh"]);
-  const float unclip_ratio = static_cast<float>(Config["det_db_unclip_ratio"]);
+  const float box_thresh = static_cast<float>(Config.at("det_db_box_thresh"));
+  const float unclip_ratio = static_cast<float>(Config.at("det_db_unclip_ratio"));
   const int det_use_polygon_score =
-      int(Config["det_use_polygon_score"]); // NOLINT
+      int(Config.at("det_use_polygon_score")); // NOLINT
 
   int width = bitmap.cols;
   int height = bitmap.rows;
@@ -258,7 +256,8 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
   std::vector<std::vector<cv::Point>> contours;
   std::vector<cv::Vec4i> hierarchy;
 
-  cv::findContours(bitmap, contours, hierarchy, cv::RETR_LIST,
+  cv::Mat bitmap_for_contours = bitmap;
+  cv::findContours(bitmap_for_contours, contours, hierarchy, cv::RETR_LIST,
                    cv::CHAIN_APPROX_SIMPLE);
 
   int num_contours =
@@ -327,11 +326,8 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
 }
 
 std::vector<std::vector<std::vector<int>>>
-FilterTagDetRes(std::vector<std::vector<std::vector<int>>> boxes, float ratio_h,
-                float ratio_w, cv::Mat srcimg) {
-  int oriimg_h = srcimg.rows;
-  int oriimg_w = srcimg.cols;
-
+FilterTagDetRes(std::vector<std::vector<std::vector<int>>> &boxes, float ratio_h,
+                float ratio_w, int oriimg_h, int oriimg_w) {
   std::vector<std::vector<std::vector<int>>> root_points;
   for (int n = 0; n < static_cast<int>(boxes.size()); n++) {
     boxes[n] = OrderPointsClockwise(boxes[n]);

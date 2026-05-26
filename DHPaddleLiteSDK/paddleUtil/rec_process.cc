@@ -16,27 +16,28 @@
 #include "timer.h"
 #include "utils.h"
 
-const std::vector<int> rec_image_shape{3, 48, 320};
+const std::vector<int> rec_image_shape{3, 64, 320};
 
-cv::Mat CrnnResizeImg(cv::Mat img, float wh_ratio) {
-  int imgC, imgH, imgW;
-  imgC = rec_image_shape[0];
+void CrnnResizeImg(const cv::Mat &img, cv::Mat *resize_img) {
+  if (resize_img == nullptr) {
+    return;
+  }
+  int imgH, imgW;
   imgW = rec_image_shape[2];
   imgH = rec_image_shape[1];
 
-  imgW = int(imgH * wh_ratio);
-
   float ratio = static_cast<float>(img.cols) / static_cast<float>(img.rows);
-  int resize_w, resize_h;
+  int resize_w;
   if (ceilf(imgH * ratio) > imgW)
     resize_w = imgW;
   else
     resize_w = static_cast<int>(ceilf(imgH * ratio));
-  cv::Mat resize_img;
-  cv::resize(img, resize_img, cv::Size(resize_w, imgH), 0.f, 0.f,
+  cv::resize(img, *resize_img, cv::Size(resize_w, imgH), 0.f, 0.f,
              cv::INTER_LINEAR);
-
-  return resize_img;
+  if (resize_w < imgW) {
+    cv::copyMakeBorder(*resize_img, *resize_img, 0, 0, 0, imgW - resize_w,
+                       cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0));
+  }
 }
 
 template <class ForwardIterator>
@@ -56,11 +57,10 @@ RecPredictor::RecPredictor(const std::string &modelDir, const int cpuThreadNum,
 }
 
 void RecPredictor::Preprocess(const cv::Mat &srcimg) {
-  float wh_ratio =
-      static_cast<float>(srcimg.cols) / static_cast<float>(srcimg.rows);
   std::vector<float> mean = {0.5f, 0.5f, 0.5f};
   std::vector<float> scale = {1 / 0.5f, 1 / 0.5f, 1 / 0.5f};
-  cv::Mat resize_img = CrnnResizeImg(srcimg, wh_ratio);
+  cv::Mat resize_img;
+  CrnnResizeImg(srcimg, &resize_img);
   resize_img.convertTo(resize_img, CV_32FC3, 1 / 255.f);
 
   const float *dimg = reinterpret_cast<const float *>(resize_img.data);
@@ -73,7 +73,7 @@ void RecPredictor::Preprocess(const cv::Mat &srcimg) {
 
 std::pair<std::string, float>
 RecPredictor::Postprocess(const cv::Mat &rgbaImage,
-                          std::vector<std::string> charactor_dict) {
+                          const std::vector<std::string> &charactor_dict) {
   // Get output and run postprocess
   std::unique_ptr<const Tensor> output_tensor0(
       std::move(predictor_->GetOutput(0)));
@@ -94,12 +94,17 @@ RecPredictor::Postprocess(const cv::Mat &rgbaImage,
     max_value =
         float(*std::max_element(&predict_batch[n * predict_shape[2]],
                                 &predict_batch[(n + 1) * predict_shape[2]]));
-    if (argmax_idx > 0 && (!(n > 0 && argmax_idx == last_index))) {
+    if (argmax_idx > 0 &&
+        argmax_idx < static_cast<int>(charactor_dict.size()) &&
+        (!(n > 0 && argmax_idx == last_index))) {
       score += max_value;
       count += 1;
       str_res += charactor_dict[argmax_idx];
     }
     last_index = argmax_idx;
+  }
+  if (count == 0) {
+    return std::make_pair(str_res, 0.f);
   }
   score /= count;
   return std::make_pair(str_res, score);
@@ -108,7 +113,7 @@ RecPredictor::Postprocess(const cv::Mat &rgbaImage,
 std::pair<std::string, float>
 RecPredictor::Predict(const cv::Mat &rgbaImage, double *preprocessTime,
                       double *predictTime, double *postprocessTime,
-                      std::vector<std::string> charactor_dict) {
+                      const std::vector<std::string> &charactor_dict) {
   //  Timer tic;
   //  tic.start();
   Preprocess(rgbaImage);

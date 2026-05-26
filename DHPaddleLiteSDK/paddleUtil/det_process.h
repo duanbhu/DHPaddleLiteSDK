@@ -27,16 +27,21 @@ public:
                         const std::string &cpuPowerMode);
 
   std::vector<std::vector<std::vector<int>>>
-  Predict(cv::Mat &rgbImage, std::map<std::string, double> Config,
+  Predict(const cv::Mat &rgbImage, const std::map<std::string, double> &Config,
           double *preprocessTime, double *predictTime, double *postprocessTime);
 
 private:
   void Preprocess(const cv::Mat &img, const int max_side_len);
   std::vector<std::vector<std::vector<int>>>
-  Postprocess(const cv::Mat srcimg, std::map<std::string, double> Config,
+  Postprocess(int srcimg_h, int srcimg_w,
+              const std::map<std::string, double> &Config,
               int det_db_use_dilate);
 
 private:
   std::vector<float> ratio_hw_;
+  cv::Mat pred_map_;
+  cv::Mat cbuf_map_;
+  cv::Mat bit_map_;
+  cv::Mat dilation_map_;
   std::shared_ptr<paddle::lite_api::PaddlePredictor> predictor_;
 };

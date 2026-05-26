@@ -36,27 +36,63 @@ struct OCRItem {
     float height;
 };
 
-static OCRItem BuildOCRItem(const std::string &text, float score,
-                            const std::vector<std::vector<int>> &box) {
-    OCRItem item;
-    item.text = text;
-    item.score = score;
-    item.box = box;
-    item.min_x = static_cast<float>(box[0][0]);
-    item.max_x = static_cast<float>(box[0][0]);
-    item.min_y = static_cast<float>(box[0][1]);
-    item.max_y = static_cast<float>(box[0][1]);
+static bool IsValidBox(const std::vector<std::vector<int>> &box) {
+    if (box.size() < 4) {
+        return false;
+    }
+    for (const auto &point : box) {
+        if (point.size() < 2) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool BuildOCRItem(const std::string &text, float score,
+                         const std::vector<std::vector<int>> &box,
+                         OCRItem *item) {
+    if (item == nullptr || !IsValidBox(box)) {
+        return false;
+    }
+    OCRItem built_item;
+    built_item.text = text;
+    built_item.score = std::isfinite(score) ? score : 0.0f;
+    built_item.box = box;
+    built_item.min_x = static_cast<float>(box[0][0]);
+    built_item.max_x = static_cast<float>(box[0][0]);
+    built_item.min_y = static_cast<float>(box[0][1]);
+    built_item.max_y = static_cast<float>(box[0][1]);
 
     for (size_t i = 1; i < box.size(); ++i) {
-        item.min_x = std::min(item.min_x, static_cast<float>(box[i][0]));
-        item.max_x = std::max(item.max_x, static_cast<float>(box[i][0]));
-        item.min_y = std::min(item.min_y, static_cast<float>(box[i][1]));
-        item.max_y = std::max(item.max_y, static_cast<float>(box[i][1]));
+        built_item.min_x = std::min(built_item.min_x, static_cast<float>(box[i][0]));
+        built_item.max_x = std::max(built_item.max_x, static_cast<float>(box[i][0]));
+        built_item.min_y = std::min(built_item.min_y, static_cast<float>(box[i][1]));
+        built_item.max_y = std::max(built_item.max_y, static_cast<float>(box[i][1]));
     }
-    item.center_x = (item.min_x + item.max_x) * 0.5f;
-    item.center_y = (item.min_y + item.max_y) * 0.5f;
-    item.height = std::max(1.0f, item.max_y - item.min_y);
-    return item;
+    built_item.center_x = (built_item.min_x + built_item.max_x) * 0.5f;
+    built_item.center_y = (built_item.min_y + built_item.max_y) * 0.5f;
+    built_item.height = std::max(1.0f, built_item.max_y - built_item.min_y);
+    if (!std::isfinite(built_item.center_x) || !std::isfinite(built_item.center_y) ||
+        !std::isfinite(built_item.height)) {
+        return false;
+    }
+    *item = std::move(built_item);
+    return true;
+}
+
+static bool IsValidOCRItem(const OCRItem &item) {
+    return IsValidBox(item.box) &&
+           std::isfinite(item.score) &&
+           std::isfinite(item.min_x) &&
+           std::isfinite(item.max_x) &&
+           std::isfinite(item.min_y) &&
+           std::isfinite(item.max_y) &&
+           std::isfinite(item.center_x) &&
+           std::isfinite(item.center_y) &&
+           std::isfinite(item.height) &&
+           item.height > 0.0f &&
+           item.min_x <= item.max_x &&
+           item.min_y <= item.max_y;
 }
 
 static std::vector<std::vector<int>> BuildAxisAlignedBox(float min_x, float min_y,
@@ -82,12 +118,30 @@ static void MergeItemsByLine(const std::vector<OCRItem> &items,
     }
 
     // 1) 先按 Y 再按 X 进行稳定排序，提升分行聚类的一致性。
-    std::vector<OCRItem> sorted_items = items;
-    std::sort(sorted_items.begin(), sorted_items.end(), [](const OCRItem &a, const OCRItem &b) {
-        if (std::fabs(a.center_y - b.center_y) < 1.0f) {
+    std::vector<OCRItem> sorted_items;
+    sorted_items.reserve(items.size());
+    for (const auto &item : items) {
+        if (IsValidOCRItem(item)) {
+            sorted_items.push_back(item);
+        }
+    }
+    if (sorted_items.empty()) {
+        return;
+    }
+    std::stable_sort(sorted_items.begin(), sorted_items.end(), [](const OCRItem &a, const OCRItem &b) {
+        if (a.center_y != b.center_y) {
+            return a.center_y < b.center_y;
+        }
+        if (a.center_x != b.center_x) {
             return a.center_x < b.center_x;
         }
-        return a.center_y < b.center_y;
+        if (a.text != b.text) {
+            return a.text < b.text;
+        }
+        if (a.score != b.score) {
+            return a.score < b.score;
+        }
+        return a.box < b.box;
     });
 
     std::vector<std::vector<OCRItem>> lines;
@@ -118,21 +172,51 @@ static void MergeItemsByLine(const std::vector<OCRItem> &items,
         }
     }
 
-    std::sort(lines.begin(), lines.end(),
+    lines.erase(std::remove_if(lines.begin(), lines.end(),
+                               [](const std::vector<OCRItem> &line) {
+                                   return line.empty();
+                               }),
+                lines.end());
+    if (lines.empty()) {
+        return;
+    }
+
+    std::stable_sort(lines.begin(), lines.end(),
               [](const std::vector<OCRItem> &a, const std::vector<OCRItem> &b) {
+                  if (a.empty() || b.empty()) {
+                      return a.size() < b.size();
+                  }
                   float ay = 0.0f;
                   float by = 0.0f;
                   for (const auto &item : a) ay += item.center_y;
                   for (const auto &item : b) by += item.center_y;
                   ay /= static_cast<float>(a.size());
                   by /= static_cast<float>(b.size());
-                  return ay < by;
+                  if (ay != by) {
+                      return ay < by;
+                  }
+                  if (a.front().center_x != b.front().center_x) {
+                      return a.front().center_x < b.front().center_x;
+                  }
+                  return a.size() < b.size();
               });
 
     for (auto &line : lines) {
         // 3) 同一行内按从左到右顺序合并文本。
-        std::sort(line.begin(), line.end(), [](const OCRItem &a, const OCRItem &b) {
-            return a.center_x < b.center_x;
+        std::stable_sort(line.begin(), line.end(), [](const OCRItem &a, const OCRItem &b) {
+            if (a.center_x != b.center_x) {
+                return a.center_x < b.center_x;
+            }
+            if (a.center_y != b.center_y) {
+                return a.center_y < b.center_y;
+            }
+            if (a.text != b.text) {
+                return a.text < b.text;
+            }
+            if (a.score != b.score) {
+                return a.score < b.score;
+            }
+            return a.box < b.box;
         });
 
         std::string merged_text;
@@ -169,21 +253,25 @@ static void MergeItemsByLine(const std::vector<OCRItem> &items,
 
 } // namespace
 
-cv::Mat GetRotateCropImage(cv::Mat srcimage,
+cv::Mat GetRotateCropImage(const cv::Mat &srcimage,
                            std::vector<std::vector<int>> box) {
-    cv::Mat image;
-    srcimage.copyTo(image);
+    if (srcimage.empty() || !IsValidBox(box)) {
+        return cv::Mat();
+    }
     std::vector<std::vector<int>> points = box;
     
     int x_collect[4] = {box[0][0], box[1][0], box[2][0], box[3][0]};
     int y_collect[4] = {box[0][1], box[1][1], box[2][1], box[3][1]};
-    int left = int(*std::min_element(x_collect, x_collect + 4));   // NOLINT
-    int right = int(*std::max_element(x_collect, x_collect + 4));  // NOLINT
-    int top = int(*std::min_element(y_collect, y_collect + 4));    // NOLINT
-    int bottom = int(*std::max_element(y_collect, y_collect + 4)); // NOLINT
+    int left = std::max(0, int(*std::min_element(x_collect, x_collect + 4)));   // NOLINT
+    int right = std::min(srcimage.cols, int(*std::max_element(x_collect, x_collect + 4)));  // NOLINT
+    int top = std::max(0, int(*std::min_element(y_collect, y_collect + 4)));    // NOLINT
+    int bottom = std::min(srcimage.rows, int(*std::max_element(y_collect, y_collect + 4))); // NOLINT
+    if (right <= left || bottom <= top) {
+        return cv::Mat();
+    }
     
     cv::Mat img_crop;
-    image(cv::Rect(left, top, right - left, bottom - top)).copyTo(img_crop);
+    srcimage(cv::Rect(left, top, right - left, bottom - top)).copyTo(img_crop);
     
     for (int i = 0; i < points.size(); i++) {
         points[i][0] -= left;
@@ -196,6 +284,9 @@ cv::Mat GetRotateCropImage(cv::Mat srcimage,
     int img_crop_height =
     static_cast<int>(sqrt(pow(points[0][0] - points[3][0], 2) +
                           pow(points[0][1] - points[3][1], 2)));
+    if (img_crop_width <= 0 || img_crop_height <= 0) {
+        return cv::Mat();
+    }
     
     cv::Point2f pts_std[4];
     pts_std[0] = cv::Point2f(0., 0.);
@@ -246,21 +337,27 @@ std::vector<std::string> ReadDict(std::string path) {
 std::vector<std::string> split(const std::string &str,
                                const std::string &delim) {
     std::vector<std::string> res;
-    if ("" == str)
+    if (str.empty() || delim.empty()) {
         return res;
-    char *strs = new char[str.length() + 1];
-    std::strcpy(strs, str.c_str()); // NOLINT
-    
-    char *d = new char[delim.length() + 1];
-    std::strcpy(d, delim.c_str()); // NOLINT
-    
-    char *p = std::strtok(strs, d);
-    while (p) {
-        std::string s = p;
-        res.push_back(s);
-        p = std::strtok(NULL, d);
     }
-    
+
+    size_t start = 0;
+    while (start < str.size()) {
+        size_t pos = str.find(delim, start);
+        if (pos == std::string::npos) {
+            std::string token = str.substr(start);
+            if (!token.empty()) {
+                res.push_back(token);
+            }
+            break;
+        }
+
+        if (pos > start) {
+            res.push_back(str.substr(start, pos - start));
+        }
+        start = pos + delim.size();
+    }
+
     return res;
 }
 
@@ -268,8 +365,11 @@ std::map<std::string, double> LoadConfigTxt(std::string config_path) {
     auto config = ReadDict(config_path);
     
     std::map<std::string, double> dict;
-    for (int i = 0; i < config.size(); i++) {
+    for (size_t i = 0; i < config.size(); i++) {
         std::vector<std::string> res = split(config[i], " ");
+        if (res.size() < 2 || res[0].empty()) {
+            continue;
+        }
         dict[res[0]] = stod(res[1]);
     }
     return dict;
@@ -323,24 +423,17 @@ Pipeline::Pipeline(const std::string &detModelDir,
     use_direction_classify_override_ = -1;
 }
 
-cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
+cv::Mat Pipeline::Process(const cv::Mat &img, std::string output_img_path,
                           std::vector<std::string> &res_txt,
                           std::vector<std::vector<std::vector<int>>> *res_boxes,
                           bool enable_visualization) {
     //  Timer tic;
     //  tic.start();
     int use_direction_classify = use_direction_classify_override_ >= 0 ? use_direction_classify_override_ : int(Config_["use_direction_classify"]); // NOLINT
-    cv::Mat srcimg;
-    img.copyTo(srcimg);
     // det predict
     auto boxes =
-    detPredictor_->Predict(srcimg, Config_, nullptr, nullptr, nullptr);
+    detPredictor_->Predict(img, Config_, nullptr, nullptr, nullptr);
     
-    std::vector<float> mean = {0.5f, 0.5f, 0.5f};
-    std::vector<float> scale = {1 / 0.5f, 1 / 0.5f, 1 / 0.5f};
-    
-    cv::Mat img_copy;
-    img.copyTo(img_copy);
     cv::Mat crop_img;
     
     // 行级合并前的原始识别结果（每个检测框一个）。
@@ -350,15 +443,28 @@ cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
         res_boxes->clear();
     }
     
-    for (int i = boxes.size() - 1; i >= 0; i--) {
-        crop_img = GetRotateCropImage(img_copy, boxes[i]);
+    for (auto it = boxes.rbegin(); it != boxes.rend(); ++it) {
+        const auto &box = *it;
+        if (!IsValidBox(box)) {
+            continue;
+        }
+        crop_img = GetRotateCropImage(img, box);
+        if (crop_img.empty()) {
+            continue;
+        }
         if (use_direction_classify >= 1) {
             crop_img =
             clsPredictor_->Predict(crop_img, nullptr, nullptr, nullptr, 0.9);
         }
+        if (crop_img.empty()) {
+            continue;
+        }
         auto res = recPredictor_->Predict(crop_img, nullptr, nullptr, nullptr,
                                           charactor_dict_);
-        recognized_items.push_back(BuildOCRItem(res.first, res.second, boxes[i]));
+        OCRItem item;
+        if (BuildOCRItem(res.first, res.second, box, &item)) {
+            recognized_items.push_back(std::move(item));
+        }
     }
     // tic.end();
     // *processTime = tic.get_average_ms();
@@ -374,6 +480,7 @@ cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
     MergeItemsByLine(recognized_items, merged_text, merged_score, res_boxes);
 
     // 输出按“行”合并后的识别文本与置信度。
+    res_txt.clear();
     res_txt.resize(merged_text.size() * 2);
     for (int i = 0; i < merged_text.size(); i++) {
         //    std::cout << i << "\t" << rec_text[i] << "\t" << rec_text_score[i]
@@ -383,5 +490,6 @@ cv::Mat Pipeline::Process(cv::Mat img, std::string output_img_path,
         res_txt[2 * i] = merged_text[i];
         res_txt[2 * i + 1] = ss.str();
     }
+
     return img_vis;
 }

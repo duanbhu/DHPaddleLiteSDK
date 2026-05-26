@@ -51,12 +51,13 @@ OrderPointsClockwise(std::vector<std::vector<int>> pts);
 
 std::vector<std::vector<float>> GetMiniBoxes(cv::RotatedRect box, float &ssid);
 
-float BoxScoreFast(std::vector<std::vector<float>> box_array, cv::Mat pred);
+float BoxScoreFast(const std::vector<std::vector<float>> &box_array,
+                   const cv::Mat &pred);
 
 std::vector<std::vector<std::vector<int>>>
-BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
-                std::map<std::string, double> Config);
+BoxesFromBitmap(const cv::Mat &pred, const cv::Mat &bitmap,
+                const std::map<std::string, double> &Config);
 
 std::vector<std::vector<std::vector<int>>>
-FilterTagDetRes(std::vector<std::vector<std::vector<int>>> boxes, float ratio_h,
-                float ratio_w, cv::Mat srcimg);
+FilterTagDetRes(std::vector<std::vector<std::vector<int>>> &boxes, float ratio_h,
+                float ratio_w, int oriimg_h, int oriimg_w);

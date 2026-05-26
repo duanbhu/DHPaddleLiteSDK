@@ -7,11 +7,13 @@
 
 #import "DHPaddleLiteTextRecognition.h"
 #import "DLTextRecognitionResult.h"
+#import <CoreVideo/CoreVideo.h>
 
 // OpenCV headers
 #import <opencv2/opencv.hpp>
 #import <opencv2/imgcodecs/ios.h>
 #import <opencv2/videoio/cap_ios.h>
+#import <malloc/malloc.h>
 
 // PaddleLite headers
 #include "paddle_api.h"
@@ -33,6 +35,7 @@ NSString *const DHPaddleLiteTextRecognitionErrorDomain = @"com.paddlelite.textre
 
 // Pipeline instance
 Pipeline *pipeline_;
+static const void *kDHPaddleLiteTextRecognitionQueueKey = &kDHPaddleLiteTextRecognitionQueueKey;
 
 @interface DHPaddleLiteTextRecognition ()
 
@@ -55,19 +58,27 @@ Pipeline *pipeline_;
 @property (nonatomic) std::string cls_model_path;
 
 // Private helper methods
+- (BOOL)beginRecognitionWithCompletion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion;
+- (void)finishRecognitionWithResults:(NSArray<DLTextRecognitionResult *> * _Nullable)results
+                               error:(NSError * _Nullable)error
+                          completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion;
+- (void)recognizePreparedMat:(cv::Mat)preparedMat
+                  cropOffset:(CGPoint)cropOffset
+                  completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion;
 - (cv::Mat)convertUIImageToMat:(UIImage *)image error:(NSError **)error;
+- (cv::Mat)convertSampleBufferToMat:(CMSampleBufferRef)sampleBuffer
+                       effectiveArea:(CGRect)rect
+                          cropOffset:(CGPoint *)cropOffset
+                               error:(NSError **)error;
 - (cv::Mat)cropMat:(cv::Mat)srcMat withRect:(CGRect)rect error:(NSError **)error;
 - (CGRect)boundingBoxFromPoints:(const std::vector<std::vector<int>> &)points
                           offset:(CGPoint)offset;
 - (NSArray<NSValue *> *)cornersFromPoints:(const std::vector<std::vector<int>> &)points
                                    offset:(CGPoint)offset;
-- (cv::Mat)buildEnhancedMatForOCR:(const cv::Mat &)srcMat;
 // 解析 pipeline 输出协议：[text0, score0, text1, score1, ...]。
 - (NSArray<DLTextRecognitionResult *> *)resultsFromResTxt:(const std::vector<std::string> &)resTxt
                                                   resBoxes:(const std::vector<std::vector<std::vector<int>>> &)resBoxes
                                                     offset:(CGPoint)cropOffset;
-// 用于在主识别与增强识别之间择优的启发式质量分。
-- (CGFloat)qualityScoreForResults:(NSArray<DLTextRecognitionResult *> *)results;
 - (void)rebuildPipeline;
 
 @end
@@ -109,6 +120,10 @@ Pipeline *pipeline_;
         
         // Create serial queue for thread-safe resource access
         _processingQueue = dispatch_queue_create("com.paddlelite.textrecognition.processing", DISPATCH_QUEUE_SERIAL);
+        dispatch_queue_set_specific(_processingQueue,
+                                    kDHPaddleLiteTextRecognitionQueueKey,
+                                    (void *)kDHPaddleLiteTextRecognitionQueueKey,
+                                    NULL);
         
         // Setup the SDK
         [self setup];
@@ -151,7 +166,6 @@ Pipeline *pipeline_;
                 [fileManager fileExistsAtPath:requiredFilePathV5]) {
                 resourceBundle = candidateBundle;
                 path = candidatePath;
-                NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法1): %@", path);
             }
         }
     }
@@ -173,7 +187,6 @@ Pipeline *pipeline_;
                 [fileManager fileExistsAtPath:requiredFilePathV5]) {
                 resourceBundle = bundle;
                 path = candidatePath;
-                NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法2): %@", path);
                 break;
             }
         }
@@ -194,7 +207,6 @@ Pipeline *pipeline_;
                 [fileManager fileExistsAtPath:requiredFilePathV5]) {
                 resourceBundle = [NSBundle bundleWithPath:bundlePath];
                 path = bundlePath;
-                NSLog(@"[DHPaddleLiteTextRecognition] 找到资源包 (方法3): %@", path);
                 break;
             }
         }
@@ -204,7 +216,6 @@ Pipeline *pipeline_;
     if (!path) {
         resourceBundle = [NSBundle mainBundle];
         path = [resourceBundle bundlePath];
-        NSLog(@"[DHPaddleLiteTextRecognition] 使用主包兜底 (方法4): %@", path);
     }
     
     // Setup model paths
@@ -271,9 +282,7 @@ Pipeline *pipeline_;
     NSString *dictPath = [NSString stringWithUTF8String:self.dict_path.c_str()];
     NSString *configPath = [NSString stringWithUTF8String:self.config_path.c_str()];
 
-    if (resolvedOCRVersion) {
-        NSLog(@"[DHPaddleLiteTextRecognition] 模型版本: %@", resolvedOCRVersion);
-    } else {
+    if (!resolvedOCRVersion) {
         NSLog(@"[DHPaddleLiteTextRecognition] 警告: 未识别到完整的PP-OCRv4/PP-OCRv5模型文件组合");
     }
     
@@ -306,28 +315,8 @@ Pipeline *pipeline_;
         allFilesExist = NO;
     }
     
-    // If any files are missing, log the bundle contents for debugging
+    // If any files are missing, fail initialization.
     if (!allFilesExist) {
-        NSLog(@"[DHPaddleLiteTextRecognition] 调试信息 - 包路径: %@", path);
-        NSArray *contents = [fileManager contentsOfDirectoryAtPath:path error:nil];
-        NSLog(@"[DHPaddleLiteTextRecognition] 调试信息 - 包内容: %@", contents);
-        
-        // Check if models directory exists (for reference, though CocoaPods flattens structure)
-        NSString *modelsDir = [NSString stringWithFormat:@"%@/models", path];
-        if ([fileManager fileExistsAtPath:modelsDir]) {
-            NSArray *modelsContents = [fileManager contentsOfDirectoryAtPath:modelsDir error:nil];
-            NSLog(@"[DHPaddleLiteTextRecognition] 调试信息 - models目录内容: %@", modelsContents);
-        } else {
-            NSLog(@"[DHPaddleLiteTextRecognition] 调试信息 - models目录不存在（这是正常的，CocoaPods会将文件扁平化到包根目录）");
-        }
-        
-        // Check if labels directory exists
-        NSString *labelsDir = [NSString stringWithFormat:@"%@/labels", path];
-        if ([fileManager fileExistsAtPath:labelsDir]) {
-            NSArray *labelsContents = [fileManager contentsOfDirectoryAtPath:labelsDir error:nil];
-            NSLog(@"[DHPaddleLiteTextRecognition] 调试信息 - labels目录内容: %@", labelsContents);
-        }
-        
         self.initializationFailed = YES;
         return;
     }
@@ -351,9 +340,6 @@ Pipeline *pipeline_;
                                 "LITE_POWER_HIGH", (int)threads, self.config_path, self.dict_path);
         pipeline_->SetUseDirectionClassify(self.configuredDirectionClassifyEnabled);
 
-        NSLog(@"[DHPaddleLiteTextRecognition] OCR线程数: %ld", (long)threads);
-        NSLog(@"[DHPaddleLiteTextRecognition] 方向分类: %@", self.configuredDirectionClassifyEnabled ? @"开启" : @"关闭");
-        NSLog(@"[DHPaddleLiteTextRecognition] SDK初始化成功");
         self.initializationFailed = NO;
     } @catch (NSException *exception) {
         NSLog(@"[DHPaddleLiteTextRecognition] 错误: Pipeline初始化失败: %@", exception.reason);
@@ -366,68 +352,27 @@ Pipeline *pipeline_;
 - (void)recognizeImage:(UIImage *)image
         effectiveArea:(CGRect)rect
            completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion {
-    // Throttle control: Skip if already processing
-    if (self.isProcessing) {
-//        NSLog(@"[DHPaddleLiteTextRecognition] 正在处理中，跳过本次请求");
-        if (completion) {
-            completion(@[], nil); // Return empty results instead of error
-        }
+    @autoreleasepool {
+    if (![self beginRecognitionWithCompletion:completion]) {
         return;
     }
     
-    // Throttle control: Limit processing frequency (max 2 times per second)
-    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
-    NSTimeInterval minInterval = 0.3; // 500ms interval
-    
-    if (currentTime - self.lastProcessTime < minInterval) {
-//        NSLog(@"[DHPaddleLiteTextRecognition] 处理频率过高，跳过本次请求");
-        if (completion) {
-            completion(@[], nil); // Return empty results instead of error
-        }
-        return;
-    }
-    
-    // Mark as processing and update last process time
-    self.isProcessing = YES;
-    self.lastProcessTime = currentTime;
-    
-    // Check if initialization failed
-    if (self.initializationFailed) {
-        self.isProcessing = NO; // Reset flag before returning
-        NSError *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
-                                             code:DHPaddleLiteTextRecognitionErrorCodeModelLoadFailed
-                                         userInfo:@{NSLocalizedDescriptionKey: @"SDK初始化失败，模型文件或配置文件加载失败"}];
-        if (completion) {
-            completion(nil, error);
-        }
-        return;
-    }
-    
-    // 1. Validate input image is not nil
     if (!image) {
-        self.isProcessing = NO; // Reset flag before returning
         NSError *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
                                              code:DHPaddleLiteTextRecognitionErrorCodeInvalidImage
                                          userInfo:@{NSLocalizedDescriptionKey: @"输入图像不能为nil"}];
-        if (completion) {
-            completion(nil, error);
-        }
+        [self finishRecognitionWithResults:nil error:error completion:completion];
         return;
     }
     
-    // 2. Call image preprocessing logic - convert UIImage to cv::Mat
     NSError *conversionError = nil;
     cv::Mat convertedMat = [self convertUIImageToMat:image error:&conversionError];
     
     if (conversionError || convertedMat.empty()) {
-        self.isProcessing = NO; // Reset flag before returning
-        if (completion) {
-            completion(nil, conversionError);
-        }
+        [self finishRecognitionWithResults:nil error:conversionError completion:completion];
         return;
     }
     
-    // 3. Call crop helper method with effectiveArea
     NSError *cropError = nil;
     cv::Mat processedMat = [self cropMat:convertedMat withRect:rect error:&cropError];
     CGPoint cropOffset = CGPointZero;
@@ -440,92 +385,33 @@ Pipeline *pipeline_;
     convertedMat = cv::Mat();
     
     if (cropError || processedMat.empty()) {
-        self.isProcessing = NO; // Reset flag before returning
-        if (completion) {
-            completion(nil, cropError);
-        }
+        [self finishRecognitionWithResults:nil error:cropError completion:completion];
         return;
     }
-    
-    // Clone processedMat to ensure it's independent and can be safely used in async block
-    // Use __block to allow modification in the block
-    __block cv::Mat processedMatCopy = processedMat.clone();
-    // Release original processedMat
-    processedMat = cv::Mat();
-    
-    // 4. 执行 OCR 主流程（线程安全串行队列）：
-    //    1) 先对原图进行主识别，得到 primaryResults。
-    //    2) 当主识别为空或质量分偏低时，触发增强图二次识别。
-    //    3) 分别计算两次结果质量分（置信度加权 + 条数小幅加分）。
-    //    4) 按规则择优，输出最终 finalResults 给上层回调。
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(self.processingQueue, ^{
-        NSMutableArray<DLTextRecognitionResult *> *results = [NSMutableArray array];
-        NSError *processingError = nil;
-        
-        @try {
-            // Primary OCR pass.
-            std::vector<std::string> primaryResTxt;
-            std::vector<std::vector<std::vector<int>>> primaryResBoxes;
-            __block cv::Mat img_vis = pipeline_->Process(processedMatCopy, "", primaryResTxt, &primaryResBoxes, false);
-            img_vis = cv::Mat();
-            NSArray<DLTextRecognitionResult *> *primaryResults = [self resultsFromResTxt:primaryResTxt
-                                                                                 resBoxes:primaryResBoxes
-                                                                                   offset:cropOffset];
+    [self recognizePreparedMat:processedMat cropOffset:cropOffset completion:completion];
+    }
+}
 
-            // 低质量场景下的二次识别：使用增强图再次 OCR。
-            // 仅在主识别为空或整体置信度偏弱时触发。
-            NSArray<DLTextRecognitionResult *> *finalResults = primaryResults;
-            CGFloat primaryScore = [self qualityScoreForResults:primaryResults];
-            BOOL shouldRetryWithEnhancement = (primaryResults.count == 0 || primaryScore < 0.58);
-            if (shouldRetryWithEnhancement) {
-                cv::Mat enhancedMat = [self buildEnhancedMatForOCR:processedMatCopy];
-                if (!enhancedMat.empty()) {
-                    std::vector<std::string> enhancedResTxt;
-                    std::vector<std::vector<std::vector<int>>> enhancedResBoxes;
-                    __block cv::Mat enhancedVis = pipeline_->Process(enhancedMat, "", enhancedResTxt, &enhancedResBoxes, false);
-                    enhancedVis = cv::Mat();
+- (void)releaseResources {
+    void (^releaseBlock)(void) = ^{
+        @autoreleasepool {
+            self.isProcessing = NO;
+            self.lastProcessTime = 0;
 
-                    NSArray<DLTextRecognitionResult *> *enhancedResults = [self resultsFromResTxt:enhancedResTxt
-                                                                                         resBoxes:enhancedResBoxes
-                                                                                           offset:cropOffset];
-                    CGFloat enhancedScore = [self qualityScoreForResults:enhancedResults];
-
-                    // 增强结果明显更好，或接近但行数更多时，优先采用增强结果。
-                    if (enhancedScore > primaryScore + 0.02 ||
-                        (enhancedScore >= primaryScore - 0.01 && enhancedResults.count > primaryResults.count)) {
-                        finalResults = enhancedResults;
-                    }
-                }
+            if (pipeline_ != nullptr) {
+                delete pipeline_;
+                pipeline_ = nullptr;
             }
 
-            [results addObjectsFromArray:finalResults];
-            processedMatCopy = cv::Mat();
-            
-        } @catch (NSException *exception) {
-            // Handle Pipeline processing exceptions
-            processingError = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
-                                                  code:DHPaddleLiteTextRecognitionErrorCodeProcessingFailed
-                                              userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"OCR处理失败: %@", exception.reason]}];
-            NSLog(@"[DHPaddleLiteTextRecognition] 错误: %@, 错误码: %ld", processingError.localizedDescription, (long)processingError.code);
+            malloc_zone_pressure_relief(malloc_default_zone(), 0);
         }
-        
-        // Release temporary resources after processing (Requirement 7.2)
-        // Note: convertedMat and processedMat will be automatically released when they go out of scope
-        
-        // Reset processing flag
-        weakSelf.isProcessing = NO;
-        
-        // Call completion callback with results or error
-        if (completion) {
-            if (processingError) {
-                completion(nil, processingError);
-            } else {
-                // Return results array (empty if no text detected or all filtered by threshold)
-                completion([results copy], nil);
-            }
-        }
-    });
+    };
+
+    if (dispatch_get_specific(kDHPaddleLiteTextRecognitionQueueKey) == kDHPaddleLiteTextRecognitionQueueKey) {
+        releaseBlock();
+    } else {
+        dispatch_sync(self.processingQueue, releaseBlock);
+    }
 }
 
 - (void)setConfidenceThreshold:(CGFloat)threshold {
@@ -537,8 +423,6 @@ Pipeline *pipeline_;
     // Clamp threshold to valid range [0.0, 1.0]
     CGFloat clampedThreshold = MAX(0.0, MIN(1.0, threshold));
     _confidenceThreshold = clampedThreshold;
-    
-    NSLog(@"[DHPaddleLiteTextRecognition] 置信度阈值已设置为: %.2f", _confidenceThreshold);
 }
 
 - (void)setDirectionClassifyEnabled:(BOOL)enabled {
@@ -574,6 +458,122 @@ Pipeline *pipeline_;
 
 #pragma mark - Private Helper Methods
 
+- (BOOL)beginRecognitionWithCompletion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion {
+    if (self.isProcessing) {
+        if (completion) {
+            completion(@[], nil);
+        }
+        return NO;
+    }
+
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval minInterval = 0.3;
+    if (currentTime - self.lastProcessTime < minInterval) {
+        if (completion) {
+            completion(@[], nil);
+        }
+        return NO;
+    }
+
+    self.isProcessing = YES;
+    self.lastProcessTime = currentTime;
+
+    if (self.initializationFailed) {
+        NSError *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                             code:DHPaddleLiteTextRecognitionErrorCodeModelLoadFailed
+                                         userInfo:@{NSLocalizedDescriptionKey: @"SDK初始化失败，模型文件或配置文件加载失败"}];
+        [self finishRecognitionWithResults:nil error:error completion:completion];
+        return NO;
+    }
+
+    return YES;
+}
+
+- (void)finishRecognitionWithResults:(NSArray<DLTextRecognitionResult *> * _Nullable)results
+                               error:(NSError * _Nullable)error
+                          completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion {
+    self.isProcessing = NO;
+    if (completion) {
+        completion(results, error);
+    }
+}
+
+- (void)recognizePreparedMat:(cv::Mat)preparedMat
+                  cropOffset:(CGPoint)cropOffset
+                  completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion {
+    __block cv::Mat processedMatCopy = preparedMat;
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(self.processingQueue, ^{
+        @autoreleasepool {
+        NSMutableArray<DLTextRecognitionResult *> *results = [NSMutableArray array];
+        NSError *processingError = nil;
+
+        @try {
+            if (pipeline_ == nullptr) {
+                [weakSelf rebuildPipeline];
+            }
+            if (weakSelf.initializationFailed || pipeline_ == nullptr) {
+                processingError = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                                      code:DHPaddleLiteTextRecognitionErrorCodeModelLoadFailed
+                                                  userInfo:@{NSLocalizedDescriptionKey: @"OCR模型未加载，无法执行识别"}];
+            } else {
+                std::vector<std::string> primaryResTxt;
+                std::vector<std::vector<std::vector<int>>> primaryResBoxes;
+                __block cv::Mat img_vis = pipeline_->Process(processedMatCopy, "", primaryResTxt, &primaryResBoxes, false);
+                img_vis = cv::Mat();
+                NSArray<DLTextRecognitionResult *> *primaryResults = [weakSelf resultsFromResTxt:primaryResTxt
+                                                                                        resBoxes:primaryResBoxes
+                                                                                          offset:cropOffset];
+                [results addObjectsFromArray:primaryResults];
+            }
+        } @catch (NSException *exception) {
+            processingError = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                                  code:DHPaddleLiteTextRecognitionErrorCodeProcessingFailed
+                                              userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"OCR处理失败: %@", exception.reason]}];
+            NSLog(@"[DHPaddleLiteTextRecognition] 错误: %@, 错误码: %ld", processingError.localizedDescription, (long)processingError.code);
+        } @finally {
+            processedMatCopy = cv::Mat();
+            malloc_zone_pressure_relief(malloc_default_zone(), 0);
+        }
+
+        [weakSelf finishRecognitionWithResults:processingError ? nil : [results copy]
+                                         error:processingError
+                                    completion:completion];
+        }
+    });
+}
+
+- (void)recognizeSampleBuffer:(CMSampleBufferRef)sampleBuffer
+                effectiveArea:(CGRect)rect
+                   completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion {
+    @autoreleasepool {
+    if (![self beginRecognitionWithCompletion:completion]) {
+        return;
+    }
+
+    if (sampleBuffer == NULL) {
+        NSError *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                             code:DHPaddleLiteTextRecognitionErrorCodeInvalidImage
+                                         userInfo:@{NSLocalizedDescriptionKey: @"输入视频帧不能为空"}];
+        [self finishRecognitionWithResults:nil error:error completion:completion];
+        return;
+    }
+
+    NSError *conversionError = nil;
+    CGPoint cropOffset = CGPointZero;
+    cv::Mat processedMat = [self convertSampleBufferToMat:sampleBuffer
+                                             effectiveArea:rect
+                                                cropOffset:&cropOffset
+                                                     error:&conversionError];
+    if (conversionError || processedMat.empty()) {
+        [self finishRecognitionWithResults:nil error:conversionError completion:completion];
+        return;
+    }
+
+    [self recognizePreparedMat:processedMat cropOffset:cropOffset completion:completion];
+    }
+}
+
 - (cv::Mat)convertUIImageToMat:(UIImage *)image error:(NSError **)error {
     cv::Mat resultMat;
     
@@ -585,9 +585,6 @@ Pipeline *pipeline_;
         if (image.size.width > maxDimension || image.size.height > maxDimension) {
             CGFloat scale = MIN(maxDimension / image.size.width, maxDimension / image.size.height);
             CGSize newSize = CGSizeMake(image.size.width * scale, image.size.height * scale);
-            
-            NSLog(@"[DHPaddleLiteTextRecognition] 图片过大 (%.0f x %.0f)，缩放到 (%.0f x %.0f)",
-                  image.size.width, image.size.height, newSize.width, newSize.height);
             
             UIGraphicsBeginImageContextWithOptions(newSize, NO, 1.0);
             [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
@@ -648,6 +645,88 @@ Pipeline *pipeline_;
     }
     
     return resultMat;
+}
+
+- (cv::Mat)convertSampleBufferToMat:(CMSampleBufferRef)sampleBuffer
+                       effectiveArea:(CGRect)rect
+                          cropOffset:(CGPoint *)cropOffset
+                               error:(NSError **)error {
+    @try {
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        if (imageBuffer == NULL) {
+            if (error) {
+                *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                             code:DHPaddleLiteTextRecognitionErrorCodeInvalidImage
+                                         userInfo:@{NSLocalizedDescriptionKey: @"视频帧中没有可用图像缓冲区"}];
+            }
+            return cv::Mat();
+        }
+
+        CVPixelBufferLockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
+        cv::Mat resultMat;
+        @try {
+            const size_t width = CVPixelBufferGetWidth(imageBuffer);
+            const size_t height = CVPixelBufferGetHeight(imageBuffer);
+            const size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+            const OSType pixelFormat = CVPixelBufferGetPixelFormatType(imageBuffer);
+            void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+            if (baseAddress == NULL || width == 0 || height == 0) {
+                if (error) {
+                    *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                                 code:DHPaddleLiteTextRecognitionErrorCodeInvalidImage
+                                             userInfo:@{NSLocalizedDescriptionKey: @"视频帧像素数据无效"}];
+                }
+                return cv::Mat();
+            }
+
+            if (pixelFormat != kCVPixelFormatType_32BGRA) {
+                if (error) {
+                    *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                                 code:DHPaddleLiteTextRecognitionErrorCodeUnsupportedFormat
+                                             userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"不支持的视频帧像素格式: %u", (unsigned int)pixelFormat]}];
+                }
+                return cv::Mat();
+            }
+
+            cv::Rect roiRect(0, 0, static_cast<int>(width), static_cast<int>(height));
+            if (!CGRectIsEmpty(rect) && !CGRectEqualToRect(rect, CGRectZero)) {
+                int x = MAX(0, (int)floor(rect.origin.x));
+                int y = MAX(0, (int)floor(rect.origin.y));
+                int maxX = MIN((int)width, (int)ceil(CGRectGetMaxX(rect)));
+                int maxY = MIN((int)height, (int)ceil(CGRectGetMaxY(rect)));
+                int roiWidth = maxX - x;
+                int roiHeight = maxY - y;
+                if (roiWidth <= 0 || roiHeight <= 0) {
+                    if (error) {
+                        *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                                     code:DHPaddleLiteTextRecognitionErrorCodeInvalidImage
+                                                 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"无效的视频帧识别区域: %@", NSStringFromCGRect(rect)]}];
+                    }
+                    return cv::Mat();
+                }
+                roiRect = cv::Rect(x, y, roiWidth, roiHeight);
+                if (cropOffset != nullptr) {
+                    *cropOffset = CGPointMake(x, y);
+                }
+            } else if (cropOffset != nullptr) {
+                *cropOffset = CGPointZero;
+            }
+
+            cv::Mat bgraMat(static_cast<int>(height), static_cast<int>(width), CV_8UC4, baseAddress, bytesPerRow);
+            cv::Mat roiMat = bgraMat(roiRect);
+            cv::cvtColor(roiMat, resultMat, cv::COLOR_BGRA2RGB);
+        } @finally {
+            CVPixelBufferUnlockBaseAddress(imageBuffer, kCVPixelBufferLock_ReadOnly);
+        }
+        return resultMat;
+    } @catch (NSException *exception) {
+        if (error) {
+            *error = [NSError errorWithDomain:DHPaddleLiteTextRecognitionErrorDomain
+                                         code:DHPaddleLiteTextRecognitionErrorCodeUnsupportedFormat
+                                     userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"视频帧转换异常: %@", exception.reason]}];
+        }
+        return cv::Mat();
+    }
 }
 
 - (cv::Mat)cropMat:(cv::Mat)srcMat withRect:(CGRect)rect error:(NSError **)error {
@@ -752,34 +831,6 @@ Pipeline *pipeline_;
     return [corners copy];
 }
 
-- (cv::Mat)buildEnhancedMatForOCR:(const cv::Mat &)srcMat {
-    if (srcMat.empty()) {
-        return cv::Mat();
-    }
-
-    cv::Mat enhanced;
-    srcMat.copyTo(enhanced);
-
-    // Improve local contrast in low-light or low-contrast images.
-    cv::Mat lab;
-    cvtColor(enhanced, lab, COLOR_RGB2Lab);
-    std::vector<cv::Mat> channels;
-    split(lab, channels);
-    if (channels.size() == 3) {
-        cv::Ptr<cv::CLAHE> clahe = cv::createCLAHE(2.0, cv::Size(8, 8));
-        clahe->apply(channels[0], channels[0]);
-        merge(channels, lab);
-        cvtColor(lab, enhanced, COLOR_Lab2RGB);
-    }
-
-    // 轻度去噪 + 轻锐化：尽量保留文字边缘，避免过增强带来的伪影。
-    cv::Mat denoised;
-    bilateralFilter(enhanced, denoised, 5, 35, 35);
-    cv::Mat sharpened;
-    addWeighted(denoised, 1.25, enhanced, -0.25, 0, sharpened);
-    return sharpened;
-}
-
 - (NSArray<DLTextRecognitionResult *> *)resultsFromResTxt:(const std::vector<std::string> &)resTxt
                                                   resBoxes:(const std::vector<std::vector<std::vector<int>>> &)resBoxes
                                                     offset:(CGPoint)cropOffset {
@@ -819,24 +870,6 @@ Pipeline *pipeline_;
     }
 
     return [parsedResults copy];
-}
-
-- (CGFloat)qualityScoreForResults:(NSArray<DLTextRecognitionResult *> *)results {
-    if (results.count == 0) {
-        return 0;
-    }
-
-    CGFloat weightedSum = 0;
-    CGFloat weight = 0;
-    for (DLTextRecognitionResult *result in results) {
-        CGFloat tokenWeight = MAX(1, result.text.length);
-        weightedSum += result.confidence * tokenWeight;
-        weight += tokenWeight;
-    }
-    CGFloat avgConfidence = weight > 0 ? (weightedSum / weight) : 0;
-    // 结果条数给予小幅加分，但设置上限，避免条数对评分产生过强偏置。
-    CGFloat countBonus = MIN((CGFloat)results.count, 6.0) * 0.02;
-    return avgConfidence + countBonus;
 }
 
 @end

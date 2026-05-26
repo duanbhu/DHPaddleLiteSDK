@@ -308,17 +308,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     self.isFrameProcessing = YES;
     
     @autoreleasepool {
-        UIImage *frameImage = [self imageFromSampleBuffer:sampleBuffer];
-        if (!frameImage) {
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        if (imageBuffer == NULL) {
             self.isFrameProcessing = NO;
             return;
         }
-        CGSize imageSize = CGSizeMake((CGFloat)CGImageGetWidth(frameImage.CGImage),
-                                      (CGFloat)CGImageGetHeight(frameImage.CGImage));
-        CGRect effectiveArea = [self effectiveAreaForImage:frameImage];
+        CGSize imageSize = CGSizeMake((CGFloat)CVPixelBufferGetHeight(imageBuffer),
+                                      (CGFloat)CVPixelBufferGetWidth(imageBuffer));
+        CGRect effectiveArea = [self effectiveAreaForImageSize:imageSize];
         
         __weak typeof(self) weakSelf = self;
-        [self.textRecognizer recognizeImage:frameImage effectiveArea:effectiveArea completion:^(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error) {
+        [self.textRecognizer recognizeSampleBuffer:sampleBuffer effectiveArea:effectiveArea completion:^(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             if (!strongSelf) {
                 return;
@@ -482,6 +482,20 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     if (imageSize.width <= 0 || imageSize.height <= 0) {
         imageSize = image.size;
     }
+    return [self effectiveAreaForImageSize:imageSize];
+}
+
+- (CGRect)effectiveAreaForImageSize:(CGSize)imageSize {
+    CGRect normalized = self.recognitionRectNormalized;
+    if (CGRectIsEmpty(normalized)) {
+        return CGRectZero;
+    }
+    
+    CGSize previewSize = self.previewSizeForMapping;
+    if (previewSize.width <= 0 || previewSize.height <= 0) {
+        return CGRectZero;
+    }
+
     if (imageSize.width <= 0 || imageSize.height <= 0) {
         return CGRectZero;
     }

@@ -9,6 +9,8 @@
 #import "DHPhoneNumberResult.h"
 #import <CoreVideo/CoreVideo.h>
 
+static const NSUInteger kDHMaxRecognizedPhoneNumberCount = 128;
+
 @interface DHStreamRecognitionManager ()
 
 /**
@@ -134,6 +136,9 @@
 
 - (void)addResult:(DHPhoneNumberResult *)result {
     if (result && result.phoneNumber) {
+        if (self.recognizedPhoneNumbers.count >= kDHMaxRecognizedPhoneNumberCount) {
+            [self.recognizedPhoneNumbers removeAllObjects];
+        }
         [self.recognizedPhoneNumbers addObject:result.phoneNumber];
     }
 }

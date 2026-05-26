@@ -33,7 +33,7 @@ public:
            const int cPUThreadNum, const std::string &config_path,
            const std::string &dict_path);
 
-  cv::Mat Process(cv::Mat srcimg, std::string output_img_path,
+  cv::Mat Process(const cv::Mat &srcimg, std::string output_img_path,
                   std::vector<std::string> &res_txt,
                   std::vector<std::vector<std::vector<int>>> *res_boxes =
                       nullptr,

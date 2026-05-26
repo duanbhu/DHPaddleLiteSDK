@@ -18,6 +18,9 @@ NSString *const kKeyPrivacyNumber = @"kKeyPrivacyNumber";
 
 NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
 
+static const NSUInteger kDLPaddleLiteMaxCandidateCount = 128;
+static const NSUInteger kDLPaddleLiteMaxFramesBeforeReset = 120;
+
 @interface DLPaddleLiteSDK ()
 
 @property(nonatomic, strong) NSPredicate *predicate;
@@ -30,6 +33,9 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
 
 /// 虚拟号
 @property(nonatomic, strong) NSCountedSet *mobileExtSet;
+
+/// 已累计处理的非空 OCR 结果帧数
+@property(nonatomic, assign) NSUInteger accumulatedFrameCount;
 
 @end
 
@@ -75,7 +81,6 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
         
         // 如果结果为空（可能是节流跳过），不处理，保持计数集合不变
         if (results.count == 0) {
-//            NSLog(@"[DLPaddleLiteSDK] 识别结果为空，跳过处理");
             return;
         }
         
@@ -85,14 +90,13 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
 }
 
 - (void)processRecognitionResults:(NSArray<DLTextRecognitionResult *> *)results completion:(void(^)(NSDictionary *info))completion {
+    self.accumulatedFrameCount += 1;
+
     // 处理每个识别结果
     for (DLTextRecognitionResult *result in results) {
         NSString *str = result.text;
         CGFloat score = result.confidence;
         // 置信度过滤已由 DHPaddleLiteTextRecognition 处理，这里不需要再次过滤
-        
-        NSLog(@"原始数据：%@",str);
-        
         // 处理特殊字符（*号识别成水的情况）
         if ([NSString countOfSub:@"*" inString:str] > 2 || [NSString countOfSub:@"水" inString:str] > 2) {
             // 针对有些*号识别成水的情况，不足11位时，补成11位
@@ -109,7 +113,6 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
             if ([str hasPrefix:@"*"]) {
                 str = [NSString stringWithFormat:@"1%@", [str substringFromIndex:1]];
             }
-            NSLog(@"[DLPaddleLiteSDK] 匹配到: %@", str);
             
             // 提取手机号
             NSArray *list = [NSString searchRegular:@"[1*][3-9*][\\d*]{9}([\\s\\S]{0,3}\\d{3,4})?" atString:str];
@@ -118,7 +121,6 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
             }
             
             for (NSString *mobile in list) {
-                NSLog(@"[DLPaddleLiteSDK] 手机号: %@", mobile);
                 if ([mobile containsString:@"*"]) {
                     // 隐私号
                     [self.privateSet addObject:mobile];
@@ -157,7 +159,23 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
         [self.mobileSet removeAllObjects];
         [self.mobileExtSet removeAllObjects];
         [self.privateSet removeAllObjects];
+        self.accumulatedFrameCount = 0;
+    } else {
+        [self trimCandidateSetsIfNeeded];
     }
+}
+
+- (void)trimCandidateSetsIfNeeded {
+    NSUInteger totalCount = self.mobileSet.count + self.mobileExtSet.count + self.privateSet.count;
+    if (totalCount < kDLPaddleLiteMaxCandidateCount &&
+        self.accumulatedFrameCount < kDLPaddleLiteMaxFramesBeforeReset) {
+        return;
+    }
+
+    [self.mobileSet removeAllObjects];
+    [self.mobileExtSet removeAllObjects];
+    [self.privateSet removeAllObjects];
+    self.accumulatedFrameCount = 0;
 }
 
 //- (void)recognitionSampleBuffer:(CMSampleBufferRef)sampleBuffer effectiveArea:(CGRect)rect result:(void (^)(NSDictionary * _Nonnull))result {
@@ -185,7 +203,6 @@ NSString *const kKeyVirtualPhone = @"kKeyVirtualPhone";
     NSMutableArray *array = @[].mutableCopy;
     for (NSTextCheckingResult *match in phoneMatches) {
         NSString *phoneNumber = [str substringWithRange:match.range];
-        NSLog(@"手机号: %@", phoneNumber);
         [array addObject:phoneNumber];
         [set addObject:phoneNumber];
     }

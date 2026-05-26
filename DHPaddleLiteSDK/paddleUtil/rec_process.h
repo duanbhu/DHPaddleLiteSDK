@@ -28,13 +28,14 @@ public:
 
   std::pair<std::string, float>
   Predict(const cv::Mat &rgbaImage, double *preprocessTime, double *predictTime,
-          double *postprocessTime, std::vector<std::string> charactor_dict);
+          double *postprocessTime,
+          const std::vector<std::string> &charactor_dict);
 
 private:
   void Preprocess(const cv::Mat &rgbaImage);
   std::pair<std::string, float>
   Postprocess(const cv::Mat &rgbaImage,
-              std::vector<std::string> charactor_dict);
+              const std::vector<std::string> &charactor_dict);
 
 private:
   std::shared_ptr<paddle::lite_api::PaddlePredictor> predictor_;

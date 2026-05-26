@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreMedia/CoreMedia.h>
 #import "DLTextRecognitionResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -115,6 +116,31 @@ typedef NS_ENUM(NSInteger, DHPaddleLiteTextRecognitionErrorCode) {
 - (void)recognizeImage:(UIImage *)image
         effectiveArea:(CGRect)rect
            completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion;
+
+/**
+ * @brief 识别视频帧中的文本
+ *
+ * 直接处理 `CMSampleBufferRef` 视频帧，避免先转换为 `UIImage` 再进入 OCR，
+ * 更适合实时视频流场景。
+ *
+ * @param sampleBuffer 输入视频帧
+ * @param rect 有效识别区域，传入 CGRectZero 表示识别整帧
+ * @param completion 完成回调
+ */
+- (void)recognizeSampleBuffer:(CMSampleBufferRef)sampleBuffer
+                effectiveArea:(CGRect)rect
+                   completion:(void(^)(NSArray<DLTextRecognitionResult *> * _Nullable results, NSError * _Nullable error))completion;
+
+/**
+ * @brief 释放OCR模型和运行时缓存
+ *
+ * 退出扫描页面或长时间不再使用OCR时调用。该方法会等待当前正在执行的识别任务结束，
+ * 然后释放PaddleLite Pipeline持有的模型、Predictor和中间缓存。
+ *
+ * @discussion 再次调用 recognizeImage:effectiveArea:completion: 时会自动重新加载模型。
+ * @note 不建议在高频识别过程中反复调用，否则下次识别需要重新初始化模型。
+ */
+- (void)releaseResources;
 
 /**
  * @brief 设置置信度阈值

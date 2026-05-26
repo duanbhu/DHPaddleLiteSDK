@@ -16,6 +16,7 @@
 #import "DHPhoneNumberTypeFilter.h"
 #import "DHStreamRecognitionManager.h"
 #import "DLTextRecognitionResult.h"
+#import <objc/message.h>
 
 
 
@@ -102,6 +103,7 @@
     
     // 在后台线程执行识别操作
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @autoreleasepool {
         // 调用 DHPaddleLiteTextRecognition 进行 OCR 识别
         [self.ocrEngine recognizeImage:image
                         effectiveArea:rect
@@ -129,6 +131,7 @@
                 completion(phoneResults, nil);
             }
         }];
+        }
     });
 }
 
@@ -158,8 +161,6 @@
     
     // 启动视频流识别
     [self.streamManager start];
-    
-    NSLog(@"[DHPhoneNumberRecognizer] 视频流识别已启动，类型过滤器：%ld，帧率：%ld fps", (long)types, (long)framesPerSecond);
 }
 
 - (void)processVideoFrame:(CMSampleBufferRef)sampleBuffer {
@@ -173,21 +174,26 @@
         NSLog(@"[DHPhoneNumberRecognizer] 警告：视频帧数据为空，跳过处理");
         return;
     }
+
+    CFRetain(sampleBuffer);
     
     // 在后台线程处理视频帧，避免阻塞主线程
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @autoreleasepool {
         @try {
-            // 将 CMSampleBufferRef 转换为 UIImage
-            UIImage *image = [self.streamManager convertSampleBufferToImage:sampleBuffer];
-            if (!image) {
-                NSLog(@"[DHPhoneNumberRecognizer] 警告：视频帧转换为图像失败，跳过处理");
+            SEL selector = NSSelectorFromString(@"recognizeSampleBuffer:effectiveArea:completion:");
+            if (![self.ocrEngine respondsToSelector:selector]) {
+                NSLog(@"[DHPhoneNumberRecognizer] 警告：OCR引擎不支持直接处理视频帧");
                 return;
             }
-            
-            // 调用 DHPaddleLiteTextRecognition 进行 OCR 识别
-            [self.ocrEngine recognizeImage:image
-                            effectiveArea:CGRectZero
-                               completion:^(NSArray<DLTextRecognitionResult *> * _Nullable ocrResults, NSError * _Nullable ocrError) {
+
+            typedef void (*RecognizeSampleBufferMsgSend)(id, SEL, CMSampleBufferRef, CGRect, void(^)(NSArray<DLTextRecognitionResult *> * _Nullable, NSError * _Nullable));
+            RecognizeSampleBufferMsgSend sendRecognizeSampleBuffer = (RecognizeSampleBufferMsgSend)objc_msgSend;
+            sendRecognizeSampleBuffer(self.ocrEngine,
+                                      selector,
+                                      sampleBuffer,
+                                      CGRectZero,
+                                      ^(NSArray<DLTextRecognitionResult *> * _Nullable ocrResults, NSError * _Nullable ocrError) {
                 
                 // 如果 OCR 识别失败，记录错误但不中断处理流程
                 if (ocrError) {
@@ -213,10 +219,13 @@
                         self.streamManager.callback([newResults copy]);
                     });
                 }
-            }];
+            });
         } @catch (NSException *exception) {
             // 捕获异常，记录错误但不中断处理流程
             NSLog(@"[DHPhoneNumberRecognizer] 视频帧处理异常：%@", exception.reason);
+        } @finally {
+            CFRelease(sampleBuffer);
+        }
         }
     });
 }
@@ -227,8 +236,6 @@
     
     // 重置当前类型过滤器
     self.currentTypeFilter = DHPhoneNumberTypesAll;
-    
-    NSLog(@"[DHPhoneNumberRecognizer] 视频流识别已停止");
 }
 
 #pragma mark - Public Methods - Configuration
